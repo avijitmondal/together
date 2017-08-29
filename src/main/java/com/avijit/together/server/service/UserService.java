@@ -7,6 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.server.service;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,11 @@ public class UserService implements IUserService {
 	 */
 	@Override
 	public Page<User> getAll(Pageable pageable) {
-		return iUserRepository.findAll(pageable);
+		try {
+			return iUserRepository.findAll(pageable);
+		} catch (Exception exception) {
+			return null;
+		}
 	}
 
 	/*
@@ -46,7 +51,62 @@ public class UserService implements IUserService {
 	 */
 	@Override
 	public User findById(String userId) {
-		return iUserRepository.findOne(UUID.fromString(userId));
+		try {
+			return iUserRepository.findOne(UUID.fromString(userId));
+		} catch (Exception exception) {
+			return null;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.avijit.together.server.service.IUserService#delete(java.lang.String)
+	 */
+	@Override
+	public boolean delete(String userId) {
+		try {
+			iUserRepository.delete(UUID.fromString(userId));
+			return true;
+		} catch (Exception exception) {
+			return false;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.avijit.together.server.service.IUserService#save(com.avijit.together.
+	 * server.model.User)
+	 */
+	@Override
+	public User save(User user) {
+		user.setId(UUID.randomUUID());
+		user.setCreatedAt(LocalDateTime.now());
+		user.setUpdatedAt(LocalDateTime.now());
+		try {
+			return iUserRepository.save(user);
+		} catch (Exception exception) {
+			return null;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.avijit.together.server.service.IUserService#findByEmail(java.lang.
+	 * String)
+	 */
+	@Override
+	public User findByEmail(String email) {
+		try {
+			return iUserRepository.findByEmail(email);
+		} catch (Exception exception) {
+			return null;
+		}
 	}
 
 }

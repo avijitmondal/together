@@ -26,7 +26,7 @@ public class PageResource<T> extends ResourceSupport implements Page<T> {
 	}
 
 	private void addPreviousLink(String pageParam, String sizeParam) {
-		if (page.hasPrevious()) {
+		if (null != page && page.hasPrevious()) {
 			Link prevLink = buildPageLink(pageParam, page.getNumber() - 1, sizeParam, page.getSize(),
 					Link.REL_PREVIOUS);
 			add(prevLink);
@@ -34,25 +34,32 @@ public class PageResource<T> extends ResourceSupport implements Page<T> {
 	}
 
 	private void addSelfLink(String pageParam, String sizeParam) {
-		Link selfLink = buildPageLink(pageParam, page.getNumber(), sizeParam, page.getSize(), Link.REL_SELF);
-		add(selfLink);
+		if (null != page) {
+			Link selfLink = buildPageLink(pageParam, page.getNumber(), sizeParam, page.getSize(), Link.REL_SELF);
+			add(selfLink);
+		}
 	}
 
 	private void addNextLink(String pageParam, String sizeParam) {
-		if (page.hasNext()) {
+		if (null != page && page.hasNext()) {
 			Link nextLink = buildPageLink(pageParam, page.getNumber() + 1, sizeParam, page.getSize(), Link.REL_NEXT);
 			add(nextLink);
 		}
 	}
 
 	private void addLastLink(String pageParam, String sizeParam) {
-		Link prevLink = buildPageLink(pageParam, page.getTotalPages() - 1, sizeParam, page.getSize(), Link.REL_LAST);
-		add(prevLink);
+		if (null != page && !page.isLast()) {
+			Link prevLink = buildPageLink(pageParam, page.getTotalPages() - 1, sizeParam, page.getSize(),
+					Link.REL_LAST);
+			add(prevLink);
+		}
 	}
 
 	private void addFirstLink(String pageParam, String sizeParam) {
-		Link prevLink = buildPageLink(pageParam, 0, sizeParam, page.getSize(), Link.REL_FIRST);
-		add(prevLink);
+		if (null != page && !page.isFirst()) {
+			Link prevLink = buildPageLink(pageParam, 0, sizeParam, page.getSize(), Link.REL_FIRST);
+			add(prevLink);
+		}
 	}
 
 	private ServletUriComponentsBuilder createBuilder() {
@@ -77,85 +84,71 @@ public class PageResource<T> extends ResourceSupport implements Page<T> {
 
 	@Override
 	public int getNumberOfElements() {
-		// TODO Auto-generated method stub
 		return page.getNumberOfElements();
 	}
 
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
 		return page.getSize();
 	}
 
 	@Override
 	public Sort getSort() {
-		// TODO Auto-generated method stub
 		return page.getSort();
 	}
 
 	@Override
 	public boolean hasContent() {
-		// TODO Auto-generated method stub
 		return page.hasContent();
 	}
 
 	@Override
 	public boolean hasNext() {
-		// TODO Auto-generated method stub
 		return page.hasNext();
 	}
 
 	@Override
 	public boolean hasPrevious() {
-		// TODO Auto-generated method stub
 		return page.hasPrevious();
 	}
 
 	@Override
 	public boolean isFirst() {
-		// TODO Auto-generated method stub
 		return page.isFirst();
 	}
 
 	@Override
 	public boolean isLast() {
-		// TODO Auto-generated method stub
 		return page.isLast();
 	}
 
 	@Override
 	public Pageable nextPageable() {
-		// TODO Auto-generated method stub
 		return page.nextPageable();
 	}
 
 	@Override
 	public Pageable previousPageable() {
-		// TODO Auto-generated method stub
 		return page.previousPageable();
 	}
 
 	@Override
 	public Iterator<T> iterator() {
-		// TODO Auto-generated method stub
 		return page.iterator();
 	}
 
 	@Override
 	public long getTotalElements() {
-		// TODO Auto-generated method stub
 		return page.getTotalElements();
 	}
 
 	@Override
 	public int getTotalPages() {
-		// TODO Auto-generated method stub
 		return page.getTotalPages();
 	}
 
 	@Override
 	public <S> Page<S> map(Converter<? super T, ? extends S> arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

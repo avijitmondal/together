@@ -225,4 +225,18 @@ public class Conversation {
 		this.participants = participants;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Conversation [" + (id != null ? "id=" + id + ", " : "") + (title != null ? "title=" + title + ", " : "")
+				+ (creatorId != null ? "creatorId=" + creatorId + ", " : "")
+				+ (channelId != null ? "channelId=" + channelId + ", " : "")
+				+ (conversationType != null ? "conversationType=" + conversationType + ", " : "")
+				+ (createdAt != null ? "createdAt=" + createdAt + ", " : "")
+				+ (updatedAt != null ? "updatedAt=" + updatedAt + ", " : "")
+				+ (participants != null ? "participants=" + participants : "") + "]";
+	}
+
 }

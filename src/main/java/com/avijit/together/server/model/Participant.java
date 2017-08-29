@@ -19,6 +19,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author avijit
  *
@@ -39,8 +41,9 @@ public class Participant {
 	@Column(name = "USERS_ID")
 	private UUID userId;
 
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "ID", insertable = false, updatable = false)
+	@JoinColumn(name = "CONVERSATION_ID", insertable = false, updatable = false)
 	private Conversation conversation;
 
 	/**
@@ -122,6 +125,18 @@ public class Participant {
 	 */
 	public void setConversation(Conversation conversation) {
 		this.conversation = conversation;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Participant [" + (id != null ? "id=" + id + ", " : "")
+				+ (conversationId != null ? "conversationId=" + conversationId + ", " : "")
+				+ (userId != null ? "userId=" + userId + ", " : "") + "]";
 	}
 
 }

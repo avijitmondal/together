@@ -106,4 +106,15 @@ public class Authority {
 	public void setAuthentications(List<Authentication> authentications) {
 		this.authentications = authentications;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Authority [" + (id != null ? "id=" + id + ", " : "")
+				+ (authorityRole != null ? "authorityRole=" + authorityRole : "") + "]";
+	}
 }

@@ -7,6 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.server.service;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,26 @@ public class ConversationService implements IConversationService {
 	 */
 	@Override
 	public Page<Conversation> findAll(Pageable pageable) {
+		Page<Conversation> conversations = iConversationRepository.findAll(pageable);
+		conversations.forEach(action->{
+			System.out.println(action.getParticipants());
+		});
 		return iConversationRepository.findAll(pageable);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.avijit.together.server.service.IConversationService#findByUserId(org.
+	 * springframework.data.domain.Pageable, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public Page<Conversation> findByUserId(Pageable pageable, String conversationId, String userId) {
+		Page<Conversation> conversations = iConversationRepository.findByUserId(pageable, UUID.fromString(conversationId), UUID.fromString(userId));
+//		conversations.forEach(System.out::println);
+//		return iConversationRepository.findByUserId(pageable, UUID.fromString(conversationId), UUID.fromString(userId));
+		return conversations;
 	}
 
 	/*
@@ -48,6 +68,42 @@ public class ConversationService implements IConversationService {
 	@Override
 	public Conversation findById(String conversationId) {
 		return iConversationRepository.findOne(UUID.fromString(conversationId));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.avijit.together.server.service.IConversationService#save(com.avijit.
+	 * together.server.model.Conversation)
+	 */
+	@Override
+	public Conversation save(Conversation conversation) {
+		conversation.setId(UUID.randomUUID());
+		conversation.setCreatedAt(LocalDateTime.now());
+		conversation.setUpdatedAt(LocalDateTime.now());
+		try {
+			return iConversationRepository.save(conversation);
+		} catch (Exception exception) {
+			return null;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.avijit.together.server.service.IConversationService#delete(java.lang.
+	 * String)
+	 */
+	@Override
+	public boolean delete(String conversationId) {
+		try {
+			iConversationRepository.delete(UUID.fromString(conversationId));
+			return true;
+		} catch (Exception exception) {
+			return false;
+		}
 	}
 
 }

@@ -17,9 +17,14 @@ import com.avijit.together.server.model.Conversation;
  *
  */
 public interface IConversationService extends IService {
-	
+
 	Page<Conversation> findAll(Pageable pageable);
+
+	Page<Conversation> findByUserId(Pageable pageable, String conversationId, String userId);
 
 	Conversation findById(String conversationId);
 
+	Conversation save(Conversation conversation);
+
+	boolean delete(String conversationId);
 }

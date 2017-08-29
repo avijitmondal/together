@@ -21,4 +21,8 @@ public interface IAuthenticationService extends IService{
 	Page<Authentication> findAll(Pageable pageable);
 
 	Authentication findById(String authenticationId);
+	
+	Authentication save(Authentication authentication);
+
+	boolean delete(String authenticationId);
 }

@@ -330,4 +330,23 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "User [" + (id != null ? "id=" + id + ", " : "") + (email != null ? "email=" + email + ", " : "")
+				+ (phone != null ? "phone=" + phone + ", " : "")
+				+ (firstName != null ? "firstName=" + firstName + ", " : "")
+				+ (middleName != null ? "middleName=" + middleName + ", " : "")
+				+ (lastName != null ? "lastName=" + lastName + ", " : "")
+				+ (gender != null ? "gender=" + gender + ", " : "")
+				+ (birthday != null ? "birthday=" + birthday + ", " : "") + "isActive=" + isActive + ", isReported="
+				+ isReported + ", isBlocked=" + isBlocked + ", "
+				+ (createdAt != null ? "createdAt=" + createdAt + ", " : "")
+				+ (updatedAt != null ? "updatedAt=" + updatedAt : "") + "]";
+	}
+
 }

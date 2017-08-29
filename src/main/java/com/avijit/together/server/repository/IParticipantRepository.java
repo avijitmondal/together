@@ -9,6 +9,8 @@ package com.avijit.together.server.repository;
 
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,4 +23,5 @@ import com.avijit.together.server.model.Participant;
 @Repository("iParticipantRepository")
 public interface IParticipantRepository extends PagingAndSortingRepository<Participant, UUID> {
 
+	Page<Participant> findByConversationId(Pageable pageable, UUID conversationId);
 }

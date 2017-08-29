@@ -20,4 +20,11 @@ public interface IUserService extends IService {
 	Page<User> getAll(Pageable pageable);
 
 	User findById(String userId);
+	
+	boolean delete(String userId);
+	
+	User save(User user);
+	
+	User findByEmail(String email);
+	
 }

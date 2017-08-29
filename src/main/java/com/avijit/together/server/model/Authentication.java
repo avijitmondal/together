@@ -190,9 +190,25 @@ public class Authentication {
 	}
 
 	/**
-	 * @param authorities the authorities to set
+	 * @param authorities
+	 *            the authorities to set
 	 */
 	public void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Authentication [" + (id != null ? "id=" + id + ", " : "")
+				+ (username != null ? "username=" + username + ", " : "")
+				+ (email != null ? "email=" + email + ", " : "")
+				+ (password != null ? "password=" + password + ", " : "") + "enabled=" + enabled + ", "
+				+ (lastPasswordResetDate != null ? "lastPasswordResetDate=" + lastPasswordResetDate + ", " : "")
+				+ (authorities != null ? "authorities=" + authorities : "") + "]";
 	}
 }

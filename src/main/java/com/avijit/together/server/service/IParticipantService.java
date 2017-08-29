@@ -17,8 +17,14 @@ import com.avijit.together.server.model.Participant;
  *
  */
 public interface IParticipantService extends IService {
-	
+
 	Page<Participant> findAll(Pageable pageable);
 
 	Participant findById(String participantId);
+
+	Participant save(Participant participant);
+
+	boolean delete(String participantId);
+
+	Page<Participant> findByConversationId(Pageable pageable, String conversationId);
 }

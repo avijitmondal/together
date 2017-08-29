@@ -10,10 +10,15 @@ package com.avijit.together.server.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.avijit.together.server.model.User;
@@ -26,6 +31,7 @@ import com.avijit.together.server.service.UserService;
  */
 @CrossOrigin
 @RestController
+@RequestMapping(value = "/api/users")
 public class UserController {
 
 	@Autowired
@@ -35,7 +41,7 @@ public class UserController {
 	 * @param pageable
 	 * @return
 	 */
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
 	public PageResource<User> list(Pageable pageable) {
 
 		Page<User> users = userService.getAll(pageable);
@@ -47,9 +53,41 @@ public class UserController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+	@RequestMapping(params = "email", method = RequestMethod.GET, produces = { "application/json" })
+	public User findByEmail(@RequestParam("email") String email) {
+		User user = userService.findByEmail(email);
+		return user;
+	}
+
+	/**
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/json" })
 	public User findById(@PathVariable("id") String userId) {
 		User user = userService.findById(userId);
 		return user;
+	}
+
+	/**
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json" }, produces = { "application/json" })
+	public HttpEntity<User> save(@RequestBody User user) {
+		User temp = userService.save(user);
+		return new ResponseEntity<User>(temp, HttpStatus.CREATED);
+	}
+
+	/**
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = { "application/json" })
+	public HttpEntity<User> delete(@PathVariable("id") String userId) {
+		boolean result = userService.delete(userId);
+		if (result)
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }

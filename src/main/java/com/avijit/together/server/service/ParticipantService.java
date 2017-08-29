@@ -50,4 +50,54 @@ public class ParticipantService implements IParticipantService {
 		return iParticipantRepository.findOne(UUID.fromString(participantId));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.avijit.together.server.service.IParticipantService#save(com.avijit.
+	 * together.server.model.Participant)
+	 */
+	@Override
+	public Participant save(Participant participant) {
+		participant.setId(UUID.randomUUID());
+		try {
+			return iParticipantRepository.save(participant);
+		} catch (Exception exception) {
+			return null;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.avijit.together.server.service.IParticipantService#delete(java.lang.
+	 * String)
+	 */
+	@Override
+	public boolean delete(String participantId) {
+		try {
+			iParticipantRepository.delete(UUID.fromString(participantId));
+			return true;
+		} catch (Exception exception) {
+			return false;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.avijit.together.server.service.IParticipantService#
+	 * findByConversationId(org.springframework.data.domain.Pageable,
+	 * java.lang.String)
+	 */
+	@Override
+	public Page<Participant> findByConversationId(Pageable pageable, String conversationId) {
+		try {
+			return iParticipantRepository.findByConversationId(pageable, UUID.fromString(conversationId));
+		} catch (Exception exception) {
+			return null;
+		}
+	}
+
 }
