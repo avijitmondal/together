@@ -41,8 +41,9 @@ public class ParticipantController {
 	 * @param participantId
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/json" })
-	public Participant findById(@PathVariable("id") String participantId) {
+	@RequestMapping(value = "/{participant_id}", method = RequestMethod.GET, produces = { "application/json" })
+	public Participant findById(@PathVariable("conversation_id") String conversationId,
+			@PathVariable("participant_id") String participantId) {
 		Participant participant = participantService.findById(participantId);
 		return participant;
 	}
@@ -52,8 +53,8 @@ public class ParticipantController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
-	public PageResource<Participant> findByConversationId(@PathVariable("conversation_id") String conversationId,
-			Pageable pageable) {
+	public PageResource<Participant> findByConversationId(Pageable pageable,
+			@PathVariable("conversation_id") String conversationId) {
 		Page<Participant> participants = participantService.findByConversationId(pageable, conversationId);
 		return new PageResource<Participant>(participants, "page", "size");
 	}
@@ -63,7 +64,8 @@ public class ParticipantController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = { "application/json" })
-	public HttpEntity<Conversation> delete(@PathVariable("id") String participantId) {
+	public HttpEntity<Conversation> delete(@PathVariable("conversation_id") String conversationId,
+			@PathVariable("participant_id") String participantId) {
 		boolean result = participantService.delete(participantId);
 		if (result)
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -75,7 +77,8 @@ public class ParticipantController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json" }, produces = { "application/json" })
-	public HttpEntity<Participant> save(@RequestBody Participant participant) {
+	public HttpEntity<Participant> save(@RequestBody Participant participant,
+			@PathVariable("conversation_id") String conversationId) {
 		Participant temp = participantService.save(participant);
 		return new ResponseEntity<Participant>(temp, HttpStatus.CREATED);
 	}

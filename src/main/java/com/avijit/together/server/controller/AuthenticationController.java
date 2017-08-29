@@ -51,8 +51,8 @@ public class AuthenticationController {
 	 * @param authenticationId
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/json" })
-	public Authentication findById(@PathVariable("id") String authenticationId) {
+	@RequestMapping(value = "/{authentication_id}", method = RequestMethod.GET, produces = { "application/json" })
+	public Authentication findById(@PathVariable("authentication_id") String authenticationId) {
 		Authentication authentication = authenticationService.findById(authenticationId);
 		return authentication;
 	}
@@ -72,8 +72,8 @@ public class AuthenticationController {
 	 * @param authenticationId
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = { "application/json" })
-	public HttpEntity<Authentication> delete(@PathVariable("id") String authenticationId) {
+	@RequestMapping(value = "/{authentication_id}", method = RequestMethod.DELETE, produces = { "application/json" })
+	public HttpEntity<Authentication> delete(@PathVariable("authentication_id") String authenticationId) {
 		boolean result = authenticationService.delete(authenticationId);
 		if (result)
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -63,8 +63,8 @@ public class UserController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/json" })
-	public User findById(@PathVariable("id") String userId) {
+	@RequestMapping(value = "/{user_id}", method = RequestMethod.GET, produces = { "application/json" })
+	public User findById(@PathVariable("user_id") String userId) {
 		User user = userService.findById(userId);
 		return user;
 	}
@@ -83,8 +83,8 @@ public class UserController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = { "application/json" })
-	public HttpEntity<User> delete(@PathVariable("id") String userId) {
+	@RequestMapping(value = "/{user_id}", method = RequestMethod.DELETE, produces = { "application/json" })
+	public HttpEntity<User> delete(@PathVariable("user_id") String userId) {
 		boolean result = userService.delete(userId);
 		if (result)
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

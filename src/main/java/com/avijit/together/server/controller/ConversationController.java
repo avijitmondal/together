@@ -53,8 +53,8 @@ public class ConversationController {
 	 * @param conversationId
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/json" })
-	public Conversation findById(@PathVariable("id") String conversationId) {
+	@RequestMapping(value = "/{conversation_id}", method = RequestMethod.GET, produces = { "application/json" })
+	public Conversation findById(@PathVariable("conversation_id") String conversationId) {
 		Conversation conversation = conversationService.findById(conversationId);
 		return conversation;
 	}
@@ -63,12 +63,14 @@ public class ConversationController {
 	 * @param conversationId
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", params = "user_id", method = RequestMethod.GET, produces = { "application/json" })
-	public PageResource<Conversation> findByUserId(Pageable pageable, @PathVariable("id") String conversationId, @RequestParam("user_id") String userId) {
+	@RequestMapping(value = "/{conversation_id}", params = "user_id", method = RequestMethod.GET, produces = {
+			"application/json" })
+	public PageResource<Conversation> findByUserId(Pageable pageable,
+			@PathVariable("conversation_id") String conversationId, @RequestParam("user_id") String userId) {
 		Page<Conversation> conversations = conversationService.findByUserId(pageable, conversationId, userId);
 		return new PageResource<Conversation>(conversations, "page", "size");
 	}
-	
+
 	/**
 	 * @param conversation
 	 * @return
@@ -83,8 +85,8 @@ public class ConversationController {
 	 * @param conversationId
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = { "application/json" })
-	public HttpEntity<User> delete(@PathVariable("id") String conversationId) {
+	@RequestMapping(value = "/{conversation_id}", method = RequestMethod.DELETE, produces = { "application/json" })
+	public HttpEntity<User> delete(@PathVariable("conversation_id") String conversationId) {
 		boolean result = conversationService.delete(conversationId);
 		if (result)
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
