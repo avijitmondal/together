@@ -22,6 +22,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author avijit
  *
@@ -36,10 +38,11 @@ public class Authority {
 	@Column(columnDefinition = "BINARY(16)", name = "ID")
 	private UUID id;
 
-	@Column(name = "ROLE", columnDefinition = "enum('USER','ADMIN','SUPER_ADMIN')", nullable = false)
+	@Column(name = "ROLE", columnDefinition = "enum('ROLE_USER','ROLE_ADMIN')", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private AuthorityRole authorityRole;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
 	private List<Authentication> authentications;
 

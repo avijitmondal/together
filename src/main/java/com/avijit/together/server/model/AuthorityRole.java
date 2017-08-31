@@ -12,5 +12,5 @@ package com.avijit.together.server.model;
  *
  */
 public enum AuthorityRole {
-	USER, ADMIN, SUPER_ADMIN
+	ROLE_USER, ROLE_ADMIN
 }

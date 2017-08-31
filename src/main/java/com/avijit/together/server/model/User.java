@@ -60,7 +60,7 @@ public class User {
 	@Column(name = "LAST_NAME")
 	private String lastName;
 
-	@Column(name = "GENDER", columnDefinition = "enum('MALE','FEMALE','OTHERS')", nullable = false)
+	@Column(name = "GENDER", columnDefinition = "enum('MALE','FEMALE')", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
