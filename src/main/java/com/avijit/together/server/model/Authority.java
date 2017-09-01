@@ -44,7 +44,7 @@ public class Authority {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
-	private List<Authentication> authentications;
+	private List<Credential> credentials;
 
 	/**
 	 * 
@@ -56,13 +56,13 @@ public class Authority {
 	/**
 	 * @param id
 	 * @param authorityRole
-	 * @param authentications
+	 * @param credentials
 	 */
-	public Authority(UUID id, AuthorityRole authorityRole, List<Authentication> authentications) {
+	public Authority(UUID id, AuthorityRole authorityRole, List<Credential> credentials) {
 		super();
 		this.id = id;
 		this.authorityRole = authorityRole;
-		this.authentications = authentications;
+		this.credentials = credentials;
 	}
 
 	/**
@@ -96,18 +96,18 @@ public class Authority {
 	}
 
 	/**
-	 * @return the authentications
+	 * @return the credentials
 	 */
-	public List<Authentication> getAuthentications() {
-		return authentications;
+	public List<Credential> getCredentials() {
+		return credentials;
 	}
 
 	/**
-	 * @param authentications
-	 *            the authentications to set
+	 * @param credentials
+	 *            the credentials to set
 	 */
-	public void setAuthentications(List<Authentication> authentications) {
-		this.authentications = authentications;
+	public void setCredentials(List<Credential> credentials) {
+		this.credentials = credentials;
 	}
 
 	/*

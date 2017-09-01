@@ -10,7 +10,7 @@ package com.avijit.together.server.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.avijit.together.server.model.Authentication;
+import com.avijit.together.server.model.Credential;
 
 /**
  * @author avijit
@@ -18,11 +18,11 @@ import com.avijit.together.server.model.Authentication;
  */
 public interface IAuthenticationService extends IService{
 
-	Page<Authentication> findAll(Pageable pageable);
+	Page<Credential> findAll(Pageable pageable);
 
-	Authentication findById(String authenticationId);
+	Credential findById(String authenticationId);
 	
-	Authentication save(Authentication authentication);
+	Credential save(Credential credential);
 
 	boolean delete(String authenticationId);
 }
