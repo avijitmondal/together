@@ -1,4 +1,4 @@
-package com.avijit.together.server.service;
+package com.avijit.together.server.util;
 
 import java.util.Iterator;
 import java.util.List;

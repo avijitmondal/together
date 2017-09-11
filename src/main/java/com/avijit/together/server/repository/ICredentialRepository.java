@@ -20,5 +20,5 @@ import com.avijit.together.server.model.Credential;
  */
 @Repository("iCredentialRepository")
 public interface ICredentialRepository extends PagingAndSortingRepository<Credential, UUID> {
-
+	Credential findByUsername(String username);
 }

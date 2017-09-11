@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.avijit.together.server.model.User;
-import com.avijit.together.server.service.PageResource;
 import com.avijit.together.server.service.UserService;
+import com.avijit.together.server.util.PageResource;
 
 /**
  * @author avijit

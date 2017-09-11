@@ -3,7 +3,7 @@ Implementation-Title: together-server
 Implementation-Version: 0.0.3-SNAPSHOT
 Built-By: avijit
 Implementation-Vendor-Id: com.avijit.together.server
-Build-Jdk: 1.8.0_131
+Build-Jdk: 1.8.0_144
 Implementation-URL: http://projects.spring.io/spring-boot/together-ser
  ver/
 Created-By: Maven Integration for Eclipse

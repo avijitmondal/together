@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.avijit.together.server.model.Message;
 import com.avijit.together.server.service.MessageService;
-import com.avijit.together.server.service.PageResource;
+import com.avijit.together.server.util.PageResource;
 
 /**
  * @author avijit
