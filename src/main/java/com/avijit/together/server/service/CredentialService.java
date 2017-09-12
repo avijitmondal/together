@@ -105,7 +105,9 @@ public class CredentialService implements IAuthenticationService, UserDetailsSer
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Credential credential = iCredentialRepository.findByUsername(username);
+		// TODO: now verifying user with only email. Later change to either
+		// email or username or with mobile number
+		Credential credential = iCredentialRepository.findByEmail(username);
 		if (credential == null) {
 			throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
 		} else {
