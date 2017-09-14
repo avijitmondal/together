@@ -36,10 +36,10 @@ public class ConversationService implements IConversationService {
 	 */
 	@Override
 	public Page<Conversation> findAll(Pageable pageable) {
-		Page<Conversation> conversations = iConversationRepository.findAll(pageable);
+		/*Page<Conversation> conversations = iConversationRepository.findAll(pageable);
 		conversations.forEach(action->{
 			System.out.println(action.getParticipants());
-		});
+		});*/
 		return iConversationRepository.findAll(pageable);
 	}
 
@@ -52,10 +52,10 @@ public class ConversationService implements IConversationService {
 	 */
 	@Override
 	public Page<Conversation> findByUserId(Pageable pageable, String conversationId, String userId) {
-		Page<Conversation> conversations = iConversationRepository.findByUserId(pageable, UUID.fromString(conversationId), UUID.fromString(userId));
+//		Page<Conversation> conversations = iConversationRepository.findByUserId(pageable, UUID.fromString(conversationId), UUID.fromString(userId));
 //		conversations.forEach(System.out::println);
-//		return iConversationRepository.findByUserId(pageable, UUID.fromString(conversationId), UUID.fromString(userId));
-		return conversations;
+		return iConversationRepository.findByUserId(pageable, UUID.fromString(conversationId), UUID.fromString(userId));
+//		return conversations;
 	}
 
 	/*
