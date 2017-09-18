@@ -24,7 +24,7 @@ import com.avijit.together.server.model.Conversation;
 @Repository("iConversationRepository")
 public interface IConversationRepository extends PagingAndSortingRepository<Conversation, UUID> {
 
-	@Query(value = "SELECT c FROM Conversation AS c LEFT JOIN c.participants AS p WHERE p.conversationId =?1 AND p.userId=?2")
-	Page<Conversation> findByUserId(Pageable pageable, UUID conversationId, UUID userId);
-	
+	@Query(value = "SELECT c FROM Conversation AS c LEFT JOIN c.participants AS p WHERE c.conversationType='SINGLE' OR (c.conversationType='GROUP' AND p.userId=?1)")
+	Page<Conversation> findByUserId(Pageable pageable, UUID userId);
+
 }

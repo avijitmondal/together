@@ -54,12 +54,13 @@ public class ParticipantService implements IParticipantService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.avijit.together.server.service.IParticipantService#save(com.avijit.
-	 * together.server.model.Participant)
+	 * com.avijit.together.server.service.IParticipantService#save(java.lang.
+	 * String, com.avijit.together.server.model.Participant)
 	 */
 	@Override
-	public Participant save(Participant participant) {
+	public Participant save(String conversationId, Participant participant) {
 		participant.setId(UUID.randomUUID());
+		participant.setConversationId(UUID.fromString(conversationId));
 		try {
 			return iParticipantRepository.save(participant);
 		} catch (Exception exception) {

@@ -7,9 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-	</configs>
-	<autoconfigs>
-		<config>java:com.avijit.together.server.TogetherServerApplication</config>
+		<config>java:com.avijit.together.server.Tocom.avijit.together.server.TogetherApplicationgs>
 	</autoconfigs>
 	<configSets>
 	</configSets>

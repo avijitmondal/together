@@ -79,7 +79,7 @@ public class ParticipantController {
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json" }, produces = { "application/json" })
 	public HttpEntity<Participant> save(@RequestBody Participant participant,
 			@PathVariable("conversation_id") String conversationId) {
-		Participant temp = participantService.save(participant);
+		Participant temp = participantService.save(conversationId, participant);
 		return new ResponseEntity<Participant>(temp, HttpStatus.CREATED);
 	}
 }

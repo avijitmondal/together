@@ -22,7 +22,7 @@ public interface IParticipantService extends IService {
 
 	Participant findById(String participantId);
 
-	Participant save(Participant participant);
+	Participant save(String conversationId, Participant participant);
 
 	boolean delete(String participantId);
 

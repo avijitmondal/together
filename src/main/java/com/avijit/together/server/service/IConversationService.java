@@ -20,7 +20,7 @@ public interface IConversationService extends IService {
 
 	Page<Conversation> findAll(Pageable pageable);
 
-	Page<Conversation> findByUserId(Pageable pageable, String conversationId, String userId);
+	Page<Conversation> findByUserId(Pageable pageable, String userId);
 
 	Conversation findById(String conversationId);
 

@@ -60,14 +60,12 @@ public class ConversationController {
 	}
 
 	/**
-	 * @param conversationId
+	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/{conversation_id}", params = "user_id", method = RequestMethod.GET, produces = {
-			"application/json" })
-	public PageResource<Conversation> findByUserId(Pageable pageable,
-			@PathVariable("conversation_id") String conversationId, @RequestParam("user_id") String userId) {
-		Page<Conversation> conversations = conversationService.findByUserId(pageable, conversationId, userId);
+	@RequestMapping(params = "user_id", method = RequestMethod.GET, produces = { "application/json" })
+	public PageResource<Conversation> findByUserId(Pageable pageable, @RequestParam("user_id") String userId) {
+		Page<Conversation> conversations = conversationService.findByUserId(pageable, userId);
 		return new PageResource<Conversation>(conversations, "page", "size");
 	}
 
