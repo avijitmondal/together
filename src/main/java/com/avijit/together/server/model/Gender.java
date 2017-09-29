@@ -12,5 +12,12 @@ package com.avijit.together.server.model;
  *
  */
 public enum Gender {
-	MALE, FEMALE
+	/**
+	 * User is a male
+	 */
+	MALE,
+	/**
+	 * User is a Female
+	 */
+	FEMALE
 }

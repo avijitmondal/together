@@ -5,7 +5,7 @@
 
 	<groupId>com.avijit.together</groupId>
 	<artifactId>together-server</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>Together</name>

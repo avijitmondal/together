@@ -39,25 +39,43 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Table(name = "CONVERSATION")
 public class Conversation {
 
+	/**
+	 * Unique id for Conversation
+	 */
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(columnDefinition = "BINARY(16)", name = "ID")
 	private UUID id;
 
+	/**
+	 * Conversation Title
+	 */
 	@Column(name = "TITLE")
 	private String title;
 
+	/**
+	 * Conversation Creator ID
+	 */
 	@Column(name = "CREATOR_ID")
 	private UUID creatorId;
 
+	/**
+	 * Conversation channel ID
+	 */
 	@Column(name = "CHANNEL_ID")
 	private String channelId;
 
+	/**
+	 * Conversation type
+	 */
 	@Column(name = "TYPE", columnDefinition = "enum('GROUP','SINGLE')", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private ConversationType conversationType;
 
+	/**
+	 * DateTime when conversation created
+	 */
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@DateTimeFormat(iso = ISO.DATE_TIME)
@@ -65,6 +83,9 @@ public class Conversation {
 	@Column(name = "CREATED_AT")
 	private LocalDateTime createdAt;
 
+	/**
+	 * DateTime when the conversation last updated
+	 */
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@DateTimeFormat(iso = ISO.DATE_TIME)
@@ -72,6 +93,9 @@ public class Conversation {
 	@Column(name = "UPDATED_AT")
 	private LocalDateTime updatedAt;
 
+	/**
+	 * List of participants for this conversation
+	 */
 	@OneToMany(targetEntity = Participant.class, mappedBy = "conversation", fetch = FetchType.EAGER)
 	private Set<Participant> participants;
 
@@ -84,13 +108,21 @@ public class Conversation {
 
 	/**
 	 * @param id
+	 *            Unique id for Conversation
 	 * @param title
+	 *            Conversation Title
 	 * @param creatorId
+	 *            Conversation Creator ID
 	 * @param channelId
+	 *            Conversation channel ID
 	 * @param conversationType
+	 *            Conversation type
 	 * @param createdAt
+	 *            DateTime when conversation created
 	 * @param updatedAt
+	 *            DateTime when the conversation last updated
 	 * @param participants
+	 *            List of participants for this conversation
 	 */
 	public Conversation(UUID id, String title, UUID creatorId, String channelId, ConversationType conversationType,
 			LocalDateTime createdAt, LocalDateTime updatedAt, Set<Participant> participants) {

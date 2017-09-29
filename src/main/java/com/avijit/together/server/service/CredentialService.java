@@ -31,6 +31,9 @@ import com.avijit.together.server.repository.ICredentialRepository;
 @Service("credentialService")
 public class CredentialService implements IAuthenticationService, UserDetailsService {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private ICredentialRepository iCredentialRepository;
 
@@ -63,7 +66,7 @@ public class CredentialService implements IAuthenticationService, UserDetailsSer
 	 * 
 	 * @see
 	 * com.avijit.together.server.service.IAuthenticationService#save(com.avijit
-	 * .together.server.model.Authentication)
+	 * .together.server.model.Credential)
 	 */
 	@Override
 	public Credential save(Credential credential) {

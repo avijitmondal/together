@@ -23,5 +23,10 @@ import com.avijit.together.server.model.Participant;
 @Repository("iParticipantRepository")
 public interface IParticipantRepository extends PagingAndSortingRepository<Participant, UUID> {
 
+	/**
+	 * @param pageable
+	 * @param conversationId
+	 * @return
+	 */
 	Page<Participant> findByConversationId(Pageable pageable, UUID conversationId);
 }

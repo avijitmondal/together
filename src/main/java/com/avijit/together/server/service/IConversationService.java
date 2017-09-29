@@ -18,13 +18,34 @@ import com.avijit.together.server.model.Conversation;
  */
 public interface IConversationService extends IService {
 
+	/**
+	 * @param pageable
+	 * @return
+	 */
 	Page<Conversation> findAll(Pageable pageable);
 
+	/**
+	 * @param pageable
+	 * @param userId
+	 * @return
+	 */
 	Page<Conversation> findByUserId(Pageable pageable, String userId);
 
+	/**
+	 * @param conversationId
+	 * @return
+	 */
 	Conversation findById(String conversationId);
 
+	/**
+	 * @param conversation
+	 * @return
+	 */
 	Conversation save(Conversation conversation);
 
+	/**
+	 * @param conversationId
+	 * @return
+	 */
 	boolean delete(String conversationId);
 }

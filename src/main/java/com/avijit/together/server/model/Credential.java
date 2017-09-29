@@ -35,29 +35,50 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "AUTHENTICATION")
 public class Credential {
 
+	/**
+	 * Unique ID for Credential
+	 */
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(columnDefinition = "BINARY(16)", name = "ID")
 	private UUID id;
 
+	/**
+	 * Credential username
+	 */
 	@Column(name = "USERNAME")
 	private String username;
 
+	/**
+	 * Credential email
+	 */
 	@Column(name = "EMAIL")
 	private String email;
 
+	/**
+	 * Credential password
+	 */
 	@Column(name = "PASSWORD")
 	private String password;
 
+	/**
+	 * Credential enabled or not
+	 */
 	@Column(name = "ENABLED", columnDefinition = "CHAR", length = 1)
 	private boolean enabled;
 
+	/**
+	 * DateTime when password last reset
+	 */
 	@DateTimeFormat(iso = ISO.DATE)
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "LAST_PASSWORD_RESET")
 	private Date lastPasswordResetDate;
 
+	/**
+	 * Authority types for that credential
+	 */
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "AUTHENTICATION_AUTHORITY", joinColumns = {
 			@JoinColumn(name = "AUTHENTICATION_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
@@ -73,12 +94,19 @@ public class Credential {
 
 	/**
 	 * @param id
+	 *            Unique ID for Credential
 	 * @param username
+	 *            Credential username
 	 * @param email
+	 *            Credential email
 	 * @param password
+	 *            Credential password
 	 * @param enabled
+	 *            Credential enabled or not
 	 * @param lastPasswordResetDate
+	 *            DateTime when password last reset
 	 * @param authorities
+	 *            Authority types for that credential
 	 */
 	public Credential(UUID id, String username, String email, String password, boolean enabled,
 			Date lastPasswordResetDate, List<Authority> authorities) {

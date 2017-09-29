@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
-Implementation-Title: together-server
-Implementation-Version: 0.0.3-SNAPSHOT
+Implementation-Title: Together
+Implementation-Version: 1.0.2-SNAPSHOT
 Built-By: avijit
-Implementation-Vendor-Id: com.avijit.together.server
+Implementation-Vendor-Id: com.avijit.together
 Build-Jdk: 1.8.0_144
 Implementation-URL: http://projects.spring.io/spring-boot/together-ser
  ver/

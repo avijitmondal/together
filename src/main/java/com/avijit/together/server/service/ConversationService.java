@@ -25,6 +25,9 @@ import com.avijit.together.server.repository.IConversationRepository;
 @Service("conversationService")
 public class ConversationService implements IConversationService {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private IConversationRepository iConversationRepository;
 

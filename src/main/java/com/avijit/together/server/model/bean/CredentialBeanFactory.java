@@ -14,8 +14,9 @@ import com.avijit.together.server.model.Credential;
  *
  */
 public final class CredentialBeanFactory {
+
 	/**
-	 * @param user
+	 * @param credential
 	 * @return
 	 */
 	public static CredentialBean create(Credential credential) {

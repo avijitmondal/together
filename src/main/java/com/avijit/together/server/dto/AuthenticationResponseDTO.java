@@ -10,12 +10,28 @@ import com.avijit.together.server.model.User;
  */
 public class AuthenticationResponseDTO implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
 	private final User user;
+	/**
+	 * 
+	 */
 	private final String token;
+	/**
+	 * 
+	 */
 	private final String expiration = "86400";
 
+	/**
+	 * @param token
+	 * @param user
+	 */
 	public AuthenticationResponseDTO(String token, User user) {
 		this.token = token;
 		this.user = user;
@@ -32,7 +48,7 @@ public class AuthenticationResponseDTO implements Serializable {
 	 * @return
 	 */
 	public String getToken() {
-		return this.token;
+		return token;
 	}
 
 	/**

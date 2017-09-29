@@ -25,6 +25,9 @@ import com.avijit.together.server.repository.IUserRepository;
 @Service("userService")
 public class UserService implements IUserService {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private IUserRepository iUserRepository;
 

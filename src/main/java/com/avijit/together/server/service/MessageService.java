@@ -25,6 +25,9 @@ import com.avijit.together.server.repository.IMessageRepository;
 @Service("messageService")
 public class MessageService implements IMessageService {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private IMessageRepository iMessageRepository;
 

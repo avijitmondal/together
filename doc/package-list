@@ -1,0 +1,11 @@
+com.avijit.together.server
+com.avijit.together.server.controller
+com.avijit.together.server.dto
+com.avijit.together.server.model
+com.avijit.together.server.model.bean
+com.avijit.together.server.repository
+com.avijit.together.server.security
+com.avijit.together.server.service
+com.avijit.together.server.socket
+com.avijit.together.server.util
+com.avijit.together.server.util.javatime

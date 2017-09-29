@@ -34,6 +34,9 @@ import com.avijit.together.server.util.PageResource;
 @RequestMapping(value = "/api/users")
 public class UserController {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private UserService userService;
 
@@ -50,7 +53,7 @@ public class UserController {
 	}
 
 	/**
-	 * @param userId
+	 * @param email
 	 * @return
 	 */
 	@RequestMapping(params = "email", method = RequestMethod.GET, produces = { "application/json" })

@@ -23,5 +23,10 @@ import com.avijit.together.server.model.Message;
 @Repository("iMessageRepository")
 public interface IMessageRepository extends PagingAndSortingRepository<Message, UUID> {
 
+	/**
+	 * @param pageable
+	 * @param conversationId
+	 * @return
+	 */
 	Page<Message> findByConversationId(Pageable pageable, UUID conversationId);
 }

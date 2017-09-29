@@ -17,14 +17,34 @@ import com.avijit.together.server.model.User;
  *
  */
 public interface IUserService extends IService {
+	/**
+	 * @param pageable
+	 * @return
+	 */
 	Page<User> getAll(Pageable pageable);
 
+	/**
+	 * @param userId
+	 * @return
+	 */
 	User findById(String userId);
-	
+
+	/**
+	 * @param userId
+	 * @return
+	 */
 	boolean delete(String userId);
-	
+
+	/**
+	 * @param user
+	 * @return
+	 */
 	User save(User user);
-	
+
+	/**
+	 * @param email
+	 * @return
+	 */
 	User findByEmail(String email);
-	
+
 }

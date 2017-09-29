@@ -18,7 +18,7 @@ public class TimeProvider implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @return
+	 * @return Current date
 	 */
 	public Date now() {
 		return new Date();

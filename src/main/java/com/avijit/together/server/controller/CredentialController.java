@@ -46,14 +46,29 @@ import com.avijit.together.server.util.PageResource;
 @RestController
 @RequestMapping(value = "/api/authentications")
 public class CredentialController {
+	/**
+	 * 
+	 */
 	@Autowired
 	private CredentialService credentialService;
+	/**
+	 * 
+	 */
 	@Autowired
 	private UserService userService;
+	/**
+	 * 
+	 */
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	/**
+	 * 
+	 */
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
+	/**
+	 * 
+	 */
 	private String tokenHeader = "Authorization";
 
 	/**
@@ -63,8 +78,9 @@ public class CredentialController {
 	 * @throws AuthenticationException
 	 */
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
-	public HttpEntity<AuthenticationResponseDTO> createAuthenticationToken(@RequestBody AuthenticationRequestDTO authenticationRequestDTO,
-			Device device) throws AuthenticationException {
+	public HttpEntity<AuthenticationResponseDTO> createAuthenticationToken(
+			@RequestBody AuthenticationRequestDTO authenticationRequestDTO, Device device)
+			throws AuthenticationException {
 
 		// Perform the security
 		final Authentication authentication = authenticationManager
@@ -77,7 +93,7 @@ public class CredentialController {
 				.loadUserByUsername(authenticationRequestDTO.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails, device);
 		User user = userService.findByEmail(userDetails.getEmail());
-		
+
 		// Return the token
 		return ResponseEntity.ok(new AuthenticationResponseDTO(token, user));
 	}
@@ -123,7 +139,7 @@ public class CredentialController {
 	}
 
 	/**
-	 * @param conversation
+	 * @param credential
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json" }, produces = { "application/json" })

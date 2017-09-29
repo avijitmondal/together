@@ -36,31 +36,55 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Table(name = "MESSAGES")
 public class Message {
 
+	/**
+	 * Unique ID for Message
+	 */
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(columnDefinition = "BINARY(16)", name = "ID")
 	private UUID id;
 
+	/**
+	 * Conversation ID message belongs to
+	 */
 	@Column(name = "CONVERSATION_ID")
 	private UUID conversationId;
 
+	/**
+	 * Sender ID of the message
+	 */
 	@Column(name = "SENDER_ID")
 	private UUID senderId;
 
+	/**
+	 * Message
+	 */
 	@Column(name = "MESSAGE")
 	private String message;
 
-	@Column(name = "message_type", columnDefinition = "enum('TEXT','IMAGE','VIDEO','AUDIO')")
+	/**
+	 * message type
+	 */
+	@Column(name = "message_type", columnDefinition = "enum('TEXT','IMAGE','VIDEO','AUDIO','DOCUMENT')")
 	@Enumerated(EnumType.STRING)
 	private MessageType messageType;
 
+	/**
+	 * If image then attachment thumbnail URL
+	 */
 	@Column(name = "attachment_thumb_url")
 	private String attachmentThumbnailUrl;
 
+	/**
+	 * If message is document then document attachment URL
+	 */
 	@Column(name = "attachment_url")
 	private String attachmentUrl;
 
+	/**
+	 * Message sent DateTime
+	 */
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@DateTimeFormat(iso = ISO.DATE_TIME)
@@ -68,6 +92,9 @@ public class Message {
 	@Column(name = "CREATED_AT")
 	private LocalDateTime createdAt;
 
+	/**
+	 * Last DateTime when the message last updated
+	 */
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@DateTimeFormat(iso = ISO.DATE_TIME)
@@ -84,14 +111,23 @@ public class Message {
 
 	/**
 	 * @param id
+	 *            Unique ID for Message
 	 * @param conversationId
+	 *            Conversation ID message belongs to
 	 * @param senderId
+	 *            Sender ID of the message
 	 * @param message
+	 *            Message
 	 * @param messageType
+	 *            message type
 	 * @param attachmentThumbnailUrl
+	 *            If image then attachment thumbnail URL
 	 * @param attachmentUrl
+	 *            If message is document then document attachment URL
 	 * @param createdAt
+	 *            Message sent DateTime
 	 * @param updatedAt
+	 *            Last DateTime when the message last updated
 	 */
 	public Message(UUID id, UUID conversationId, UUID senderId, String message, MessageType messageType,
 			String attachmentThumbnailUrl, String attachmentUrl, LocalDateTime createdAt, LocalDateTime updatedAt) {

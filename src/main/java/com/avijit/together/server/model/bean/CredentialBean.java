@@ -19,14 +19,35 @@ public class CredentialBean implements UserDetails {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	private final UUID id;
+	/**
+	 * 
+	 */
 	private final String username;
+	/**
+	 * 
+	 */
 	@JsonIgnore
 	private final String password;
+	/**
+	 * 
+	 */
 	private final String email;
+	/**
+	 * 
+	 */
 	private final Collection<? extends GrantedAuthority> authorities;
+	/**
+	 * 
+	 */
 	@JsonIgnore
 	private final boolean enabled;
+	/**
+	 * 
+	 */
 	private final Date lastPasswordResetDate;
 
 	/**

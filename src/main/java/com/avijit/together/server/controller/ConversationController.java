@@ -34,6 +34,9 @@ import com.avijit.together.server.util.PageResource;
 @RestController
 @RequestMapping(value = "/api/conversations")
 public class ConversationController {
+	/**
+	 * 
+	 */
 	@Autowired
 	private ConversationService conversationService;
 
@@ -60,6 +63,7 @@ public class ConversationController {
 	}
 
 	/**
+	 * @param pageable
 	 * @param userId
 	 * @return
 	 */

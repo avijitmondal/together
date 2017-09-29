@@ -17,13 +17,31 @@ import com.avijit.together.server.model.Message;
  *
  */
 public interface IMessageService extends IService {
-	
+
+	/**
+	 * @param conversationId
+	 * @param messageId
+	 * @return
+	 */
 	Message findById(String conversationId, String messageId);
 
+	/**
+	 * @param message
+	 * @return
+	 */
 	Message save(Message message);
 
+	/**
+	 * @param messageId
+	 * @return
+	 */
 	boolean delete(String messageId);
 
+	/**
+	 * @param pageable
+	 * @param conversationId
+	 * @return
+	 */
 	Page<Message> findByConversationId(Pageable pageable, String conversationId);
-	
+
 }

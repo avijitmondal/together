@@ -12,5 +12,12 @@ package com.avijit.together.server.model;
  *
  */
 public enum AuthorityRole {
-	ROLE_USER, ROLE_ADMIN
+	/**
+	 * Authorized as an end User
+	 */
+	ROLE_USER,
+	/**
+	 * Authorized as an Administrator
+	 */
+	ROLE_ADMIN
 }

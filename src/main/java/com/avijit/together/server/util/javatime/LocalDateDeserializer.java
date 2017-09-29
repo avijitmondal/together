@@ -17,12 +17,26 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
  */
 public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
 	protected LocalDateDeserializer() {
 		super(LocalDate.class);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.fasterxml.jackson.databind.JsonDeserializer#deserialize(com.fasterxml
+	 * .jackson.core.JsonParser,
+	 * com.fasterxml.jackson.databind.DeserializationContext)
+	 */
 	@Override
 	public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {

@@ -29,18 +29,30 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "PARTICIPANTS")
 public class Participant {
 
+	/**
+	 * Unique ID for Participant
+	 */
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(columnDefinition = "BINARY(16)", name = "ID")
 	private UUID id;
 
+	/**
+	 * Conversation ID participant belongs to
+	 */
 	@Column(name = "CONVERSATION_ID")
 	private UUID conversationId;
 
+	/**
+	 * Participant user ID
+	 */
 	@Column(name = "USERS_ID")
 	private UUID userId;
 
+	/**
+	 * Conversation participant belongs to
+	 */
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "CONVERSATION_ID", insertable = false, updatable = false)
@@ -55,9 +67,13 @@ public class Participant {
 
 	/**
 	 * @param id
+	 *            Unique ID for Participant
 	 * @param conversationId
+	 *            Conversation ID participant belongs to
 	 * @param userId
+	 *            Participant user ID
 	 * @param conversation
+	 *            Conversation participant belongs to
 	 */
 	public Participant(UUID id, UUID conversationId, UUID userId, Conversation conversation) {
 		super();

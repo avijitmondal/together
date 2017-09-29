@@ -34,10 +34,14 @@ import com.avijit.together.server.util.PageResource;
 @RequestMapping(value = "/api/conversations/{conversation_id}/participants")
 public class ParticipantController {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private ParticipantService participantService;
 
 	/**
+	 * @param conversationId
 	 * @param participantId
 	 * @return
 	 */
@@ -50,6 +54,7 @@ public class ParticipantController {
 
 	/**
 	 * @param pageable
+	 * @param conversationId
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
@@ -60,6 +65,7 @@ public class ParticipantController {
 	}
 
 	/**
+	 * @param conversationId
 	 * @param participantId
 	 * @return
 	 */
@@ -74,6 +80,7 @@ public class ParticipantController {
 
 	/**
 	 * @param participant
+	 * @param conversationId
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json" }, produces = { "application/json" })

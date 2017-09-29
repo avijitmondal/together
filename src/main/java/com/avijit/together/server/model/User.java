@@ -39,31 +39,55 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Table(name = "USERS")
 public class User {
 
+	/**
+	 * Unique ID for User
+	 */
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(columnDefinition = "BINARY(16)", name = "ID")
 	private UUID id;
 
+	/**
+	 * email of the user
+	 */
 	@Column(name = "EMAIL")
 	private String email;
 
+	/**
+	 * phone number of the user
+	 */
 	@Column(name = "PHONE")
 	private String phone;
 
+	/**
+	 * First Name of the user
+	 */
 	@Column(name = "FIRST_NAME")
 	private String firstName;
 
+	/**
+	 * Middle name of the user
+	 */
 	@Column(name = "MIDDLE_NAME")
 	private String middleName;
 
+	/**
+	 * Last Name of the user
+	 */
 	@Column(name = "LAST_NAME")
 	private String lastName;
 
+	/**
+	 * Gender of the user
+	 */
 	@Column(name = "GENDER", columnDefinition = "enum('MALE','FEMALE')", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
+	/**
+	 * Birthday of the user
+	 */
 	@JsonSerialize(using = LocalDateSerializer.class)
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@DateTimeFormat(iso = ISO.DATE)
@@ -71,15 +95,27 @@ public class User {
 	@Column(name = "BIRTHDAY")
 	private LocalDate birthday;
 
+	/**
+	 * Number of device user is active
+	 */
 	@Column(name = "IS_ACTIVE")
 	private byte isActive;
 
+	/**
+	 * How many other user is reported about this user
+	 */
 	@Column(name = "IS_REPORTED")
 	private byte isReported;
 
+	/**
+	 * How many other user blocked this user
+	 */
 	@Column(name = "IS_BLOCKED")
 	private byte isBlocked;
 
+	/**
+	 * Creation DateTime of the user
+	 */
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@DateTimeFormat(iso = ISO.DATE_TIME)
@@ -87,6 +123,9 @@ public class User {
 	@Column(name = "CREATED_AT")
 	private LocalDateTime createdAt;
 
+	/**
+	 * DateTime of the last update
+	 */
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@DateTimeFormat(iso = ISO.DATE_TIME)
@@ -103,18 +142,31 @@ public class User {
 
 	/**
 	 * @param id
+	 *            Unique ID for User
 	 * @param email
+	 *            email of the user
 	 * @param phone
+	 *            phone number of the user
 	 * @param firstName
+	 *            First Name of the user
 	 * @param middleName
+	 *            Middle name of the user
 	 * @param lastName
+	 *            Last Name of the user
 	 * @param gender
+	 *            Gender of the user
 	 * @param birthday
+	 *            Birthday of the user
 	 * @param isActive
+	 *            Number of device user is active
 	 * @param isReported
+	 *            How many other user is reported about this user
 	 * @param isBlocked
+	 *            How many other user blocked this user
 	 * @param createdAt
+	 *            Creation DateTime of the user
 	 * @param updatedAt
+	 *            DateTime of the last update
 	 */
 	public User(UUID id, String email, String phone, String firstName, String middleName, String lastName,
 			Gender gender, LocalDate birthday, byte isActive, byte isReported, byte isBlocked, LocalDateTime createdAt,

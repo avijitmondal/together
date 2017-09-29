@@ -23,14 +23,26 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
+	/**
+	 * 
+	 */
 	private final Log logger = LogFactory.getLog(this.getClass());
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private UserDetailsService credentialService;
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 
+	/**
+	 * 
+	 */
 	private String tokenHeader = "Authorization";
 
 	/*

@@ -21,6 +21,10 @@ import com.avijit.together.server.model.User;
 @Repository("iUserRepository")
 public interface IUserRepository extends PagingAndSortingRepository<User, UUID> {
 
+	/**
+	 * @param email
+	 * @return
+	 */
 	User findByEmail(String email);
-	
+
 }

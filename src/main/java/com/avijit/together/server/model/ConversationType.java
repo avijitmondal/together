@@ -12,5 +12,12 @@ package com.avijit.together.server.model;
  *
  */
 public enum ConversationType {
-	GROUP, SINGLE
+	/**
+	 * Conversation is a type of Group conversation
+	 */
+	GROUP,
+	/**
+	 * Conversation is one to one
+	 */
+	SINGLE
 }

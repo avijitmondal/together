@@ -16,13 +16,29 @@ import com.avijit.together.server.model.Credential;
  * @author avijit
  *
  */
-public interface IAuthenticationService extends IService{
+public interface IAuthenticationService extends IService {
 
+	/**
+	 * @param pageable
+	 * @return
+	 */
 	Page<Credential> findAll(Pageable pageable);
 
+	/**
+	 * @param authenticationId
+	 * @return
+	 */
 	Credential findById(String authenticationId);
-	
+
+	/**
+	 * @param credential
+	 * @return
+	 */
 	Credential save(Credential credential);
 
+	/**
+	 * @param authenticationId
+	 * @return
+	 */
 	boolean delete(String authenticationId);
 }

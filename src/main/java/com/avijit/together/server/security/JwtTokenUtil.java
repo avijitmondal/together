@@ -24,23 +24,59 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtTokenUtil implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
 	static final String CLAIM_KEY_USERNAME = "sub";
+	/**
+	 * 
+	 */
 	static final String CLAIM_KEY_AUDIENCE = "audience";
+	/**
+	 * 
+	 */
 	static final String CLAIM_KEY_CREATED = "created";
+	/**
+	 * 
+	 */
 	static final String CLAIM_KEY_EXPIRED = "exp";
 
+	/**
+	 * 
+	 */
 	static final String AUDIENCE_UNKNOWN = "unknown";
+	/**
+	 * 
+	 */
 	static final String AUDIENCE_WEB = "web";
+	/**
+	 * 
+	 */
 	static final String AUDIENCE_MOBILE = "mobile";
+	/**
+	 * 
+	 */
 	static final String AUDIENCE_TABLET = "tablet";
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private TimeProvider timeProvider;
 
+	/**
+	 * 
+	 */
 	private String secret = "mySecret";
 
+	/**
+	 * 
+	 */
 	private Long expiration = 86400L;
 
 	/**

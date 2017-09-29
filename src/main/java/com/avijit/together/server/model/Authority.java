@@ -32,16 +32,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "AUTHORITY")
 public class Authority {
 
+	/**
+	 * Unique id for an Authority
+	 */
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(columnDefinition = "BINARY(16)", name = "ID")
 	private UUID id;
 
+	/**
+	 * Role for an authority
+	 */
 	@Column(name = "ROLE", columnDefinition = "enum('ROLE_USER','ROLE_ADMIN')", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private AuthorityRole authorityRole;
 
+	/**
+	 * Contains list of all credentials for that specific authority type
+	 */
 	@JsonIgnore
 	@ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
 	private List<Credential> credentials;
@@ -55,8 +64,12 @@ public class Authority {
 
 	/**
 	 * @param id
+	 *            Unique id for an Authority
 	 * @param authorityRole
+	 *            Role for an authority
 	 * @param credentials
+	 *            Contains list of all credentials for that specific authority
+	 *            type
 	 */
 	public Authority(UUID id, AuthorityRole authorityRole, List<Credential> credentials) {
 		super();

@@ -32,10 +32,14 @@ import com.avijit.together.server.util.PageResource;
 @RequestMapping(value = "/api/conversations/{conversation_id}/messages")
 public class MessageController {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private MessageService messageService;
 
 	/**
+	 * @param pageable
 	 * @param conversationId
 	 * @param messageId
 	 * @return
@@ -49,6 +53,7 @@ public class MessageController {
 
 	/**
 	 * @param pageable
+	 * @param conversationId
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
@@ -59,6 +64,7 @@ public class MessageController {
 	}
 
 	/**
+	 * @param conversationId
 	 * @param messageId
 	 * @return
 	 */

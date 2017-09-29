@@ -24,6 +24,9 @@ import com.avijit.together.server.repository.IParticipantRepository;
 @Service("participantService")
 public class ParticipantService implements IParticipantService {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private IParticipantRepository iParticipantRepository;
 
