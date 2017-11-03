@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.avijit.together.server.exception.UUIDConversationException;
 import com.avijit.together.server.model.Conversation;
 import com.avijit.together.server.repository.IConversationRepository;
 
@@ -100,6 +101,24 @@ public class ConversationService implements IConversationService {
 		} catch (Exception exception) {
 			return false;
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.avijit.together.server.service.IConversationService#isExists(java.
+	 * lang.String)
+	 */
+	@Override
+	public boolean isExists(String conversationId) throws UUIDConversationException {
+		UUID tempConversationID = null;
+		try {
+			tempConversationID = UUID.fromString(conversationId);
+		} catch (Exception exception) {
+			throw new UUIDConversationException("Not a valid Conversation ID");
+		}
+		return iConversationRepository.exists(tempConversationID);
 	}
 
 }

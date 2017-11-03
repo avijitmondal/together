@@ -10,6 +10,7 @@ package com.avijit.together.server.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.avijit.together.server.exception.UUIDConversationException;
 import com.avijit.together.server.model.Conversation;
 
 /**
@@ -48,4 +49,11 @@ public interface IConversationService extends IService {
 	 * @return
 	 */
 	boolean delete(String conversationId);
+	
+	/**
+	 * @param conversationId
+	 * @return
+	 * @throws UUIDConversationException 
+	 */
+	boolean isExists(String conversationId) throws UUIDConversationException;
 }
