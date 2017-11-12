@@ -10,6 +10,7 @@ package com.avijit.together.server.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.Participant;
 
 /**
@@ -27,26 +28,37 @@ public interface IParticipantService extends IService {
 	/**
 	 * @param participantId
 	 * @return
+	 * @throws TogetherException
 	 */
-	Participant findById(String participantId);
+	Participant findById(String participantId) throws TogetherException;
 
 	/**
 	 * @param conversationId
 	 * @param participant
 	 * @return
+	 * @throws TogetherException
 	 */
-	Participant save(String conversationId, Participant participant);
+	Participant save(String conversationId, Participant participant) throws TogetherException;
 
 	/**
 	 * @param participantId
 	 * @return
+	 * @throws TogetherException
 	 */
-	boolean delete(String participantId);
+	boolean delete(String participantId) throws TogetherException;
 
 	/**
 	 * @param pageable
 	 * @param conversationId
 	 * @return
+	 * @throws TogetherException
 	 */
-	Page<Participant> findByConversationId(Pageable pageable, String conversationId);
+	Page<Participant> findByConversationId(Pageable pageable, String conversationId) throws TogetherException;
+
+	/**
+	 * @param participantId
+	 * @return
+	 * @throws TogetherException
+	 */
+	boolean isExists(String participantId) throws TogetherException;
 }

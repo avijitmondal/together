@@ -15,6 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.avijit.together.server.exception.ErrorCode;
+import com.avijit.together.server.exception.IErrorDetails;
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.User;
 import com.avijit.together.server.repository.IUserRepository;
 
@@ -53,27 +56,30 @@ public class UserService implements IUserService {
 	 * String)
 	 */
 	@Override
-	public User findById(String userId) {
+	public User findById(String userId) throws TogetherException {
 		try {
 			return iUserRepository.findOne(UUID.fromString(userId));
-		} catch (Exception exception) {
-			return null;
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_USER_ID, IErrorDetails.INVALID_USER_ID);
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.avijit.together.server.service.IUserService#delete(java.lang.String)
+	 * @see com.avijit.together.server.service.IUserService#delete(java.lang.String)
 	 */
 	@Override
-	public boolean delete(String userId) {
+	public boolean delete(String userId) throws TogetherException {
 		try {
-			iUserRepository.delete(UUID.fromString(userId));
-			return true;
-		} catch (Exception exception) {
-			return false;
+			if (isExists(userId)) {
+				iUserRepository.delete(UUID.fromString(userId));
+				return true;
+			} else {
+				return false;
+			}
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_USER_ID, IErrorDetails.INVALID_USER_ID);
 		}
 	}
 
@@ -85,14 +91,30 @@ public class UserService implements IUserService {
 	 * server.model.User)
 	 */
 	@Override
-	public User save(User user) {
-		user.setId(UUID.randomUUID());
-		user.setCreatedAt(LocalDateTime.now());
-		user.setUpdatedAt(LocalDateTime.now());
+	public User save(User user) throws TogetherException {
 		try {
+			user.setId(UUID.randomUUID());
+			user.setCreatedAt(LocalDateTime.now());
+			user.setUpdatedAt(LocalDateTime.now());
 			return iUserRepository.save(user);
 		} catch (Exception exception) {
-			return null;
+			throw new TogetherException(ErrorCode.USER_NOT_ADDED, IErrorDetails.UNABLE_TO_ADD_USER);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.avijit.together.server.service.IUserService#findByEmail(java.lang.
+	 * String)
+	 */
+	@Override
+	public User findByEmail(String email) throws TogetherException {
+		try {
+			return iUserRepository.findByEmail(email);
+		} catch (Exception exception) {
+			throw new TogetherException(ErrorCode.USER_NOT_FOUND,
+					String.format(IErrorDetails.USER_EMAIL_NOT_FOUND, email));
 		}
 	}
 
@@ -100,15 +122,15 @@ public class UserService implements IUserService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.avijit.together.server.service.IUserService#findByEmail(java.lang.
-	 * String)
+	 * com.avijit.together.server.service.IUserService#isExists(java.lang.String)
 	 */
 	@Override
-	public User findByEmail(String email) {
+	public boolean isExists(String userId) throws TogetherException {
 		try {
-			return iUserRepository.findByEmail(email);
-		} catch (Exception exception) {
-			return null;
+			return iUserRepository.exists(UUID.fromString(userId));
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_USER_ID,
+					String.format(IErrorDetails.INVALID_USER_ID, userId));
 		}
 	}
 

@@ -14,6 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.avijit.together.server.exception.ErrorCode;
+import com.avijit.together.server.exception.IErrorDetails;
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.Participant;
 import com.avijit.together.server.repository.IParticipantRepository;
 
@@ -49,42 +52,50 @@ public class ParticipantService implements IParticipantService {
 	 * .String)
 	 */
 	@Override
-	public Participant findById(String participantId) {
-		return iParticipantRepository.findOne(UUID.fromString(participantId));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.avijit.together.server.service.IParticipantService#save(java.lang.
-	 * String, com.avijit.together.server.model.Participant)
-	 */
-	@Override
-	public Participant save(String conversationId, Participant participant) {
-		participant.setId(UUID.randomUUID());
-		participant.setConversationId(UUID.fromString(conversationId));
+	public Participant findById(String participantId) throws TogetherException {
 		try {
-			return iParticipantRepository.save(participant);
-		} catch (Exception exception) {
-			return null;
+			return iParticipantRepository.findOne(UUID.fromString(participantId));
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_PARTICIPANT_ID, IErrorDetails.INVALID_PARTICIPANT_ID);
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.avijit.together.server.service.IParticipantService#delete(java.lang.
+	 * @see com.avijit.together.server.service.IParticipantService#save(java.lang.
+	 * String, com.avijit.together.server.model.Participant)
+	 */
+	@Override
+	public Participant save(String conversationId, Participant participant) throws TogetherException {
+		try {
+			participant.setId(UUID.randomUUID());
+			participant.setConversationId(UUID.fromString(conversationId));
+			return iParticipantRepository.save(participant);
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_CONVERSATION_ID, IErrorDetails.INVALID_CONVERSATION_ID);
+		} catch (Exception exception) {
+			throw new TogetherException(ErrorCode.PARTICIPANT_NOT_ADDED, IErrorDetails.UNABLE_TO_ADD_PARTICIPANT);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.avijit.together.server.service.IParticipantService#delete(java.lang.
 	 * String)
 	 */
 	@Override
-	public boolean delete(String participantId) {
+	public boolean delete(String participantId) throws TogetherException {
 		try {
-			iParticipantRepository.delete(UUID.fromString(participantId));
-			return true;
+			if (isExists(participantId)) {
+				iParticipantRepository.delete(UUID.fromString(participantId));
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception exception) {
-			return false;
+			throw new TogetherException(ErrorCode.INVALID_PARTICIPANT_ID, IErrorDetails.INVALID_PARTICIPANT_ID);
 		}
 	}
 
@@ -96,11 +107,28 @@ public class ParticipantService implements IParticipantService {
 	 * java.lang.String)
 	 */
 	@Override
-	public Page<Participant> findByConversationId(Pageable pageable, String conversationId) {
+	public Page<Participant> findByConversationId(Pageable pageable, String conversationId) throws TogetherException {
 		try {
 			return iParticipantRepository.findByConversationId(pageable, UUID.fromString(conversationId));
 		} catch (Exception exception) {
-			return null;
+			throw new TogetherException(ErrorCode.INVALID_CONVERSATION_ID, IErrorDetails.INVALID_CONVERSATION_ID);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.avijit.together.server.service.IParticipantService#isExists(java.lang.
+	 * String)
+	 */
+	@Override
+	public boolean isExists(String participantId) throws TogetherException {
+		try {
+			return iParticipantRepository.exists(UUID.fromString(participantId));
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_PARTICIPANT_ID,
+					String.format(IErrorDetails.INVALID_PARTICIPANT_ID, participantId));
 		}
 	}
 

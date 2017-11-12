@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class ViewResolver {
+	/**
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
 

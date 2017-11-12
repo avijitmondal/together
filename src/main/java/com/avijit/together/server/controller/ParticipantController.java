@@ -7,6 +7,8 @@
  ****************************************************************************/
 package com.avijit.together.server.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.avijit.together.server.model.Conversation;
+import com.avijit.together.server.dto.ResponseFactory;
+import com.avijit.together.server.exception.ErrorCode;
+import com.avijit.together.server.exception.IErrorDetails;
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.Participant;
 import com.avijit.together.server.service.ParticipantService;
 import com.avijit.together.server.util.PageResource;
@@ -41,52 +46,87 @@ public class ParticipantController {
 	private ParticipantService participantService;
 
 	/**
+	 * @param request
 	 * @param conversationId
 	 * @param participantId
 	 * @return
 	 */
 	@RequestMapping(value = "/{participant_id}", method = RequestMethod.GET, produces = { "application/json" })
-	public Participant findById(@PathVariable("conversation_id") String conversationId,
+	public HttpEntity<?> findById(HttpServletRequest request, @PathVariable("conversation_id") String conversationId,
 			@PathVariable("participant_id") String participantId) {
-		Participant participant = participantService.findById(participantId);
-		return participant;
+		try {
+			Participant participant = participantService.findById(participantId);
+			if (null != participant) {
+				return new ResponseEntity<>(participant, HttpStatus.OK);
+			}
+			return ResponseFactory.getResponse(HttpStatus.NOT_FOUND, ErrorCode.INVALID_PARTICIPANT_ID,
+					IErrorDetails.INVALID_PARTICIPANT_ID, IErrorDetails.ENTER_VALID_PARTICIPANT_ID,
+					request.getRequestURI());
+		} catch (TogetherException togetherException) {
+			return ResponseFactory.getResponse(HttpStatus.BAD_REQUEST, togetherException,
+					IErrorDetails.ENTER_VALID_PARTICIPANT_ID, request.getRequestURI());
+		}
 	}
 
 	/**
+	 * @param request
 	 * @param pageable
 	 * @param conversationId
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
-	public PageResource<Participant> findByConversationId(Pageable pageable,
+	public PageResource<?> findByConversationId(HttpServletRequest request, Pageable pageable,
 			@PathVariable("conversation_id") String conversationId) {
-		Page<Participant> participants = participantService.findByConversationId(pageable, conversationId);
-		return new PageResource<Participant>(participants, "page", "size");
+		try {
+			Page<Participant> participants = participantService.findByConversationId(pageable, conversationId);
+			return new PageResource<Participant>(participants, "page", "size");
+		} catch (TogetherException togetherException) {
+			return null;
+		}
 	}
 
 	/**
+	 * @param request
 	 * @param conversationId
 	 * @param participantId
 	 * @return
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = { "application/json" })
-	public HttpEntity<Conversation> delete(@PathVariable("conversation_id") String conversationId,
+	public HttpEntity<?> delete(HttpServletRequest request, @PathVariable("conversation_id") String conversationId,
 			@PathVariable("participant_id") String participantId) {
-		boolean result = participantService.delete(participantId);
-		if (result)
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		try {
+			boolean result = participantService.delete(participantId);
+			if (result) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return ResponseFactory.getResponse(HttpStatus.NOT_FOUND, ErrorCode.INVALID_PARTICIPANT_ID,
+					IErrorDetails.INVALID_PARTICIPANT_ID, IErrorDetails.ENTER_VALID_PARTICIPANT_ID,
+					request.getRequestURI());
+		} catch (TogetherException togetherException) {
+			return ResponseFactory.getResponse(HttpStatus.BAD_REQUEST, togetherException,
+					IErrorDetails.ENTER_VALID_PARTICIPANT_ID, request.getRequestURI());
+		}
 	}
 
 	/**
+	 * @param request
 	 * @param participant
 	 * @param conversationId
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json" }, produces = { "application/json" })
-	public HttpEntity<Participant> save(@RequestBody Participant participant,
+	public HttpEntity<?> save(HttpServletRequest request, @RequestBody Participant participant,
 			@PathVariable("conversation_id") String conversationId) {
-		Participant temp = participantService.save(conversationId, participant);
-		return new ResponseEntity<Participant>(temp, HttpStatus.CREATED);
+		try {
+			Participant temp = participantService.save(conversationId, participant);
+			if (null != temp) {
+				return new ResponseEntity<Participant>(temp, HttpStatus.CREATED);
+			}
+			return ResponseFactory.getResponse(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.PARTICIPANT_NOT_ADDED,
+					IErrorDetails.UNABLE_TO_ADD_PARTICIPANT, IErrorDetails.TRY_SOMETIME_LATER, request.getRequestURI());
+		} catch (TogetherException togetherException) {
+			return ResponseFactory.getResponse(HttpStatus.INTERNAL_SERVER_ERROR, togetherException,
+					IErrorDetails.TRY_SOMETIME_LATER, request.getRequestURI());
+		}
 	}
 }

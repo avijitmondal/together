@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.avijit.together.server.dto.FileUploadDownloadDTO;
-import com.avijit.together.server.exception.UUIDConversationException;
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.FileName;
 import com.avijit.together.server.service.ConversationService;
 import com.avijit.together.server.service.FileNameService;
@@ -66,7 +66,7 @@ public class FileDownloadController {
 	@RequestMapping(params = { "name", "sid", "tid" }, method = RequestMethod.GET)
 	public HttpEntity<?> downloadFile(HttpServletResponse response,
 			@PathVariable("conversation_id") String conversationId, @RequestParam("name") String fileName,
-			@RequestParam("sid") String sessionId, @RequestParam("tid") String timeId) throws IOException {
+			@RequestParam("sid") String sessionId, @RequestParam("tid") String timeId) {
 		File sourceFile = null;
 		File tempFile = null;
 		try {
@@ -83,7 +83,7 @@ public class FileDownloadController {
 					throw new FileNotFoundException("file with path: " + fileName + " was not found.");
 				}
 			}
-		} catch (UUIDConversationException uuidConversationException) {
+		} catch (TogetherException togetherException) {
 			return new ResponseEntity<>(new FileUploadDownloadDTO("Not a valid conversation ID"),
 					HttpStatus.BAD_REQUEST);
 		} catch (FileNotFoundException fileNotFoundException) {
@@ -109,11 +109,17 @@ public class FileDownloadController {
 
 		response.setHeader("Content-Length", String.valueOf(tempFile.length()));
 
-		InputStream inputStream = new BufferedInputStream(new FileInputStream(tempFile));
+		try {
+			InputStream inputStream = new BufferedInputStream(new FileInputStream(tempFile));
+			FileCopyUtils.copy(inputStream, response.getOutputStream());
+		} catch (FileNotFoundException e) {
+			return new ResponseEntity<>(new FileUploadDownloadDTO("File does not exists"), HttpStatus.NOT_FOUND);
+		} catch (IOException e) {
+			return new ResponseEntity<>(new FileUploadDownloadDTO("Unable to read or write"), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
 		// Copy bytes from source to destination(outputstream in this example),
 		// closes both streams.
-		FileCopyUtils.copy(inputStream, response.getOutputStream());
 		return new ResponseEntity<>(new FileUploadDownloadDTO("File is beign downloaded"), HttpStatus.BAD_REQUEST);
 	}
 }

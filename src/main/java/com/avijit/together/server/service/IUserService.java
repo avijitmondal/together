@@ -10,6 +10,7 @@ package com.avijit.together.server.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.User;
 
 /**
@@ -26,25 +27,35 @@ public interface IUserService extends IService {
 	/**
 	 * @param userId
 	 * @return
+	 * @throws TogetherException
 	 */
-	User findById(String userId);
+	User findById(String userId) throws TogetherException;
 
 	/**
 	 * @param userId
 	 * @return
+	 * @throws TogetherException
 	 */
-	boolean delete(String userId);
+	boolean delete(String userId) throws TogetherException;
 
 	/**
 	 * @param user
 	 * @return
+	 * @throws TogetherException
 	 */
-	User save(User user);
+	User save(User user) throws TogetherException;
 
 	/**
 	 * @param email
 	 * @return
+	 * @throws TogetherException
 	 */
-	User findByEmail(String email);
+	User findByEmail(String email) throws TogetherException;
 
+	/**
+	 * @param userId
+	 * @return
+	 * @throws TogetherException
+	 */
+	boolean isExists(String userId) throws TogetherException;
 }

@@ -10,6 +10,7 @@ package com.avijit.together.server.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.Credential;
 
 /**
@@ -27,18 +28,28 @@ public interface IAuthenticationService extends IService {
 	/**
 	 * @param authenticationId
 	 * @return
+	 * @throws TogetherException
 	 */
-	Credential findById(String authenticationId);
+	Credential findById(String authenticationId) throws TogetherException;
 
 	/**
 	 * @param credential
 	 * @return
+	 * @throws TogetherException
 	 */
-	Credential save(Credential credential);
+	Credential save(Credential credential) throws TogetherException;
 
 	/**
 	 * @param authenticationId
 	 * @return
+	 * @throws TogetherException
 	 */
-	boolean delete(String authenticationId);
+	boolean delete(String authenticationId) throws TogetherException;
+
+	/**
+	 * @param authenticationId
+	 * @return
+	 * @throws TogetherException
+	 */
+	boolean isExists(String authenticationId) throws TogetherException;
 }

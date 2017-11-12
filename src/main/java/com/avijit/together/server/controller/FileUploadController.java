@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.avijit.together.server.dto.FileUploadDownloadDTO;
-import com.avijit.together.server.exception.UUIDConversationException;
+import com.avijit.together.server.dto.ResponseFactory;
+import com.avijit.together.server.exception.ErrorCode;
+import com.avijit.together.server.exception.IErrorDetails;
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.service.ConversationService;
 import com.avijit.together.server.service.FileNameService;
 import com.avijit.together.server.util.FileNameUtility;
@@ -57,37 +61,46 @@ public class FileUploadController {
 	private FileNameService fileNameService;
 
 	/**
+	 * @param request
 	 * @param conversationId
 	 * @param uploadfile
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public HttpEntity<FileUploadDownloadDTO> uploadSingleFile(HttpServletResponse response,
+	public HttpEntity<?> uploadSingleFile(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("conversation_id") String conversationId, @RequestParam("file") MultipartFile uploadfile) {
 
 		try {
 			if (!conversationService.isExists(conversationId)) {
-				return new ResponseEntity<>(new FileUploadDownloadDTO("Conversation does not exists"),
-						HttpStatus.NOT_FOUND);
+				return ResponseFactory.getResponse(HttpStatus.NOT_FOUND, ErrorCode.CONVERSATION_NOT_FOUND,
+						String.format(IErrorDetails.CONVERSATION_ID_NOT_FOUND, conversationId),
+						IErrorDetails.ENTER_VALID_CONVERSATION_ID, request.getRequestURI());
 			}
-		} catch (UUIDConversationException uuidConversationException) {
-			return new ResponseEntity<>(new FileUploadDownloadDTO("Not a valid conversation ID"),
-					HttpStatus.BAD_REQUEST);
+		} catch (TogetherException togetherException) {
+			return ResponseFactory.getResponse(HttpStatus.BAD_REQUEST, ErrorCode.CONVERSATION_NOT_FOUND,
+					String.format(IErrorDetails.CONVERSATION_ID_NOT_FOUND, conversationId),
+					IErrorDetails.ENTER_VALID_CONVERSATION_ID, request.getRequestURI());
 		}
 
 		if (uploadfile.isEmpty()) {
-			return new ResponseEntity<>(new FileUploadDownloadDTO("please select a file!"), HttpStatus.BAD_REQUEST);
+			return ResponseFactory.getResponse(HttpStatus.BAD_REQUEST, ErrorCode.WRONG_PARAMETER,
+					String.format(IErrorDetails.INVALID_FILE_ATTACHED, conversationId), IErrorDetails.ENTER_VALID_FILE,
+					request.getRequestURI());
 		}
 
 		String convertedFileName = FileNameUtility.convertFileName(conversationId);
 
 		try {
-			
+
 			saveUploadedFiles(Arrays.asList(uploadfile), convertedFileName);
 			fileNameService.save(uploadfile.getOriginalFilename(), convertedFileName);
 
 		} catch (IOException ioException) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return ResponseFactory.getResponse(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.FILE_NOT_ADDED,
+					IErrorDetails.UNABLE_TO_ADD_FILE, IErrorDetails.TRY_SOMETIME_LATER, request.getRequestURI());
+		} catch (TogetherException togetherException) {
+			return ResponseFactory.getResponse(HttpStatus.INTERNAL_SERVER_ERROR, togetherException,
+					IErrorDetails.TRY_SOMETIME_LATER, request.getRequestURI());
 		}
 
 		response.setHeader("Location", String.format(IConstant.FILE_URI, conversationId,
@@ -103,40 +116,40 @@ public class FileUploadController {
 	 * @param uploadfiles
 	 * @return
 	 *//*
-	@RequestMapping(value = "/multiple", method = RequestMethod.POST)
-	public HttpEntity<FileUploadDownloadDTO> uploadMultipleFile(@PathVariable("conversation_id") String conversationId,
-			@RequestParam("extraField") String extraField, @RequestParam("files") MultipartFile[] uploadfiles) {
-
-		try {
-			if (!conversationService.isExists(conversationId)) {
-				return new ResponseEntity<>(new FileUploadDownloadDTO("Conversation does not exists"),
-						HttpStatus.NOT_FOUND);
-			}
-		} catch (UUIDConversationException uuidConversationException) {
-			return new ResponseEntity<>(new FileUploadDownloadDTO("Not a valid conversation ID"),
-					HttpStatus.BAD_REQUEST);
-		}
-
-		String uploadedFileName = Arrays.stream(uploadfiles).map(x -> x.getOriginalFilename())
-				.filter(x -> !StringUtils.isEmpty(x)).collect(Collectors.joining(" , "));
-
-		if (StringUtils.isEmpty(uploadedFileName)) {
-			FileUploadDownloadDTO fileUploadDownloadDTO = new FileUploadDownloadDTO("please select a file!");
-			return new ResponseEntity<>(fileUploadDownloadDTO, HttpStatus.BAD_REQUEST);
-		}
-
-		try {
-
-			saveUploadedFiles(Arrays.asList(uploadfiles), conversationId);
-
-		} catch (IOException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		FileUploadDownloadDTO fileUploadDownloadDTO = new FileUploadDownloadDTO(
-				"Successfully uploaded - " + uploadedFileName);
-		return new ResponseEntity<>(fileUploadDownloadDTO, HttpStatus.OK);
-
-	}*/
+		 * @RequestMapping(value = "/multiple", method = RequestMethod.POST) public
+		 * HttpEntity<FileUploadDownloadDTO>
+		 * uploadMultipleFile(@PathVariable("conversation_id") String conversationId,
+		 * 
+		 * @RequestParam("extraField") String extraField, @RequestParam("files")
+		 * MultipartFile[] uploadfiles) {
+		 * 
+		 * try { if (!conversationService.isExists(conversationId)) { return new
+		 * ResponseEntity<>(new FileUploadDownloadDTO("Conversation does not exists"),
+		 * HttpStatus.NOT_FOUND); } } catch (UUIDConversationException
+		 * uuidConversationException) { return new ResponseEntity<>(new
+		 * FileUploadDownloadDTO("Not a valid conversation ID"),
+		 * HttpStatus.BAD_REQUEST); }
+		 * 
+		 * String uploadedFileName = Arrays.stream(uploadfiles).map(x ->
+		 * x.getOriginalFilename()) .filter(x ->
+		 * !StringUtils.isEmpty(x)).collect(Collectors.joining(" , "));
+		 * 
+		 * if (StringUtils.isEmpty(uploadedFileName)) { FileUploadDownloadDTO
+		 * fileUploadDownloadDTO = new FileUploadDownloadDTO("please select a file!");
+		 * return new ResponseEntity<>(fileUploadDownloadDTO, HttpStatus.BAD_REQUEST); }
+		 * 
+		 * try {
+		 * 
+		 * saveUploadedFiles(Arrays.asList(uploadfiles), conversationId);
+		 * 
+		 * } catch (IOException e) { return new
+		 * ResponseEntity<>(HttpStatus.BAD_REQUEST); } FileUploadDownloadDTO
+		 * fileUploadDownloadDTO = new FileUploadDownloadDTO( "Successfully uploaded - "
+		 * + uploadedFileName); return new ResponseEntity<>(fileUploadDownloadDTO,
+		 * HttpStatus.OK);
+		 * 
+		 * }
+		 */
 
 	/**
 	 * save file

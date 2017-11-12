@@ -10,6 +10,7 @@ package com.avijit.together.server.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.Message;
 
 /**
@@ -22,26 +23,37 @@ public interface IMessageService extends IService {
 	 * @param conversationId
 	 * @param messageId
 	 * @return
+	 * @throws TogetherException
 	 */
-	Message findById(String conversationId, String messageId);
+	Message findById(String conversationId, String messageId) throws TogetherException;
 
 	/**
 	 * @param message
 	 * @return
+	 * @throws TogetherException
 	 */
-	Message save(Message message);
+	Message save(Message message) throws TogetherException;
 
 	/**
 	 * @param messageId
 	 * @return
+	 * @throws TogetherException
 	 */
-	boolean delete(String messageId);
+	boolean delete(String messageId) throws TogetherException;
 
 	/**
 	 * @param pageable
 	 * @param conversationId
 	 * @return
+	 * @throws TogetherException
 	 */
-	Page<Message> findByConversationId(Pageable pageable, String conversationId);
+	Page<Message> findByConversationId(Pageable pageable, String conversationId) throws TogetherException;
+
+	/**
+	 * @param messageId
+	 * @return
+	 * @throws TogetherException
+	 */
+	boolean isExists(String messageId) throws TogetherException;
 
 }

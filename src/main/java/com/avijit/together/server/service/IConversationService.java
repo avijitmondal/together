@@ -10,6 +10,7 @@ package com.avijit.together.server.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.exception.UUIDConversationException;
 import com.avijit.together.server.model.Conversation;
 
@@ -29,31 +30,35 @@ public interface IConversationService extends IService {
 	 * @param pageable
 	 * @param userId
 	 * @return
+	 * @throws TogetherException
 	 */
-	Page<Conversation> findByUserId(Pageable pageable, String userId);
+	Page<Conversation> findByUserId(Pageable pageable, String userId) throws TogetherException;
 
 	/**
 	 * @param conversationId
 	 * @return
+	 * @throws TogetherException
 	 */
-	Conversation findById(String conversationId);
+	Conversation findById(String conversationId) throws TogetherException;
 
 	/**
 	 * @param conversation
 	 * @return
+	 * @throws TogetherException
 	 */
-	Conversation save(Conversation conversation);
+	Conversation save(Conversation conversation) throws TogetherException;
 
 	/**
 	 * @param conversationId
 	 * @return
+	 * @throws TogetherException
 	 */
-	boolean delete(String conversationId);
+	boolean delete(String conversationId) throws TogetherException;
 	
 	/**
 	 * @param conversationId
 	 * @return
 	 * @throws UUIDConversationException 
 	 */
-	boolean isExists(String conversationId) throws UUIDConversationException;
+	boolean isExists(String conversationId) throws TogetherException;
 }

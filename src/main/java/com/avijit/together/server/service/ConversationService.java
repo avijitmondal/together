@@ -15,7 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.avijit.together.server.exception.UUIDConversationException;
+import com.avijit.together.server.exception.ErrorCode;
+import com.avijit.together.server.exception.IErrorDetails;
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.Conversation;
 import com.avijit.together.server.repository.IConversationRepository;
 
@@ -51,38 +53,46 @@ public class ConversationService implements IConversationService {
 	 * springframework.data.domain.Pageable, java.lang.String)
 	 */
 	@Override
-	public Page<Conversation> findByUserId(Pageable pageable, String userId) {
-		return iConversationRepository.findByUserId(pageable, UUID.fromString(userId));
+	public Page<Conversation> findByUserId(Pageable pageable, String userId) throws TogetherException {
+		try {
+			return iConversationRepository.findByUserId(pageable, UUID.fromString(userId));
+		} catch (Exception exception) {
+			throw new TogetherException(ErrorCode.INVALID_USER_ID,
+					String.format(IErrorDetails.CONVERSATIONS_USER_ID_NOT_FOUND, userId));
+		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.avijit.together.server.service.IConversationService#findById(java.
+	 * @see com.avijit.together.server.service.IConversationService#findById(java.
 	 * lang.String)
 	 */
 	@Override
-	public Conversation findById(String conversationId) {
-		return iConversationRepository.findOne(UUID.fromString(conversationId));
+	public Conversation findById(String conversationId) throws TogetherException {
+		try {
+			return iConversationRepository.findOne(UUID.fromString(conversationId));
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_CONVERSATION_ID,
+					String.format(IErrorDetails.CONVERSATION_ID_NOT_FOUND, conversationId));
+		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.avijit.together.server.service.IConversationService#save(com.avijit.
+	 * @see com.avijit.together.server.service.IConversationService#save(com.avijit.
 	 * together.server.model.Conversation)
 	 */
 	@Override
-	public Conversation save(Conversation conversation) {
-		conversation.setId(UUID.randomUUID());
-		conversation.setCreatedAt(LocalDateTime.now());
-		conversation.setUpdatedAt(LocalDateTime.now());
+	public Conversation save(Conversation conversation) throws TogetherException {
 		try {
+			conversation.setId(UUID.randomUUID());
+			conversation.setCreatedAt(LocalDateTime.now());
+			conversation.setUpdatedAt(LocalDateTime.now());
 			return iConversationRepository.save(conversation);
 		} catch (Exception exception) {
-			return null;
+			throw new TogetherException(ErrorCode.CONVERSATION_NOT_ADDED, IErrorDetails.UNABLE_TO_ADD_CONVERSATION);
 		}
 	}
 
@@ -94,31 +104,35 @@ public class ConversationService implements IConversationService {
 	 * String)
 	 */
 	@Override
-	public boolean delete(String conversationId) {
+	public boolean delete(String conversationId) throws TogetherException {
 		try {
-			iConversationRepository.delete(UUID.fromString(conversationId));
-			return true;
+			if (isExists(conversationId)) {
+				iConversationRepository.delete(UUID.fromString(conversationId));
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception exception) {
-			return false;
+			throw new TogetherException(ErrorCode.INVALID_CONVERSATION_ID,
+					String.format(IErrorDetails.CONVERSATION_ID_NOT_FOUND, conversationId));
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.avijit.together.server.service.IConversationService#isExists(java.
+	 * @see com.avijit.together.server.service.IConversationService#isExists(java.
 	 * lang.String)
 	 */
 	@Override
-	public boolean isExists(String conversationId) throws UUIDConversationException {
-		UUID tempConversationID = null;
+	public boolean isExists(String conversationId) throws TogetherException {
 		try {
-			tempConversationID = UUID.fromString(conversationId);
-		} catch (Exception exception) {
-			throw new UUIDConversationException("Not a valid Conversation ID");
+			return iConversationRepository.exists(UUID.fromString(conversationId));
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_CONVERSATION_ID,
+					String.format(IErrorDetails.INVALID_CONVERSATION_ID, conversationId));
 		}
-		return iConversationRepository.exists(tempConversationID);
+
 	}
 
 }

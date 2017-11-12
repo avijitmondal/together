@@ -7,6 +7,8 @@
  ****************************************************************************/
 package com.avijit.together.server.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.avijit.together.server.dto.ResponseFactory;
+import com.avijit.together.server.exception.ErrorCode;
+import com.avijit.together.server.exception.IErrorDetails;
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.User;
 import com.avijit.together.server.service.UserService;
 import com.avijit.together.server.util.PageResource;
@@ -53,44 +59,86 @@ public class UserController {
 	}
 
 	/**
+	 * @param request
 	 * @param email
 	 * @return
 	 */
 	@RequestMapping(params = "email", method = RequestMethod.GET, produces = { "application/json" })
-	public User findByEmail(@RequestParam("email") String email) {
-		User user = userService.findByEmail(email);
-		return user;
+	public HttpEntity<?> findByEmail(HttpServletRequest request, @RequestParam("email") String email) {
+		try {
+			User user = userService.findByEmail(email);
+			if (null != user) {
+				return new ResponseEntity<>(user, HttpStatus.OK);
+			}
+			return ResponseFactory.getResponse(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND,
+					String.format(IErrorDetails.USER_EMAIL_NOT_FOUND, email), IErrorDetails.ENTER_VALID_USER_EMAIL,
+					request.getRequestURI());
+		} catch (TogetherException togetherException) {
+			return ResponseFactory.getResponse(HttpStatus.BAD_REQUEST, togetherException,
+					IErrorDetails.ENTER_VALID_USER_EMAIL, request.getRequestURI());
+		}
 	}
 
 	/**
+	 * @param request
 	 * @param userId
 	 * @return
 	 */
 	@RequestMapping(value = "/{user_id}", method = RequestMethod.GET, produces = { "application/json" })
-	public User findById(@PathVariable("user_id") String userId) {
-		User user = userService.findById(userId);
-		return user;
+	public HttpEntity<?> findById(HttpServletRequest request, @PathVariable("user_id") String userId) {
+		try {
+			User user = userService.findById(userId);
+			if (null != user) {
+				return new ResponseEntity<>(user, HttpStatus.OK);
+			}
+			return ResponseFactory.getResponse(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND,
+					String.format(IErrorDetails.USER_ID_NOT_FOUND, userId), IErrorDetails.ENTER_VALID_USER_ID,
+					request.getRequestURI());
+		} catch (TogetherException togetherException) {
+			return ResponseFactory.getResponse(HttpStatus.BAD_REQUEST, togetherException,
+					IErrorDetails.ENTER_VALID_USER_ID, request.getRequestURI());
+		}
+
 	}
 
 	/**
+	 * @param request
 	 * @param user
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json" }, produces = { "application/json" })
-	public HttpEntity<User> save(@RequestBody User user) {
-		User temp = userService.save(user);
-		return new ResponseEntity<User>(temp, HttpStatus.CREATED);
+	public HttpEntity<?> save(HttpServletRequest request, @RequestBody User user) {
+		try {
+			User temp = userService.save(user);
+			if (null != user) {
+				return new ResponseEntity<User>(temp, HttpStatus.CREATED);
+			}
+			return ResponseFactory.getResponse(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.USER_NOT_ADDED,
+					IErrorDetails.UNABLE_TO_ADD_USER, IErrorDetails.TRY_SOMETIME_LATER, request.getRequestURI());
+		} catch (TogetherException togetherException) {
+			return ResponseFactory.getResponse(HttpStatus.INTERNAL_SERVER_ERROR, togetherException,
+					IErrorDetails.TRY_SOMETIME_LATER, request.getRequestURI());
+		}
 	}
 
 	/**
+	 * @param request
 	 * @param userId
 	 * @return
 	 */
 	@RequestMapping(value = "/{user_id}", method = RequestMethod.DELETE, produces = { "application/json" })
-	public HttpEntity<User> delete(@PathVariable("user_id") String userId) {
-		boolean result = userService.delete(userId);
-		if (result)
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	public HttpEntity<?> delete(HttpServletRequest request, @PathVariable("user_id") String userId) {
+		try {
+			boolean result = userService.delete(userId);
+			if (result) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return ResponseFactory.getResponse(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND,
+					String.format(IErrorDetails.USER_ID_NOT_FOUND, userId), IErrorDetails.ENTER_VALID_USER_ID,
+					request.getRequestURI());
+		} catch (TogetherException togetherException) {
+			return ResponseFactory.getResponse(HttpStatus.BAD_REQUEST, togetherException,
+					IErrorDetails.ENTER_VALID_USER_ID, request.getRequestURI());
+		}
 	}
 }

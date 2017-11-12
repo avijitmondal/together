@@ -15,6 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.avijit.together.server.exception.ErrorCode;
+import com.avijit.together.server.exception.IErrorDetails;
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.Message;
 import com.avijit.together.server.repository.IMessageRepository;
 
@@ -34,16 +37,15 @@ public class MessageService implements IMessageService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.avijit.together.server.service.IMessageService#findById(java.lang.
+	 * @see com.avijit.together.server.service.IMessageService#findById(java.lang.
 	 * String, java.lang.String)
 	 */
 	@Override
-	public Message findById(String conversationId, String messageId) {
+	public Message findById(String conversationId, String messageId) throws TogetherException {
 		try {
 			return iMessageRepository.findOne(UUID.fromString(messageId));
-		} catch (Exception exception) {
-			return null;
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_MESSAGE_ID, IErrorDetails.INVALID_MESSAGE_ID);
 		}
 	}
 
@@ -54,14 +56,14 @@ public class MessageService implements IMessageService {
 	 * together.server.model.Message)
 	 */
 	@Override
-	public Message save(Message message) {
-		message.setId(UUID.randomUUID());
-		message.setCreatedAt(LocalDateTime.now());
-		message.setUpdatedAt(LocalDateTime.now());
+	public Message save(Message message) throws TogetherException {
 		try {
+			message.setId(UUID.randomUUID());
+			message.setCreatedAt(LocalDateTime.now());
+			message.setUpdatedAt(LocalDateTime.now());
 			return iMessageRepository.save(message);
 		} catch (Exception exception) {
-			return null;
+			throw new TogetherException(ErrorCode.MESSAGE_NOT_ADDED, IErrorDetails.UNABLE_TO_ADD_MESSAGE);
 		}
 	}
 
@@ -72,12 +74,31 @@ public class MessageService implements IMessageService {
 	 * String)
 	 */
 	@Override
-	public boolean delete(String messageId) {
+	public boolean delete(String messageId) throws TogetherException {
 		try {
-			iMessageRepository.delete(UUID.fromString(messageId));
-			return true;
-		} catch (Exception exception) {
-			return false;
+			if (isExists(messageId)) {
+				iMessageRepository.delete(UUID.fromString(messageId));
+				return true;
+			} else {
+				return false;
+			}
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_MESSAGE_ID, IErrorDetails.INVALID_MESSAGE_ID);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.avijit.together.server.service.IMessageService#findByConversationId(
+	 * org.springframework.data.domain.Pageable, java.lang.String)
+	 */
+	@Override
+	public Page<Message> findByConversationId(Pageable pageable, String conversationId) throws TogetherException {
+		try {
+			return iMessageRepository.findByConversationId(pageable, UUID.fromString(conversationId));
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_CONVERSATION_ID, IErrorDetails.INVALID_CONVERSATION_ID);
 		}
 	}
 
@@ -85,15 +106,15 @@ public class MessageService implements IMessageService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.avijit.together.server.service.IMessageService#findByConversationId(
-	 * org.springframework.data.domain.Pageable, java.lang.String)
+	 * com.avijit.together.server.service.IMessageService#isExists(java.lang.String)
 	 */
 	@Override
-	public Page<Message> findByConversationId(Pageable pageable, String conversationId) {
+	public boolean isExists(String messageId) throws TogetherException {
 		try {
-			return iMessageRepository.findByConversationId(pageable, UUID.fromString(conversationId));
-		} catch (Exception exception) {
-			return null;
+			return iMessageRepository.exists(UUID.fromString(messageId));
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new TogetherException(ErrorCode.INVALID_MESSAGE_ID,
+					String.format(IErrorDetails.INVALID_MESSAGE_ID, messageId));
 		}
 	}
 

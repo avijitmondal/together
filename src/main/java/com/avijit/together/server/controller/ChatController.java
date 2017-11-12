@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.Message;
 import com.avijit.together.server.service.MessageService;
 import com.avijit.together.server.util.IURIConstant;
@@ -51,10 +52,14 @@ public class ChatController {
 	 */
 	@MessageMapping(IURIConstant.URI_GROUP_CHAT + "/{chatRoomId}")
 	public void handleGroupChat(@Payload Message message, @DestinationVariable("chatRoomId") String chatRoomId,
-			MessageHeaders messageHeaders, SimpMessageHeaderAccessor headerAccessor) throws Exception {
-		System.out.println(message);
-		messageService.save(message);
-		this.simpMessagingTemplate.convertAndSend(IURIConstant.URI_TOPIC_GROUP_CHAT_RESPONSE + chatRoomId, message);
+			MessageHeaders messageHeaders, SimpMessageHeaderAccessor headerAccessor) {
+		Message temp = null;
+		try {
+			temp = messageService.save(message);
+		} catch (TogetherException togetherException) {
+
+		}
+		this.simpMessagingTemplate.convertAndSend(IURIConstant.URI_TOPIC_GROUP_CHAT_RESPONSE + chatRoomId, temp);
 	}
 
 	/**
@@ -67,11 +72,15 @@ public class ChatController {
 	@MessageMapping(IURIConstant.URI_PERSONAL_CHAT + "/{destinationUserId}")
 	public void handlePrivateChat(@Payload Message message,
 			@DestinationVariable("destinationUserId") String destinationUserId, MessageHeaders messageHeaders,
-			SimpMessageHeaderAccessor headerAccessor) throws Exception {
-		System.out.println(message);
-		messageService.save(message);
+			SimpMessageHeaderAccessor headerAccessor) {
+		Message temp = null;
+		try {
+			temp = messageService.save(message);
+		} catch (TogetherException togetherException) {
+
+		}
 		this.simpMessagingTemplate.convertAndSend(IURIConstant.URI_QUEUE_PERSONAL_CHAT_RESPONSE + destinationUserId,
-				message);
+				temp);
 	}
 
 	/**

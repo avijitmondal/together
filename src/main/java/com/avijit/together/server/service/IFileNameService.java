@@ -7,6 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.server.service;
 
+import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.FileName;
 
 /**
@@ -18,12 +19,14 @@ public interface IFileNameService {
 	 * @param originalFileName
 	 * @param convertedFileName
 	 * @return
+	 * @throws TogetherException
 	 */
-	FileName save(String originalFileName, String convertedFileName);
+	FileName save(String originalFileName, String convertedFileName) throws TogetherException;
 	
 	/**
 	 * @param storedFileName
 	 * @return
+	 * @throws TogetherException
 	 */
-	FileName findById(String storedFileName);
+	FileName findById(String storedFileName) throws TogetherException;
 }
