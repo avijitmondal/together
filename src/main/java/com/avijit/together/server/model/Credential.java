@@ -22,6 +22,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -48,6 +49,7 @@ public class Credential {
 	 * Credential username
 	 */
 	@Column(name = "USERNAME")
+	@NotBlank(message = "error.username.notblank")
 	private String username;
 
 	/**
@@ -60,6 +62,7 @@ public class Credential {
 	 * Credential password
 	 */
 	@Column(name = "PASSWORD")
+	@NotBlank(message = "error.password.notblank")
 	private String password;
 
 	/**

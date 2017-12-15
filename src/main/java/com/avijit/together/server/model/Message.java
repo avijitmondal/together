@@ -17,8 +17,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -49,18 +51,22 @@ public class Message {
 	 * Conversation ID message belongs to
 	 */
 	@Column(name = "CONVERSATION_ID")
+	@NotBlank(message = "error.conversationid.notblank")
 	private UUID conversationId;
 
 	/**
 	 * Sender ID of the message
 	 */
 	@Column(name = "SENDER_ID")
+	@NotBlank(message = "error.senderid.notblank")
 	private UUID senderId;
 
 	/**
 	 * Message
 	 */
 	@Column(name = "MESSAGE")
+	@NotBlank(message = "error.message.notblank")
+	@Size(min = 1, max = 256, message = "Message must be between 2 and 30 characters")
 	private String message;
 
 	/**
@@ -68,6 +74,7 @@ public class Message {
 	 */
 	@Column(name = "message_type", columnDefinition = "enum('TEXT','IMAGE','VIDEO','AUDIO','DOCUMENT')")
 	@Enumerated(EnumType.STRING)
+	@NotBlank(message = "error.messagetype.notblank")
 	private MessageType messageType;
 
 	/**

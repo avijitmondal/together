@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -52,18 +53,21 @@ public class Conversation {
 	 * Conversation Title
 	 */
 	@Column(name = "TITLE")
+	@NotBlank(message = "error.title.notblank")
 	private String title;
 
 	/**
 	 * Conversation Creator ID
 	 */
 	@Column(name = "CREATOR_ID")
+	@NotBlank(message = "error.creatorid.notblank")
 	private UUID creatorId;
 
 	/**
 	 * Conversation channel ID
 	 */
 	@Column(name = "CHANNEL_ID")
+	@NotBlank(message = "error.channelid.notblank")
 	private String channelId;
 
 	/**
@@ -71,6 +75,7 @@ public class Conversation {
 	 */
 	@Column(name = "TYPE", columnDefinition = "enum('GROUP','SINGLE')", nullable = false)
 	@Enumerated(EnumType.STRING)
+	@NotBlank(message = "error.conversationtype.notblank")
 	private ConversationType conversationType;
 
 	/**

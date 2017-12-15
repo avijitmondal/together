@@ -21,6 +21,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -46,6 +47,7 @@ public class Authority {
 	 */
 	@Column(name = "ROLE", columnDefinition = "enum('ROLE_USER','ROLE_ADMIN')", nullable = false)
 	@Enumerated(EnumType.STRING)
+	@NotBlank(message = "error.authorityrole.notblank")
 	private AuthorityRole authorityRole;
 
 	/**

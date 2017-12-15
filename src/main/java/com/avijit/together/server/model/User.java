@@ -18,8 +18,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -27,7 +31,9 @@ import com.avijit.together.server.util.javatime.LocalDateDeserializer;
 import com.avijit.together.server.util.javatime.LocalDateSerializer;
 import com.avijit.together.server.util.javatime.LocalDateTimeDeserializer;
 import com.avijit.together.server.util.javatime.LocalDateTimeSerializer;
+import com.avijit.together.server.util.validator.Phone;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -52,18 +58,24 @@ public class User {
 	 * email of the user
 	 */
 	@Column(name = "EMAIL")
+	@NotBlank(message = "error.email.notblank")
+	@Email(message = "error.email.notemail")
 	private String email;
 
 	/**
 	 * phone number of the user
 	 */
 	@Column(name = "PHONE")
+	@NotBlank(message = "error.phone.notblank")
+	@Phone(message = "error.phone.notphone")
 	private String phone;
 
 	/**
 	 * First Name of the user
 	 */
 	@Column(name = "FIRST_NAME")
+	@NotBlank(message = "error.firstname.notblank")
+	@Size(min = 2, max = 30, message = "error.firstname.size.notbetween2and30")
 	private String firstName;
 
 	/**
@@ -76,6 +88,8 @@ public class User {
 	 * Last Name of the user
 	 */
 	@Column(name = "LAST_NAME")
+	@NotBlank(message = "error.lastname.notblank")
+	@Size(min = 2, max = 30, message = "error.lastname.size.notbetween2and30")
 	private String lastName;
 
 	/**
@@ -83,6 +97,8 @@ public class User {
 	 */
 	@Column(name = "GENDER", columnDefinition = "enum('MALE','FEMALE')", nullable = false)
 	@Enumerated(EnumType.STRING)
+	@NotBlank(message = "error.gender.notblank")
+	@com.avijit.together.server.util.validator.Enum(enumClass=Gender.class, ignoreCase=true )
 	private Gender gender;
 
 	/**
@@ -93,24 +109,29 @@ public class User {
 	@DateTimeFormat(iso = ISO.DATE)
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "BIRTHDAY")
+	@NotBlank(message = "error.birthday.notblank")
+	@Past(message = "error.birthday.past")
 	private LocalDate birthday;
 
 	/**
 	 * Number of device user is active
 	 */
 	@Column(name = "IS_ACTIVE")
+	@JsonIgnore
 	private byte isActive;
 
 	/**
 	 * How many other user is reported about this user
 	 */
 	@Column(name = "IS_REPORTED")
+	@JsonIgnore
 	private byte isReported;
 
 	/**
 	 * How many other user blocked this user
 	 */
 	@Column(name = "IS_BLOCKED")
+	@JsonIgnore
 	private byte isBlocked;
 
 	/**

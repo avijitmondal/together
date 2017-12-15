@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -42,12 +43,14 @@ public class Participant {
 	 * Conversation ID participant belongs to
 	 */
 	@Column(name = "CONVERSATION_ID")
+	@NotBlank(message = "error.conversationid.notblank")
 	private UUID conversationId;
 
 	/**
 	 * Participant user ID
 	 */
 	@Column(name = "USERS_ID")
+	@NotBlank(message = "error.userid.notblank")
 	private UUID userId;
 
 	/**
