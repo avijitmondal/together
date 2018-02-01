@@ -18,7 +18,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -97,8 +96,6 @@ public class User {
 	 */
 	@Column(name = "GENDER", columnDefinition = "enum('MALE','FEMALE')", nullable = false)
 	@Enumerated(EnumType.STRING)
-	@NotBlank(message = "error.gender.notblank")
-	@com.avijit.together.server.util.validator.Enum(enumClass=Gender.class, ignoreCase=true )
 	private Gender gender;
 
 	/**
@@ -109,8 +106,6 @@ public class User {
 	@DateTimeFormat(iso = ISO.DATE)
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "BIRTHDAY")
-	@NotBlank(message = "error.birthday.notblank")
-	@Past(message = "error.birthday.past")
 	private LocalDate birthday;
 
 	/**

@@ -7,18 +7,19 @@
  ****************************************************************************/
 package com.avijit.together.server.repository;
 
+import java.util.List;
 import java.util.UUID;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.Repository;
 
 import com.avijit.together.server.model.Authority;
+import com.avijit.together.server.model.AuthorityRole;
 
 /**
  * @author avijit
  *
  */
-@Repository("iAuthorityRepository")
-public interface IAuthorityRepository extends PagingAndSortingRepository<Authority, UUID> {
-
+@org.springframework.stereotype.Repository("iAuthorityRepository")
+public interface IAuthorityRepository extends Repository<Authority, UUID> {
+	List<Authority> findByAuthorityRole(AuthorityRole authorityRole);
 }

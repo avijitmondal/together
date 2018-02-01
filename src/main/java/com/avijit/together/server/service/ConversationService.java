@@ -90,6 +90,10 @@ public class ConversationService implements IConversationService {
 			conversation.setId(UUID.randomUUID());
 			conversation.setCreatedAt(LocalDateTime.now());
 			conversation.setUpdatedAt(LocalDateTime.now());
+			conversation.getParticipants().forEach(participant -> {
+				participant.setId(UUID.randomUUID());
+				participant.setConversation(conversation);
+			});
 			return iConversationRepository.save(conversation);
 		} catch (Exception exception) {
 			throw new TogetherException(ErrorCode.CONVERSATION_NOT_ADDED, IErrorDetails.UNABLE_TO_ADD_CONVERSATION);

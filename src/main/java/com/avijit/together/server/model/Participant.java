@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,17 +39,9 @@ public class Participant {
 	private UUID id;
 
 	/**
-	 * Conversation ID participant belongs to
-	 */
-	@Column(name = "CONVERSATION_ID")
-	@NotBlank(message = "error.conversationid.notblank")
-	private UUID conversationId;
-
-	/**
 	 * Participant user ID
 	 */
 	@Column(name = "USERS_ID")
-	@NotBlank(message = "error.userid.notblank")
 	private UUID userId;
 
 	/**
@@ -58,7 +49,7 @@ public class Participant {
 	 */
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "CONVERSATION_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "CONVERSATION_ID")
 	private Conversation conversation;
 
 	/**
@@ -71,17 +62,14 @@ public class Participant {
 	/**
 	 * @param id
 	 *            Unique ID for Participant
-	 * @param conversationId
-	 *            Conversation ID participant belongs to
 	 * @param userId
 	 *            Participant user ID
 	 * @param conversation
 	 *            Conversation participant belongs to
 	 */
-	public Participant(UUID id, UUID conversationId, UUID userId, Conversation conversation) {
+	public Participant(UUID id, UUID userId, Conversation conversation) {
 		super();
 		this.id = id;
-		this.conversationId = conversationId;
 		this.userId = userId;
 		this.conversation = conversation;
 	}
@@ -99,21 +87,6 @@ public class Participant {
 	 */
 	public void setId(UUID id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the conversationId
-	 */
-	public UUID getConversationId() {
-		return conversationId;
-	}
-
-	/**
-	 * @param conversationId
-	 *            the conversationId to set
-	 */
-	public void setConversationId(UUID conversationId) {
-		this.conversationId = conversationId;
 	}
 
 	/**
@@ -154,7 +127,6 @@ public class Participant {
 	@Override
 	public String toString() {
 		return "Participant [" + (id != null ? "id=" + id + ", " : "")
-				+ (conversationId != null ? "conversationId=" + conversationId + ", " : "")
 				+ (userId != null ? "userId=" + userId + ", " : "") + "]";
 	}
 

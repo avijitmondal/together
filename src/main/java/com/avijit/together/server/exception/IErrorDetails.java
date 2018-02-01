@@ -43,6 +43,7 @@ public interface IErrorDetails {
 	String ENTER_VALID_AUTHENTICATION_ID = "Please enter a valid authentication ID";
 	String ENTER_VALID_FILE_NAME = "Please enter a valid file name";
 	String ENTER_VALID_FILE = "Please attach a valid file";
+	String ENTER_VALID_DATA = "Please enter valid data(s)";
 
 	String TRY_SOMETIME_LATER = "Please try after some time";
 }

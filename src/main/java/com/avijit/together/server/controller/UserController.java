@@ -7,7 +7,10 @@
  ****************************************************************************/
 package com.avijit.together.server.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +18,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.avijit.together.server.dto.ResponseFactory;
 import com.avijit.together.server.exception.ErrorCode;
@@ -107,7 +113,16 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json" }, produces = { "application/json" })
-	public HttpEntity<?> save(HttpServletRequest request, @RequestBody User user) {
+	public HttpEntity<?> save(HttpServletRequest request, @Valid @RequestBody User user, BindingResult bindingResult,
+			SessionStatus sessionStatus) {
+		if (bindingResult.hasErrors()) {
+			List<FieldError> fieldErrors = bindingResult.getFieldErrors(); 
+			for(FieldError fieldError : fieldErrors) {
+				System.err.println(fieldError);
+			}
+			return ResponseFactory.getResponse(HttpStatus.BAD_REQUEST, ErrorCode.USER_NOT_ADDED,
+					IErrorDetails.UNABLE_TO_ADD_USER, IErrorDetails.ENTER_VALID_DATA, request.getRequestURI());
+		}
 		try {
 			User temp = userService.save(user);
 			if (null != user) {

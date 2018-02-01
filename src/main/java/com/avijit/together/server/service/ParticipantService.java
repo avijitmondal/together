@@ -70,7 +70,7 @@ public class ParticipantService implements IParticipantService {
 	public Participant save(String conversationId, Participant participant) throws TogetherException {
 		try {
 			participant.setId(UUID.randomUUID());
-			participant.setConversationId(UUID.fromString(conversationId));
+//			participant.setConversationId(UUID.fromString(conversationId));
 			return iParticipantRepository.save(participant);
 		} catch (IllegalArgumentException illegalArgumentException) {
 			throw new TogetherException(ErrorCode.INVALID_CONVERSATION_ID, IErrorDetails.INVALID_CONVERSATION_ID);

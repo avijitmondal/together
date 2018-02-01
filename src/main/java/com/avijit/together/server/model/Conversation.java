@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -60,7 +60,6 @@ public class Conversation {
 	 * Conversation Creator ID
 	 */
 	@Column(name = "CREATOR_ID")
-	@NotBlank(message = "error.creatorid.notblank")
 	private UUID creatorId;
 
 	/**
@@ -75,7 +74,6 @@ public class Conversation {
 	 */
 	@Column(name = "TYPE", columnDefinition = "enum('GROUP','SINGLE')", nullable = false)
 	@Enumerated(EnumType.STRING)
-	@NotBlank(message = "error.conversationtype.notblank")
 	private ConversationType conversationType;
 
 	/**
@@ -101,7 +99,7 @@ public class Conversation {
 	/**
 	 * List of participants for this conversation
 	 */
-	@OneToMany(targetEntity = Participant.class, mappedBy = "conversation", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL)
 	private Set<Participant> participants;
 
 	/**

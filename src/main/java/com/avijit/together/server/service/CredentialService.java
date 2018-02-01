@@ -23,6 +23,8 @@ import org.springframework.stereotype.Service;
 import com.avijit.together.server.exception.ErrorCode;
 import com.avijit.together.server.exception.IErrorDetails;
 import com.avijit.together.server.exception.TogetherException;
+import com.avijit.together.server.model.Authority;
+import com.avijit.together.server.model.AuthorityRole;
 import com.avijit.together.server.model.Credential;
 import com.avijit.together.server.model.bean.CredentialBeanFactory;
 import com.avijit.together.server.repository.ICredentialRepository;
@@ -39,6 +41,9 @@ public class CredentialService implements IAuthenticationService, UserDetailsSer
 	 */
 	@Autowired
 	private ICredentialRepository iCredentialRepository;
+	
+	@Autowired
+	private AuthorityService authorityService;
 
 	/*
 	 * (non-Javadoc)
@@ -85,6 +90,15 @@ public class CredentialService implements IAuthenticationService, UserDetailsSer
 			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String hashedPassword = passwordEncoder.encode(credential.getPassword());
 			credential.setPassword(hashedPassword);
+			credential.getAuthorities().forEach(authority -> {
+				Authority tempAuthority = null;
+				if (authority.getAuthorityRole() == AuthorityRole.ROLE_USER) {
+					tempAuthority = authorityService.findByAuthorityRoleUSER();
+				} else if(authority.getAuthorityRole() == AuthorityRole.ROLE_ADMIN) {
+					tempAuthority = authorityService.findByAuthorityRoleADMIN();
+				}
+				authority.setId(tempAuthority.getId());
+			});
 			return iCredentialRepository.save(credential);
 		} catch (Exception exception) {
 			throw new TogetherException(ErrorCode.AUTHENTICATION_NOT_ADDED, IErrorDetails.UNABLE_TO_ADD_AUTHENTICATION);
