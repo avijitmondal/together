@@ -6,7 +6,7 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
-import com.avijit.together.server.util.IURIConstant;
+import com.avijit.together.server.data.I_Constant;
 
 /**
  * @author avijit
@@ -25,8 +25,8 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 	 */
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
-		config.enableSimpleBroker(IURIConstant.URI_BROKER_TOPIC, IURIConstant.URI_BROKER_QUEUE);
-		config.setApplicationDestinationPrefixes(IURIConstant.URI_DESTINATION_PREFIX);
+		config.enableSimpleBroker(I_Constant.URI_BROKER_TOPIC, I_Constant.URI_BROKER_QUEUE);
+		config.setApplicationDestinationPrefixes(I_Constant.URI_DESTINATION_PREFIX);
 	}
 
 	/*
@@ -38,7 +38,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 	 */
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint(IURIConstant.URI_BROKER_ENDPOINT).addInterceptors(new HttpSessionIdHandshakeInterceptor())
+		registry.addEndpoint(I_Constant.URI_BROKER_ENDPOINT).addInterceptors(new HttpSessionIdHandshakeInterceptor())
 				.setAllowedOrigins("*").withSockJS();
 	}
 

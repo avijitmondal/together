@@ -14,6 +14,8 @@ import java.nio.file.Files;
 import java.time.LocalTime;
 import java.util.UUID;
 
+import com.avijit.together.server.data.I_Constant;
+
 /**
  * @author avijit
  *
@@ -75,7 +77,7 @@ public class FileNameUtility {
 	 * @throws FileNotFoundException
 	 */
 	public static File getSourceFile(String fileName) throws FileNotFoundException {
-		File file = new File(IConstant.FILES_LOCATION + fileName);
+		File file = new File(I_Constant.FILES_LOCATION + fileName);
 		if (!file.exists()) {
 			throw new FileNotFoundException("file not found.");
 		}
@@ -89,7 +91,7 @@ public class FileNameUtility {
 	 * @throws IOException
 	 */
 	public static File getDownloadableFile(File sourceFile, String fileName) throws IOException {
-		File tempFile = new File(IConstant.TEMPORARY_FILES_LOCATION + fileName);
+		File tempFile = new File(I_Constant.TEMPORARY_FILES_LOCATION + fileName);
 		if(null != tempFile && tempFile.exists()) {
 			tempFile.delete();
 		}

@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.avijit.together.server.data.I_Constant;
 import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.model.Message;
 import com.avijit.together.server.service.MessageService;
-import com.avijit.together.server.util.IURIConstant;
 
 /**
  * @author avijit
@@ -50,7 +50,7 @@ public class ChatController {
 	 * @param headerAccessor
 	 * @throws Exception
 	 */
-	@MessageMapping(IURIConstant.URI_GROUP_CHAT + "/{chatRoomId}")
+	@MessageMapping(I_Constant.URI_GROUP_CHAT + "/{chatRoomId}")
 	public void handleGroupChat(@Payload Message message, @DestinationVariable("chatRoomId") String chatRoomId,
 			MessageHeaders messageHeaders, SimpMessageHeaderAccessor headerAccessor) {
 		Message temp = null;
@@ -59,7 +59,7 @@ public class ChatController {
 		} catch (TogetherException togetherException) {
 
 		}
-		this.simpMessagingTemplate.convertAndSend(IURIConstant.URI_TOPIC_GROUP_CHAT_RESPONSE + chatRoomId, temp);
+		this.simpMessagingTemplate.convertAndSend(I_Constant.URI_TOPIC_GROUP_CHAT_RESPONSE + chatRoomId, temp);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class ChatController {
 	 * @param headerAccessor
 	 * @throws Exception
 	 */
-	@MessageMapping(IURIConstant.URI_PERSONAL_CHAT + "/{destinationUserId}")
+	@MessageMapping(I_Constant.URI_PERSONAL_CHAT + "/{destinationUserId}")
 	public void handlePrivateChat(@Payload Message message,
 			@DestinationVariable("destinationUserId") String destinationUserId, MessageHeaders messageHeaders,
 			SimpMessageHeaderAccessor headerAccessor) {
@@ -79,7 +79,7 @@ public class ChatController {
 		} catch (TogetherException togetherException) {
 
 		}
-		this.simpMessagingTemplate.convertAndSend(IURIConstant.URI_QUEUE_PERSONAL_CHAT_RESPONSE + destinationUserId,
+		this.simpMessagingTemplate.convertAndSend(I_Constant.URI_QUEUE_PERSONAL_CHAT_RESPONSE + destinationUserId,
 				temp);
 	}
 

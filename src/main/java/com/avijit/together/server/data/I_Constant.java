@@ -1,13 +1,20 @@
 /**
  * 
  */
-package com.avijit.together.server.util;
+package com.avijit.together.server.data;
 
 /**
  * @author avijit
  *
  */
-public interface IURIConstant {
+public interface I_Constant {
+	
+	String FILES_LOCATION = "C://together//db//files//";
+
+	String TEMPORARY_FILES_LOCATION = "C://together//db//files//temporary//";
+	
+	String FILE_URI = "/%s/files?file_name=%s&s_id=%s";
+	
 	/* Rest API URI */
 	/**
 	 * 

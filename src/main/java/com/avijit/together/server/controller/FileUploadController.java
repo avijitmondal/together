@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.avijit.together.server.data.I_Constant;
 import com.avijit.together.server.dto.FileUploadDownloadDTO;
 import com.avijit.together.server.dto.ResponseFactory;
 import com.avijit.together.server.exception.ErrorCode;
@@ -37,7 +38,6 @@ import com.avijit.together.server.exception.TogetherException;
 import com.avijit.together.server.service.ConversationService;
 import com.avijit.together.server.service.FileNameService;
 import com.avijit.together.server.util.FileNameUtility;
-import com.avijit.together.server.util.IConstant;
 
 /**
  * @author avijit
@@ -103,7 +103,7 @@ public class FileUploadController {
 					IErrorDetails.TRY_SOMETIME_LATER, request.getRequestURI());
 		}
 
-		response.setHeader("Location", String.format(IConstant.FILE_URI, conversationId,
+		response.setHeader("Location", String.format(I_Constant.FILE_URI, conversationId,
 				uploadfile.getOriginalFilename(), FileNameUtility.getSessionId(convertedFileName)));
 		return new ResponseEntity<>(
 				new FileUploadDownloadDTO("Successfully uploaded - " + uploadfile.getOriginalFilename()),
@@ -166,7 +166,7 @@ public class FileUploadController {
 			}
 
 			byte[] bytes = file.getBytes();
-			Path path = Paths.get(IConstant.FILES_LOCATION + convertedFileName);
+			Path path = Paths.get(I_Constant.FILES_LOCATION + convertedFileName);
 			Files.write(path, bytes);
 
 		}
