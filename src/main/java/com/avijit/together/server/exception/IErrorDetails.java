@@ -28,12 +28,12 @@ public interface IErrorDetails {
 	String UNABLE_TO_ADD_PARTICIPANT = "Unable to add new participant";
 	String UNABLE_TO_ADD_FILE = "Unable to add new file";
 	
-	String INVALID_USER_ID = "Invalid user ID";
-	String INVALID_MESSAGE_ID = "Invalid message ID";
-	String INVALID_AUTHENTICATION_ID = "Invalid authentication ID";
-	String INVALID_CONVERSATION_ID = "Invalid conversation ID";
-	String INVALID_PARTICIPANT_ID = "Invalid participant ID";
-	String INVALID_FILE_ATTACHED = "Invalid file attached";
+	String INVALID_USER_ID = "Invalid user ID: %s";
+	String INVALID_MESSAGE_ID = "Invalid message ID: %s";
+	String INVALID_AUTHENTICATION_ID = "Invalid authentication ID: %s";
+	String INVALID_CONVERSATION_ID = "Invalid conversation ID: %s";
+	String INVALID_PARTICIPANT_ID = "Invalid participant ID: %s";
+	String INVALID_FILE_ATTACHED = "Invalid file attached: %s";
 	
 	String ENTER_VALID_USER_ID = "Please enter a valid user ID";
 	String ENTER_VALID_USER_EMAIL = "Please enter a valid email ID";
