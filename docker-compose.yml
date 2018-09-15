@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  database:
+    image: mysql/mysql-server:5.7
+    container_name: docker-mysql
+    env_file:
+      - ./db/together_mysql_server.env
+    volumes:
+      - ./db/together_database.sql:/docker-entrypoint-initdb.d/together_database.sql
+    ports:
+      - "3306:3306"
+    tty: true
+    networks:
+      - together-network
+
+networks:
+  together-network:
+    driver: bridge
