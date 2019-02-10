@@ -18,7 +18,7 @@ services:
     container_name: together_server
     build:
       context: .
-      dockerfile: ./together-server.dockerfile
+      dockerfile: ./Dockerfile.together-server
     ports:
       - "8080:8080"
     links:
