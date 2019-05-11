@@ -77,5 +77,4 @@ deployment instructions
 
 ### Who do I talk to? ###
 
-* Avijit Mondal
-* Other community or team contact
+* [Avijit Mondal](mailto:avijitmondal38@gmail.com)
