@@ -31,13 +31,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.avijit.together.server.exception.StorageFileNotFoundException;
 import com.avijit.together.server.service.StorageService;
 
+import static com.avijit.together.server.data.I_Constant.API_PROFILE_PICTURES;
+
 /**
  * @author avijit
  *
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/profile_pictures")
+@RequestMapping(value = API_PROFILE_PICTURES)
 public class ProfilePictureController {
 	private final StorageService storageService;
 

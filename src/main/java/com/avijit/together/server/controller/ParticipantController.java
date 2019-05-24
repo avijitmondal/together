@@ -30,13 +30,15 @@ import com.avijit.together.server.model.Participant;
 import com.avijit.together.server.service.ParticipantService;
 import com.avijit.together.server.util.PageResource;
 
+import static com.avijit.together.server.data.I_Constant.API_CONVERSATION_PARTICIPANTS;
+
 /**
  * @author avijit
  *
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/conversations/{conversation_id}/participants")
+@RequestMapping(value = API_CONVERSATION_PARTICIPANTS)
 public class ParticipantController {
 
 	/**

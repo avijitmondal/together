@@ -8,34 +8,39 @@ package com.avijit.together.server.data;
  *
  */
 public interface I_Constant {
-	
-	String FILES_LOCATION = "C://together//db//files//";
 
-	String TEMPORARY_FILES_LOCATION = "C://together//db//files//temporary//";
-	
-	String FILE_URI = "/%s/files?file_name=%s&s_id=%s";
-	
 	/* Rest API URI */
 	/**
 	 * 
 	 */
 	String API_BASE = "/api";
+	String API_VERSION = "/v1";
+	String API_PREFIX = API_BASE + API_VERSION;
 	/**
 	 * 
 	 */
-	String API_USERS = API_BASE + "/users";
+	String API_USERS = API_PREFIX + "/users";
 	/**
 	 * 
 	 */
-	String API_AUTHENTICATION = API_BASE + "/authentications";
+	String API_AUTHENTICATIONS = API_PREFIX + "/authentications";
 	/**
 	 * 
 	 */
-	String API_CONVERSATIONS = API_BASE + "/conversations";
+	String API_CONVERSATIONS = API_PREFIX + "/conversations";
+	/*
+	*
+	*
+	*/
+	String API_PROFILE_PICTURES = API_PREFIX + "/profile_pictures";
 	/**
 	 * 
 	 */
 	String API_CONVERSATION_PARTICIPANTS = API_CONVERSATIONS + "/{conversation_id}/participants";
+
+	String API_MESSAGES = API_CONVERSATIONS + "/{conversation_id}/messages";
+
+	String API_CONVERSATION_FILES = API_CONVERSATIONS + "/ftp/{conversation_id}/files";
 
 	/* Chat URI */
 	/**
@@ -70,4 +75,10 @@ public interface I_Constant {
 	 * 
 	 */
 	String URI_QUEUE_PERSONAL_CHAT_RESPONSE = "/queue/personalchats.";
+
+	String FILES_LOCATION = "C://together//db//files//";
+
+	String TEMPORARY_FILES_LOCATION = "C://together//db//files//temporary//";
+
+	String FILE_URI = "/%s/files?file_name=%s&s_id=%s";
 }

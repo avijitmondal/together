@@ -37,13 +37,15 @@ import com.avijit.together.server.model.User;
 import com.avijit.together.server.service.UserService;
 import com.avijit.together.server.util.PageResource;
 
+import static com.avijit.together.server.data.I_Constant.API_USERS;
+
 /**
  * @author avijit
  *
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/users")
+@RequestMapping(value = API_USERS)
 public class UserController {
 
 	/**

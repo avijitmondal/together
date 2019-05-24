@@ -41,13 +41,15 @@ import com.avijit.together.server.service.CredentialService;
 import com.avijit.together.server.service.UserService;
 import com.avijit.together.server.util.PageResource;
 
+import static com.avijit.together.server.data.I_Constant.API_AUTHENTICATIONS;
+
 /**
  * @author avijit
  *
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/authentications")
+@RequestMapping(value = API_AUTHENTICATIONS)
 public class CredentialController {
 	/**
 	 * 

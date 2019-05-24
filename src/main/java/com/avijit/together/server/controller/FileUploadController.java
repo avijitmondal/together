@@ -39,13 +39,15 @@ import com.avijit.together.server.service.ConversationService;
 import com.avijit.together.server.service.FileNameService;
 import com.avijit.together.server.util.FileNameUtility;
 
+import static com.avijit.together.server.data.I_Constant.API_CONVERSATION_FILES;
+
 /**
  * @author avijit
  *
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/{conversation_id}/files")
+@RequestMapping(value = API_CONVERSATION_FILES)
 public class FileUploadController {
 
 	/**

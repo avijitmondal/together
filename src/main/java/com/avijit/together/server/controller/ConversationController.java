@@ -31,13 +31,15 @@ import com.avijit.together.server.model.Conversation;
 import com.avijit.together.server.service.ConversationService;
 import com.avijit.together.server.util.PageResource;
 
+import static com.avijit.together.server.data.I_Constant.API_CONVERSATIONS;
+
 /**
  * @author avijit
  *
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/conversations")
+@RequestMapping(value = API_CONVERSATIONS)
 public class ConversationController {
 	/**
 	 * 

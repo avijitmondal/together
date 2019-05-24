@@ -13,6 +13,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -87,7 +88,7 @@ public class ChatController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("/sessionId")
+	@RequestMapping(value = "/sessionId", method = RequestMethod.GET)
 	public String sessionId() {
 		return this.session.getId();
 	}

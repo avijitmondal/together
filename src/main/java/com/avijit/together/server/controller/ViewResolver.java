@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import static com.avijit.together.server.data.I_Constant.API_PREFIX;
+
 /**
  * @author avijit
  *
@@ -24,7 +26,7 @@ public class ViewResolver {
 	 * @return
 	 * @throws IOException
 	 */
-	@GetMapping("/")
+	@GetMapping(API_PREFIX)
     public String listUploadedFiles(Model model) throws IOException {
 
         return "upload";
