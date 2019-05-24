@@ -82,7 +82,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				.authorizeRequests()
 				// .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
+				// Allow swegger requests
+				.antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security", "/swagger-ui.html**", "/webjars/**").permitAll()
 				// allow anonymous resource requests
 				.antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js")
 				.permitAll().antMatchers(HttpMethod.POST, "/api/authentications/auth", "/api/authentications", "/api/users").permitAll().anyRequest().authenticated();

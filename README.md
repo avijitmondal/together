@@ -1,4 +1,4 @@
-# together #
+# *together* #
 
 together server is the backend for together application.
 

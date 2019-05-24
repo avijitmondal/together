@@ -5,7 +5,7 @@ services:
     image: mysql/mysql-server:5.7
     container_name: docker_mysql
     env_file:
-      - ./db/together_mysql_server.env
+      - environment/together_mysql_server.env
     volumes:
       - ./db/together_database.sql:/docker-entrypoint-initdb.d/together_database.sql
     ports:
@@ -15,7 +15,7 @@ services:
       - together_network
 
   together:
-    container_name: together_server
+    container_name: docker_together
     build:
       context: .
       dockerfile: docker/Dockerfile
@@ -23,6 +23,27 @@ services:
       - "8080:8080"
     links:
       - database
+    tty: true
+    networks:
+      - together_network
+
+  redis:
+    image: redis:3.2.8
+    container_name: docker_redis
+    ports:
+      - "6379:6379"
+    tty: true
+    networks:
+      - together_network
+
+  neo4j:
+    image: neo4j:3.5.5
+    container_name: docker_neo4j
+    env_file:
+      - environment/together_neo4j.env
+    ports:
+      - "7474:7474"
+      - "7687:7687"
     tty: true
     networks:
       - together_network
