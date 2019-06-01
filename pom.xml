@@ -7,7 +7,7 @@
 	<groupId>com.avijit.together</groupId>
 	<artifactId>together-server</artifactId>
 	<version>1.0.5-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>Together</name>
 	<description>Chat application</description>
@@ -20,6 +20,7 @@
 	</parent>
 
 	<properties>
+		<start-class>com.avijit.together.server.TogetherApplication</start-class>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
