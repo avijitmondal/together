@@ -21,7 +21,13 @@ together server is the backend for together application.
 Docker is used to deploy this application
 
 ### Configuration
-config 
+######Configure Tomcat to support SSL or https
+generate keystore 
+```docker
+$keytool -genkey -alias together -keyalg RSA -keystore together-keystore
+$keytool -importkeystore -srckeystore together-keystore -destkeystore together-keystore -deststoretype pkcs12
+``` 
+keystore password : together
 
 ### Dependencies
 Docker version
@@ -67,7 +73,9 @@ docker-compose up
 ```
 
 ### Deployment instructions
-deployment instructions
+Open
+```https://<container-ip>:8443```
+for swagger UI
 
 ### Contribution guidelines ###
 

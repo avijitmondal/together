@@ -15,6 +15,7 @@ ENV PATH "${PATH}:${JAVA_HOME}/bin:${M2_HOME}/bin:${CATALINA_HOME}/bin"
 # Copying source code
 WORKDIR /app
 ADD src/ src/
+ADD environment/ environment/
 ADD pom.xml pom.xml
 
 # Prepare by downloading dependencies
@@ -25,6 +26,8 @@ RUN ["mvn", "verify"]
 RUN ["mkdir", "/var/lib/apache-tomcat-9.0.20/webapps/admin"]
 RUN ["mv", "/var/lib/apache-tomcat-9.0.20/webapps/ROOT", "/var/lib/apache-tomcat-9.0.20/webapps/admin"]
 RUN ["mv", "target/together-server.war", "/var/lib/apache-tomcat-9.0.20/webapps/ROOT.war"]
+RUN ["mv", "/app/environment/server.xml", "/var/lib/apache-tomcat-9.0.20/conf/"]
+RUN ["mv", "/app/environment/together-keystore", "/var/lib/apache-tomcat-9.0.20/conf/"]
 
-EXPOSE 8080
+EXPOSE 8443
 CMD ["/var/lib/apache-tomcat-9.0.20/bin/catalina.sh", "run"]
