@@ -7,7 +7,6 @@
  ****************************************************************************/
 package com.avijit.together.server.controller;
 
-import java.io.IOException;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +34,12 @@ import static com.avijit.together.server.data.I_Constant.API_PROFILE_PICTURES;
 
 /**
  * @author avijit
- *
  */
 @CrossOrigin
 @RestController
 @RequestMapping(value = API_PROFILE_PICTURES)
 public class ProfilePictureController {
-	private final StorageService storageService;
+    private final StorageService storageService;
 
     @Autowired
     public ProfilePictureController(StorageService storageService) {
@@ -49,7 +47,7 @@ public class ProfilePictureController {
     }
 
     @GetMapping("/")
-    public String listUploadedFiles(Model model) throws IOException {
+    public String listUploadedFiles(Model model) {
 
         model.addAttribute("files", storageService.loadAll().map(
                 path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
@@ -70,7 +68,7 @@ public class ProfilePictureController {
 
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
+                                   RedirectAttributes redirectAttributes) {
 
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message",

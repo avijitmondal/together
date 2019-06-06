@@ -13,6 +13,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,6 +29,7 @@ import com.avijit.together.server.model.bean.ErrorBean;
  */
 @ControllerAdvice
 public class ExceptionHandler {
+	private final Log logger = LogFactory.getLog(this.getClass());
 
 	/**
 	 * @param request
@@ -41,14 +44,6 @@ public class ExceptionHandler {
 
 		return new ResponseEntity<>(new ErrorBean("0x000123", "Attachment size exceeds the allowable limit! (10MB)"),
 				status);
-
-		// return new ResponseEntity("Attachment size exceeds the allowable
-		// limit! (10MB)", status);
-
-		// example
-		// return new ResponseEntity(ex.getMessage(), status);
-		// return new ResponseEntity("success", responseHeaders, HttpStatus.OK);
-
 	}
 
 	/**
@@ -61,7 +56,7 @@ public class ExceptionHandler {
 	@ResponseBody
 	ResponseEntity<?> handleFileNotFoundException(FileNotFoundException fileNotFoundException,
 			HttpServletResponse response, HttpServletRequest request) {
-		System.out.println("handling file not found exception");
+		logger.error("handling file not found exception");
 		HttpStatus status = getStatus(request);
 
 		return new ResponseEntity<>(new ErrorBean("404", fileNotFoundException.getMessage()), status);
@@ -77,7 +72,7 @@ public class ExceptionHandler {
 	@ResponseBody
 	ResponseEntity<?> handleIOException(IOException ioException, HttpServletResponse response,
 			HttpServletRequest request) {
-		System.out.println("handling io exception");
+		logger.error("handling io exception");
 		HttpStatus status = getStatus(request);
 
 		return new ResponseEntity<>(new ErrorBean("500", ioException.getMessage()), status);

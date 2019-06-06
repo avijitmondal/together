@@ -11,17 +11,17 @@ package com.avijit.together.server.data.cache;
  */
 public class CentralCache extends AbstractCache<String, Object>{
 
-    private static CentralCache INSTANCE = null;
+    private static CentralCache instance = null;
 
     private CentralCache() {
     }
 
     public static CentralCache getInstance() {
         synchronized (CentralCache.class) {
-            if (INSTANCE == null) {
-                INSTANCE = new CentralCache();
+            if (instance == null) {
+                instance = new CentralCache();
             }
         }
-        return INSTANCE;
+        return instance;
     }
 }

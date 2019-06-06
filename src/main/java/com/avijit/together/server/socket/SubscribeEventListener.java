@@ -3,6 +3,8 @@
  */
 package com.avijit.together.server.socket;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,8 @@ import org.springframework.web.socket.messaging.SessionSubscribeEvent;
 @Component
 public class SubscribeEventListener implements ApplicationListener<SessionSubscribeEvent> {
 
+	private final Log logger = LogFactory.getLog(this.getClass());
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -25,7 +29,7 @@ public class SubscribeEventListener implements ApplicationListener<SessionSubscr
 	@Override
 	public void onApplicationEvent(SessionSubscribeEvent sessionSubscribeEvent) {
 		StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(sessionSubscribeEvent.getMessage());
-		// System.out.println(headerAccessor.getSessionAttributes().get("sessionId").toString());
-		System.out.println(headerAccessor);
+		logger.debug(headerAccessor.getSessionAttributes().get("sessionId").toString());
+		logger.debug(headerAccessor);
 	}
 }

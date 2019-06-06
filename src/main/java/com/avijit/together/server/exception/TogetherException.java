@@ -21,11 +21,11 @@ public class TogetherException extends Throwable {
 	/**
 	 * 
 	 */
-	private ErrorCode errorCode;
+	private final ErrorCode errorCode;
 	/**
 	 * 
 	 */
-	private String errorDetails;
+	private final String errorDetails;
 
 	/**
 	 * @param errorCode

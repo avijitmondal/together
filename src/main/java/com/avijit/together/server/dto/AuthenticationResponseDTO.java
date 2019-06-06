@@ -26,7 +26,7 @@ public class AuthenticationResponseDTO implements Serializable {
 	/**
 	 * 
 	 */
-	private final String expiration = "86400";
+	private String expiration = "86400";
 
 	/**
 	 * @param token

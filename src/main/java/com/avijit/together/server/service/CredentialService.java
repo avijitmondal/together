@@ -31,135 +31,134 @@ import com.avijit.together.server.repository.ICredentialRepository;
 
 /**
  * @author avijit
- *
  */
 @Service("credentialService")
 public class CredentialService implements IAuthenticationService, UserDetailsService {
 
-	/**
-	 * 
-	 */
-	@Autowired
-	private ICredentialRepository iCredentialRepository;
-	
-	@Autowired
-	private AuthorityService authorityService;
+    /**
+     *
+     */
+    @Autowired
+    private ICredentialRepository iCredentialRepository;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.avijit.together.server.service.IAuthenticationService#findAll(org.
-	 * springframework.data.domain.Pageable)
-	 */
-	@Override
-	public Page<Credential> findAll(Pageable pageable) {
-		return iCredentialRepository.findAll(pageable);
-	}
+    @Autowired
+    private AuthorityService authorityService;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.avijit.together.server.service.IAuthenticationService#findById(java.
-	 * lang.String)
-	 */
-	@Override
-	public Credential findById(String authenticationId) throws TogetherException {
-		try {
-			return iCredentialRepository.findOne(UUID.fromString(authenticationId));
-		} catch (IllegalArgumentException illegalArgumentException) {
-			throw new TogetherException(ErrorCode.INVALID_AUTHENTICATION_ID, IErrorDetails.INVALID_AUTHENTICATION_ID);
-		} catch (Exception exception) {
-			throw new TogetherException(ErrorCode.INVALID_AUTHENTICATION_ID,
-					String.format(IErrorDetails.INVALID_AUTHENTICATION_ID, authenticationId));
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.avijit.together.server.service.IAuthenticationService#findAll(org.
+     * springframework.data.domain.Pageable)
+     */
+    @Override
+    public Page<Credential> findAll(Pageable pageable) {
+        return iCredentialRepository.findAll(pageable);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.avijit.together.server.service.IAuthenticationService#save(com.avijit
-	 * .together.server.model.Credential)
-	 */
-	@Override
-	public Credential save(Credential credential) throws TogetherException {
-		try {
-			credential.setId(UUID.randomUUID());
-			credential.setLastPasswordResetDate(new Date());
-			credential.setEnabled(true);
-			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String hashedPassword = passwordEncoder.encode(credential.getPassword());
-			credential.setPassword(hashedPassword);
-			credential.getAuthorities().forEach(authority -> {
-				Authority tempAuthority = null;
-				if (authority.getAuthorityRole() == AuthorityRole.ROLE_USER) {
-					tempAuthority = authorityService.findByAuthorityRoleUSER();
-				} else if(authority.getAuthorityRole() == AuthorityRole.ROLE_ADMIN) {
-					tempAuthority = authorityService.findByAuthorityRoleADMIN();
-				}
-				authority.setId(tempAuthority.getId());
-			});
-			return iCredentialRepository.save(credential);
-		} catch (Exception exception) {
-			throw new TogetherException(ErrorCode.AUTHENTICATION_NOT_ADDED, IErrorDetails.UNABLE_TO_ADD_AUTHENTICATION);
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.avijit.together.server.service.IAuthenticationService#findById(java.
+     * lang.String)
+     */
+    @Override
+    public Credential findById(String authenticationId) throws TogetherException {
+        try {
+            return iCredentialRepository.findOne(UUID.fromString(authenticationId));
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw new TogetherException(ErrorCode.INVALID_AUTHENTICATION_ID, IErrorDetails.INVALID_AUTHENTICATION_ID);
+        } catch (Exception exception) {
+            throw new TogetherException(ErrorCode.INVALID_AUTHENTICATION_ID,
+                    String.format(IErrorDetails.INVALID_AUTHENTICATION_ID, authenticationId));
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.avijit.together.server.service.IAuthenticationService#delete(java.
-	 * lang.String)
-	 */
-	@Override
-	public boolean delete(String authenticationId) throws TogetherException {
-		try {
-			if (isExists(authenticationId)) {
-				iCredentialRepository.delete(UUID.fromString(authenticationId));
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception exception) {
-			throw new TogetherException(ErrorCode.INVALID_AUTHENTICATION_ID, IErrorDetails.INVALID_AUTHENTICATION_ID);
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.avijit.together.server.service.IAuthenticationService#save(com.avijit
+     * .together.server.model.Credential)
+     */
+    @Override
+    public Credential save(Credential credential) throws TogetherException {
+        try {
+            credential.setId(UUID.randomUUID());
+            credential.setLastPasswordResetDate(new Date());
+            credential.setEnabled(true);
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(credential.getPassword());
+            credential.setPassword(hashedPassword);
+            credential.getAuthorities().forEach(authority -> {
+                Authority tempAuthority = null;
+                if (authority.getAuthorityRole() == AuthorityRole.ROLE_USER) {
+                    tempAuthority = authorityService.findByAuthorityRoleUSER();
+                } else if (authority.getAuthorityRole() == AuthorityRole.ROLE_ADMIN) {
+                    tempAuthority = authorityService.findByAuthorityRoleADMIN();
+                }
+                authority.setId(tempAuthority.getId());
+            });
+            return iCredentialRepository.save(credential);
+        } catch (Exception exception) {
+            throw new TogetherException(ErrorCode.AUTHENTICATION_NOT_ADDED, IErrorDetails.UNABLE_TO_ADD_AUTHENTICATION);
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.security.core.userdetails.UserDetailsService#
-	 * loadUserByUsername(java.lang.String)
-	 */
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		try {
-			Credential credential = iCredentialRepository.findByUsername(username);
-			if (credential == null) {
-				throw new UsernameNotFoundException(String.format(IErrorDetails.USER_USERNAME_NOT_FOUND, username));
-			} else {
-				return CredentialBeanFactory.create(credential);
-			}
-		} catch (Exception exception) {
-			throw new UsernameNotFoundException(String.format(IErrorDetails.USER_USERNAME_NOT_FOUND, username));
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.avijit.together.server.service.IAuthenticationService#delete(java.
+     * lang.String)
+     */
+    @Override
+    public boolean delete(String authenticationId) throws TogetherException {
+        try {
+            if (isExists(authenticationId)) {
+                iCredentialRepository.delete(UUID.fromString(authenticationId));
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception exception) {
+            throw new TogetherException(ErrorCode.INVALID_AUTHENTICATION_ID, IErrorDetails.INVALID_AUTHENTICATION_ID);
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.avijit.together.server.service.IAuthenticationService#isExists(java.lang.
-	 * String)
-	 */
-	@Override
-	public boolean isExists(String authenticationId) throws TogetherException {
-		try {
-			return iCredentialRepository.exists(UUID.fromString(authenticationId));
-		} catch (IllegalArgumentException illegalArgumentException) {
-			throw new TogetherException(ErrorCode.INVALID_AUTHENTICATION_ID,
-					String.format(IErrorDetails.INVALID_AUTHENTICATION_ID, authenticationId));
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.springframework.security.core.userdetails.UserDetailsService#
+     * loadUserByUsername(java.lang.String)
+     */
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        try {
+            Credential credential = iCredentialRepository.findByUsername(username);
+            if (credential == null) {
+                throw new UsernameNotFoundException(String.format(IErrorDetails.USER_USERNAME_NOT_FOUND, username));
+            } else {
+                return CredentialBeanFactory.create(credential);
+            }
+        } catch (Exception exception) {
+            throw new UsernameNotFoundException(String.format(IErrorDetails.USER_USERNAME_NOT_FOUND, username));
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.avijit.together.server.service.IAuthenticationService#isExists(java.lang.
+     * String)
+     */
+    @Override
+    public boolean isExists(String authenticationId) throws TogetherException {
+        try {
+            return iCredentialRepository.exists(UUID.fromString(authenticationId));
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw new TogetherException(ErrorCode.INVALID_AUTHENTICATION_ID,
+                    String.format(IErrorDetails.INVALID_AUTHENTICATION_ID, authenticationId));
+        }
+    }
 
 }

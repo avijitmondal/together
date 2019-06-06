@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.avijit.together.server.util.javatime;
 
@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
@@ -18,29 +17,29 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
  */
 public class LocalDateTimeSerializer extends StdSerializer<LocalDateTime> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-	public LocalDateTimeSerializer() {
-		super(LocalDateTime.class);
-	}
+    /**
+     *
+     */
+    public LocalDateTimeSerializer() {
+        super(LocalDateTime.class);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.fasterxml.jackson.databind.ser.std.StdSerializer#serialize(java.lang.
-	 * Object, com.fasterxml.jackson.core.JsonGenerator,
-	 * com.fasterxml.jackson.databind.SerializerProvider)
-	 */
-	@Override
-	public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider sp)
-			throws IOException, JsonProcessingException {
-		gen.writeString(value.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.fasterxml.jackson.databind.ser.std.StdSerializer#serialize(java.lang.
+     * Object, com.fasterxml.jackson.core.JsonGenerator,
+     * com.fasterxml.jackson.databind.SerializerProvider)
+     */
+    @Override
+    public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider sp)
+            throws IOException {
+        gen.writeString(value.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+    }
 }

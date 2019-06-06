@@ -5,6 +5,8 @@ package com.avijit.together.server.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -12,10 +14,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.avijit.together.server.data.I_Constant;
 import com.avijit.together.server.exception.TogetherException;
@@ -28,6 +27,8 @@ import com.avijit.together.server.service.MessageService;
  */
 @RestController
 public class ChatController {
+	private final Log logger = LogFactory.getLog(this.getClass());
+
 	/**
 	 * 
 	 */
@@ -58,7 +59,7 @@ public class ChatController {
 		try {
 			temp = messageService.save(message);
 		} catch (TogetherException togetherException) {
-
+			logger.error(togetherException.getErrorDetails());
 		}
 		this.simpMessagingTemplate.convertAndSend(I_Constant.URI_TOPIC_GROUP_CHAT_RESPONSE + chatRoomId, temp);
 	}
@@ -78,7 +79,7 @@ public class ChatController {
 		try {
 			temp = messageService.save(message);
 		} catch (TogetherException togetherException) {
-
+			logger.error(togetherException.getErrorDetails());
 		}
 		this.simpMessagingTemplate.convertAndSend(I_Constant.URI_QUEUE_PERSONAL_CHAT_RESPONSE + destinationUserId,
 				temp);
@@ -88,7 +89,7 @@ public class ChatController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/sessionId", method = RequestMethod.GET)
+	@GetMapping(value = "/sessionId")
 	public String sessionId() {
 		return this.session.getId();
 	}

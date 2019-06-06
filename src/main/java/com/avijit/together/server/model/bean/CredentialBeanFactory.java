@@ -11,26 +11,28 @@ import com.avijit.together.server.model.Credential;
 
 /**
  * @author avijit
- *
  */
 public final class CredentialBeanFactory {
 
-	/**
-	 * @param credential
-	 * @return
-	 */
-	public static CredentialBean create(Credential credential) {
-		return new CredentialBean(credential.getId(), credential.getUsername(), credential.getEmail(),
-				credential.getPassword(), mapToGrantedAuthorities(credential.getAuthorities()), credential.isEnabled(),
-				credential.getLastPasswordResetDate());
-	}
+    private CredentialBeanFactory() {
+    }
 
-	/**
-	 * @param authorities
-	 * @return
-	 */
-	private static List<GrantedAuthority> mapToGrantedAuthorities(List<Authority> authorities) {
-		return authorities.stream().map(authority -> new SimpleGrantedAuthority(authority.getAuthorityRole().name()))
-				.collect(Collectors.toList());
-	}
+    /**
+     * @param credential
+     * @return
+     */
+    public static CredentialBean create(Credential credential) {
+        return new CredentialBean(credential.getId(), credential.getUsername(), credential.getEmail(),
+                credential.getPassword(), mapToGrantedAuthorities(credential.getAuthorities()), credential.isEnabled(),
+                credential.getLastPasswordResetDate());
+    }
+
+    /**
+     * @param authorities
+     * @return
+     */
+    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Authority> authorities) {
+        return authorities.stream().map(authority -> new SimpleGrantedAuthority(authority.getAuthorityRole().name()))
+                .collect(Collectors.toList());
+    }
 }
