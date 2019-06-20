@@ -10,12 +10,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 @SpringBootApplication
 @EnableEurekaServer
 @EnableAdminServer
-public class TogetherStatusApplication extends SpringBootServletInitializer {
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(TogetherStatusApplication.class);
-	}
+public class TogetherStatusApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TogetherStatusApplication.class, args);
