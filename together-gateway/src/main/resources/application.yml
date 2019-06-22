@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: together-gateway
+
+server:
+  port: 8888
+
+ribbon:
+  eureca:
+    enabled: false
