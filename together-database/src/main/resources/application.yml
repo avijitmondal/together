@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: together-database
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://docker_mysql:3306/together?useSSL=false
+    username: root
+    password: administrator
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        id:
+          new_generator_mappings: false
+        show_sql: false
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+
+server:
+  port: 8080
