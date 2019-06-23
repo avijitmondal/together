@@ -22,6 +22,8 @@
 
 	<modules>
 		<module>together-core</module>
+		<module>together-status</module>
+		<module>together-gateway</module>
 		<module>together-database</module>
 	</modules>
 

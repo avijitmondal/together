@@ -17,15 +17,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.avijit.together.server.dto.ResponseFactory;
-import com.avijit.together.server.exception.ErrorCode;
-import com.avijit.together.server.exception.IErrorDetails;
-import com.avijit.together.server.exception.TogetherException;
+import com.avijit.together.core.dto.ResponseFactory;
+import com.avijit.together.core.exception.ErrorCode;
+import com.avijit.together.core.exception.IErrorDetails;
+import com.avijit.together.core.exception.TogetherException;
 import com.avijit.together.server.model.Message;
 import com.avijit.together.server.service.MessageService;
 import com.avijit.together.server.util.PageResource;
 
-import static com.avijit.together.server.data.I_Constant.API_MESSAGES;
+import static com.avijit.together.core.data.I_Constant.API_MESSAGES;
 
 /**
  * @author avijit

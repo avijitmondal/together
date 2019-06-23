@@ -6,7 +6,7 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
-import com.avijit.together.server.data.I_Constant;
+import com.avijit.together.core.data.I_Constant;
 
 /**
  * @author avijit

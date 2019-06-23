@@ -24,17 +24,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.avijit.together.server.data.I_Constant;
-import com.avijit.together.server.dto.FileUploadDownloadDTO;
-import com.avijit.together.server.dto.ResponseFactory;
-import com.avijit.together.server.exception.ErrorCode;
-import com.avijit.together.server.exception.IErrorDetails;
-import com.avijit.together.server.exception.TogetherException;
+import com.avijit.together.core.data.I_Constant;
+import com.avijit.together.core.dto.FileUploadDownloadDTO;
+import com.avijit.together.core.dto.ResponseFactory;
+import com.avijit.together.core.exception.ErrorCode;
+import com.avijit.together.core.exception.IErrorDetails;
+import com.avijit.together.core.exception.TogetherException;
 import com.avijit.together.server.service.ConversationService;
 import com.avijit.together.server.service.FileNameService;
 import com.avijit.together.server.util.FileNameUtility;
 
-import static com.avijit.together.server.data.I_Constant.API_CONVERSATION_FILES;
+import static com.avijit.together.core.data.I_Constant.API_CONVERSATION_FILES;
 
 /**
  * @author avijit

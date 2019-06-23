@@ -22,21 +22,21 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import com.avijit.together.server.dto.AuthenticationRequestDTO;
-import com.avijit.together.server.dto.AuthenticationResponseDTO;
-import com.avijit.together.server.dto.ResponseFactory;
-import com.avijit.together.server.exception.ErrorCode;
-import com.avijit.together.server.exception.IErrorDetails;
-import com.avijit.together.server.exception.TogetherException;
+import com.avijit.together.core.dto.AuthenticationRequestDTO;
+import com.avijit.together.core.dto.AuthenticationResponseDTO;
+import com.avijit.together.core.dto.ResponseFactory;
+import com.avijit.together.core.exception.ErrorCode;
+import com.avijit.together.core.exception.IErrorDetails;
+import com.avijit.together.core.exception.TogetherException;
 import com.avijit.together.server.model.Credential;
 import com.avijit.together.server.model.User;
-import com.avijit.together.server.model.bean.CredentialBean;
+import com.avijit.together.core.model.bean.CredentialBean;
 import com.avijit.together.server.security.JwtTokenUtil;
 import com.avijit.together.server.service.CredentialService;
 import com.avijit.together.server.service.UserService;
 import com.avijit.together.server.util.PageResource;
 
-import static com.avijit.together.server.data.I_Constant.API_AUTHENTICATIONS;
+import static com.avijit.together.core.data.I_Constant.API_AUTHENTICATIONS;
 
 /**
  * @author avijit

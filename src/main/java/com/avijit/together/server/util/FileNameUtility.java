@@ -14,7 +14,7 @@ import java.nio.file.Files;
 import java.time.LocalTime;
 import java.util.UUID;
 
-import com.avijit.together.server.data.I_Constant;
+import com.avijit.together.core.data.I_Constant;
 
 /**
  * @author avijit

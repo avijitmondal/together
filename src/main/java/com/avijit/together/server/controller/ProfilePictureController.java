@@ -27,10 +27,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.avijit.together.server.exception.StorageFileNotFoundException;
+import com.avijit.together.core.exception.StorageFileNotFoundException;
 import com.avijit.together.server.service.StorageService;
 
-import static com.avijit.together.server.data.I_Constant.API_PROFILE_PICTURES;
+import static com.avijit.together.core.data.I_Constant.API_PROFILE_PICTURES;
 
 /**
  * @author avijit

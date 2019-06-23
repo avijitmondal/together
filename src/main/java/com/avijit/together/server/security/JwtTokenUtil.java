@@ -10,7 +10,7 @@ import org.springframework.mobile.device.Device;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.avijit.together.server.model.bean.CredentialBean;
+import com.avijit.together.core.model.bean.CredentialBean;
 import com.avijit.together.server.util.TimeProvider;
 
 import io.jsonwebtoken.Claims;

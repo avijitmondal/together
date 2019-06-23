@@ -16,8 +16,8 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import com.avijit.together.server.data.I_Constant;
-import com.avijit.together.server.exception.TogetherException;
+import com.avijit.together.core.data.I_Constant;
+import com.avijit.together.core.exception.TogetherException;
 import com.avijit.together.server.model.Message;
 import com.avijit.together.server.service.MessageService;
 

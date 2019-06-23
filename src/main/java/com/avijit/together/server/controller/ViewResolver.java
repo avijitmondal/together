@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import static com.avijit.together.server.data.I_Constant.API_PREFIX;
+import static com.avijit.together.core.data.I_Constant.API_PREFIX;
 
 /**
  * @author avijit
