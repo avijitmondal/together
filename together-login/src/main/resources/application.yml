@@ -1,6 +1,6 @@
 spring:
   application:
-    name: together-gateway
+    name: together-login
   profiles:
     active:
       - native
@@ -14,7 +14,7 @@ spring:
       defaultZone: http://127.0.0.1:8761/eureka/
 
 server:
-  port: 8887
+  port: 8881
 
 ribbon:
   eureca:
