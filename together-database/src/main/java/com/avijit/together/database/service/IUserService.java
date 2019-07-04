@@ -7,7 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.database.service;
 
-import com.avijit.together.core.model.User;
+import com.avijit.together.database.dao.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -24,7 +24,7 @@ public interface IUserService extends IService {
 	 * @param pageable
 	 * @return
 	 */
-	Page<User> getAll(Pageable pageable);
+	Page<User> findAll(Pageable pageable);
 
 	/**
 	 * @param userId
@@ -32,13 +32,6 @@ public interface IUserService extends IService {
 	 * @throws TogetherException
 	 */
 	Optional<User> findById(String userId) throws TogetherException;
-
-	/**
-	 * @param userId
-	 * @return
-	 * @throws TogetherException
-	 */
-	boolean delete(String userId) throws TogetherException;
 
 	/**
 	 * @param user
@@ -54,10 +47,4 @@ public interface IUserService extends IService {
 	 */
 	User findByEmail(String email) throws TogetherException;
 
-	/**
-	 * @param userId
-	 * @return
-	 * @throws TogetherException
-	 */
-	boolean isExists(String userId) throws TogetherException;
 }

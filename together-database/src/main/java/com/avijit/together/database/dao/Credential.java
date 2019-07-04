@@ -5,7 +5,7 @@
  * DATE        : Aug 24, 2017
  * DESCRIPTION : together-server
  ****************************************************************************/
-package com.avijit.together.core.model;
+package com.avijit.together.database.dao;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

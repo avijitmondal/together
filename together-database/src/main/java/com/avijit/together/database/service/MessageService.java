@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.avijit.together.core.model.Message;
+import com.avijit.together.database.dao.Message;
 import com.avijit.together.database.repository.IMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

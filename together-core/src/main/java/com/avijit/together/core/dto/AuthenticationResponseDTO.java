@@ -2,7 +2,6 @@ package com.avijit.together.core.dto;
 
 import java.io.Serializable;
 
-import com.avijit.together.core.model.User;
 
 /**
  * @author avijit

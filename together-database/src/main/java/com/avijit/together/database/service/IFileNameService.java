@@ -8,7 +8,7 @@
 package com.avijit.together.database.service;
 
 import com.avijit.together.core.exception.TogetherException;
-import com.avijit.together.core.model.FileName;
+import com.avijit.together.database.dao.FileName;
 
 import java.util.Optional;
 

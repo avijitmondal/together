@@ -10,7 +10,7 @@ package com.avijit.together.database.service;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.avijit.together.core.model.Participant;
+import com.avijit.together.database.dao.Participant;
 import com.avijit.together.database.repository.IParticipantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

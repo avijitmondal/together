@@ -7,8 +7,8 @@
  ****************************************************************************/
 package com.avijit.together.database.repository;
 
-import com.avijit.together.core.model.Authority;
-import com.avijit.together.core.model.AuthorityRole;
+import com.avijit.together.database.dao.Authority;
+import com.avijit.together.database.dao.AuthorityRole;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;

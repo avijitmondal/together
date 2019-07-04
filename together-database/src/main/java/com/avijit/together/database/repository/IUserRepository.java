@@ -7,7 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.database.repository;
 
-import com.avijit.together.core.model.User;
+import com.avijit.together.database.dao.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

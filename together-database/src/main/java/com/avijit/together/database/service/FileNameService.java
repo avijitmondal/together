@@ -7,7 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.database.service;
 
-import com.avijit.together.core.model.FileName;
+import com.avijit.together.database.dao.FileName;
 import com.avijit.together.database.repository.IFileNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

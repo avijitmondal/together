@@ -5,7 +5,7 @@
  * DATE        : Oct 18, 2017
  * DESCRIPTION : together-server
  ****************************************************************************/
-package com.avijit.together.core.model;
+package com.avijit.together.database.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

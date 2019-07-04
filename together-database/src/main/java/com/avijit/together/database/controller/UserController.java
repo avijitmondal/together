@@ -15,7 +15,7 @@ import javax.validation.Valid;
 
 import com.avijit.together.core.data.I_Constant;
 import com.avijit.together.core.dto.ResponseFactory;
-import com.avijit.together.core.model.User;
+import com.avijit.together.database.dao.User;
 import com.avijit.together.core.util.PageResource;
 import com.avijit.together.database.service.UserService;
 import org.apache.commons.logging.Log;
@@ -26,6 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ import com.avijit.together.core.exception.TogetherException;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = I_Constant.API_USERS)
+@RequestMapping(path = I_Constant.API_USERS)
 public class UserController {
 
     private final Log logger = LogFactory.getLog(this.getClass());
@@ -58,7 +59,7 @@ public class UserController {
     @GetMapping(produces = {"application/json"}, consumes = {"application/json"})
     public PageResource<User> list(Pageable pageable) {
 
-        Page<User> users = userService.getAll(pageable);
+        Page<User> users = userService.findAll(pageable);
         return new PageResource<>(users, "page", "size");
 
     }

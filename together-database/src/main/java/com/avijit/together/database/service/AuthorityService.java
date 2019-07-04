@@ -7,8 +7,8 @@
  ****************************************************************************/
 package com.avijit.together.database.service;
 
-import com.avijit.together.core.model.Authority;
-import com.avijit.together.core.model.AuthorityRole;
+import com.avijit.together.database.dao.Authority;
+import com.avijit.together.database.dao.AuthorityRole;
 import com.avijit.together.database.repository.IAuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

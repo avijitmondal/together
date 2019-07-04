@@ -7,7 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.database.service;
 
-import com.avijit.together.core.model.Conversation;
+import com.avijit.together.database.dao.Conversation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.avijit.together.core.model.User;
+import com.avijit.together.database.dao.User;
 import com.avijit.together.database.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +35,7 @@ public class UserService implements IUserService {
 	@Autowired
 	private IUserRepository iUserRepository;
 
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -42,7 +43,7 @@ public class UserService implements IUserService {
 	 * springframework.data.domain.Pageable)
 	 */
 	@Override
-	public Page<User> getAll(Pageable pageable) {
+	public Page<User> findAll(Pageable pageable) {
 		try {
 			return iUserRepository.findAll(pageable);
 		} catch (Exception exception) {
@@ -89,7 +90,7 @@ public class UserService implements IUserService {
 	 * 
 	 * @see
 	 * com.avijit.together.database.service.IUserService#save(com.avijit.together.
-	 * server.model.User)
+	 * server.dao.User)
 	 */
 	@Override
 	public User save(User user) throws TogetherException {

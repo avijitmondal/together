@@ -7,7 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.database.service;
 
-import com.avijit.together.core.model.Authority;
+import com.avijit.together.database.dao.Authority;
 
 /**
  * @author avijit

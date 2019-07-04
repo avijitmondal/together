@@ -7,7 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.database.repository;
 
-import com.avijit.together.core.model.Credential;
+import com.avijit.together.database.dao.Credential;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

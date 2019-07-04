@@ -1,23 +1,23 @@
 /*****************************************************************************
- * FILE NAME   : Gender.java
+ * FILE NAME   : AuthorityRole.java
  * VERSION     : 1.0
  * AUTHOR      : avijit
- * DATE        : Aug 23, 2017
+ * DATE        : Aug 24, 2017
  * DESCRIPTION : together-server
  ****************************************************************************/
-package com.avijit.together.core.model;
+package com.avijit.together.database.dao;
 
 /**
  * @author avijit
  *
  */
-public enum Gender {
+public enum AuthorityRole {
 	/**
-	 * User is a male
+	 * Authorized as an end User
 	 */
-	MALE,
+	ROLE_USER,
 	/**
-	 * User is a Female
+	 * Authorized as an Administrator
 	 */
-	FEMALE
+	ROLE_ADMIN
 }

@@ -5,7 +5,7 @@
  * DATE        : Aug 23, 2017
  * DESCRIPTION : together-server
  ****************************************************************************/
-package com.avijit.together.core.model;
+package com.avijit.together.database.dao;
 
 import com.avijit.together.core.util.javatime.LocalDateTimeDeserializer;
 import com.avijit.together.core.util.javatime.LocalDateTimeSerializer;

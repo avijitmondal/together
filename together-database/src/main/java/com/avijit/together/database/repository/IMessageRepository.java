@@ -7,7 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.database.repository;
 
-import com.avijit.together.core.model.Message;
+import com.avijit.together.database.dao.Message;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;

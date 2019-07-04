@@ -5,7 +5,7 @@
  * DATE        : Oct 17, 2017
  * DESCRIPTION : together-server
  ****************************************************************************/
-package com.avijit.together.core.model.bean;
+package com.avijit.together.core.bean;
 
 /**
  * @author avijit
