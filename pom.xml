@@ -30,6 +30,11 @@
         <module>together-status</module>
         <module>together-gateway</module>
         <module>together-database</module>
+        <module>together-conversation</module>
+        <module>together-ftp</module>
+        <module>together-login</module>
+        <module>together-registration</module>
+        <module>together-user</module>
     </modules>
 
     <dependencies>
