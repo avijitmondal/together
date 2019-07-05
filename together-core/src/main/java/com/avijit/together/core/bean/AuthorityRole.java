@@ -1,23 +1,23 @@
 /*****************************************************************************
- * FILE NAME   : ConversationType.java
+ * FILE NAME   : AuthorityRole.java
  * VERSION     : 1.0
  * AUTHOR      : avijit
- * DATE        : Aug 23, 2017
+ * DATE        : Aug 24, 2017
  * DESCRIPTION : together-server
  ****************************************************************************/
-package com.avijit.together.database.dao;
+package com.avijit.together.core.bean;
 
 /**
  * @author avijit
  *
  */
-public enum ConversationType {
+public enum AuthorityRole {
 	/**
-	 * Conversation is a type of Group conversation
+	 * Authorized as an end User
 	 */
-	GROUP,
+	ROLE_USER,
 	/**
-	 * Conversation is one to one
+	 * Authorized as an Administrator
 	 */
-	SINGLE
+	ROLE_ADMIN
 }

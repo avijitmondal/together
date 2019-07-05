@@ -17,7 +17,7 @@ import com.avijit.together.core.data.I_Constant;
 import com.avijit.together.core.dto.ResponseFactory;
 import com.avijit.together.database.dao.User;
 import com.avijit.together.core.util.PageResource;
-import com.avijit.together.database.service.UserService;
+import com.avijit.together.database.service.IUserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +49,7 @@ public class UserController {
      *
      */
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     /**
      * @param pageable

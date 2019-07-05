@@ -14,7 +14,7 @@ import com.avijit.together.database.dao.Authority;
  *
  */
 public interface IAuthorityService {
-	public Authority findByAuthorityRoleUSER();
+	Authority findByAuthorityRoleUSER();
 
-	public Authority findByAuthorityRoleADMIN();
+	Authority findByAuthorityRoleADMIN();
 }

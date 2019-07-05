@@ -8,7 +8,7 @@
 package com.avijit.together.database.repository;
 
 import com.avijit.together.database.dao.Authority;
-import com.avijit.together.database.dao.AuthorityRole;
+import com.avijit.together.core.bean.AuthorityRole;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;

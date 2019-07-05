@@ -7,6 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.database.dao;
 
+import com.avijit.together.core.bean.AuthorityRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;

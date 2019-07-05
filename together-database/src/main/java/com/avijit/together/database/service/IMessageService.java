@@ -37,25 +37,10 @@ public interface IMessageService extends IService {
 	Message save(Message message) throws TogetherException;
 
 	/**
-	 * @param messageId
-	 * @return
-	 * @throws TogetherException
-	 */
-	boolean delete(String messageId) throws TogetherException;
-
-	/**
 	 * @param pageable
 	 * @param conversationId
 	 * @return
 	 * @throws TogetherException
 	 */
 	Page<Message> findByConversationId(Pageable pageable, String conversationId) throws TogetherException;
-
-	/**
-	 * @param messageId
-	 * @return
-	 * @throws TogetherException
-	 */
-	boolean isExists(String messageId) throws TogetherException;
-
 }

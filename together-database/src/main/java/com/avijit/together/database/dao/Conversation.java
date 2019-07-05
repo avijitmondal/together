@@ -7,6 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.database.dao;
 
+import com.avijit.together.core.bean.ConversationType;
 import com.avijit.together.core.util.javatime.LocalDateTimeDeserializer;
 import com.avijit.together.core.util.javatime.LocalDateTimeSerializer;
 import com.fasterxml.jackson.annotation.JsonFormat;

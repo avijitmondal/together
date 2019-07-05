@@ -7,6 +7,8 @@
  ****************************************************************************/
 package com.avijit.together.database.dao;
 
+import lombok.*;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +18,11 @@ import javax.persistence.Table;
  * @author avijit
  *
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "FILE_NAME")
 public class FileName {
@@ -32,52 +39,4 @@ public class FileName {
 	 */
 	@Column(name = "ORIGINAL_FILE_NAME")
 	private String originalFileName;
-
-	/**
-	 * 
-	 */
-	public FileName() {
-		super();
-	}
-
-	/**
-	 * @param storedFileName
-	 * @param originalFileName
-	 */
-	public FileName(String storedFileName, String originalFileName) {
-		super();
-		this.storedFileName = storedFileName;
-		this.originalFileName = originalFileName;
-	}
-
-	/**
-	 * @return the storedFileName
-	 */
-	public String getStoredFileName() {
-		return storedFileName;
-	}
-
-	/**
-	 * @param storedFileName
-	 *            the storedFileName to set
-	 */
-	public void setStoredFileName(String storedFileName) {
-		this.storedFileName = storedFileName;
-	}
-
-	/**
-	 * @return the originalFileName
-	 */
-	public String getOriginalFileName() {
-		return originalFileName;
-	}
-
-	/**
-	 * @param originalFileName
-	 *            the originalFileName to set
-	 */
-	public void setOriginalFileName(String originalFileName) {
-		this.originalFileName = originalFileName;
-	}
-
 }

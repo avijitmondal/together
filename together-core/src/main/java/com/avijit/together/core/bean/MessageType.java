@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.avijit.together.database.dao;
+package com.avijit.together.core.bean;
 
 /**
  * @author avijit

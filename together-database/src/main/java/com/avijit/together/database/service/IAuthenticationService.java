@@ -40,18 +40,4 @@ public interface IAuthenticationService extends IService {
 	 * @throws TogetherException
 	 */
 	Credential save(Credential credential) throws TogetherException;
-
-	/**
-	 * @param authenticationId
-	 * @return
-	 * @throws TogetherException
-	 */
-	boolean delete(String authenticationId) throws TogetherException;
-
-	/**
-	 * @param authenticationId
-	 * @return
-	 * @throws TogetherException
-	 */
-	boolean isExists(String authenticationId) throws TogetherException;
 }

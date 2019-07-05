@@ -49,18 +49,4 @@ public interface IConversationService extends IService {
 	 * @throws TogetherException
 	 */
 	Conversation save(Conversation conversation) throws TogetherException;
-
-	/**
-	 * @param conversationId
-	 * @return
-	 * @throws TogetherException
-	 */
-	boolean delete(String conversationId) throws TogetherException;
-	
-	/**
-	 * @param conversationId
-	 * @return
-	 * @throws UUIDConversationException 
-	 */
-	boolean isExists(String conversationId) throws TogetherException;
 }

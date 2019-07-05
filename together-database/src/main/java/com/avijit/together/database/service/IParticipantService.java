@@ -43,24 +43,10 @@ public interface IParticipantService extends IService {
 	Participant save(String conversationId, Participant participant) throws TogetherException;
 
 	/**
-	 * @param participantId
-	 * @return
-	 * @throws TogetherException
-	 */
-	boolean delete(String participantId) throws TogetherException;
-
-	/**
 	 * @param pageable
 	 * @param conversationId
 	 * @return
 	 * @throws TogetherException
 	 */
 	Page<Participant> findByConversationId(Pageable pageable, String conversationId) throws TogetherException;
-
-	/**
-	 * @param participantId
-	 * @return
-	 * @throws TogetherException
-	 */
-	boolean isExists(String participantId) throws TogetherException;
 }
