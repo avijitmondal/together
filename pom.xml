@@ -36,6 +36,7 @@
         <module>together-login</module>
         <module>together-registration</module>
         <module>together-user</module>
+        <module>together-config</module>
     </modules>
 
     <dependencies>
