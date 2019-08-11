@@ -5,13 +5,14 @@
  * DATE        : Jun 27, 2017
  * DESCRIPTION : TogetherDesktop
  *************************************************************************** */
-package com.avijit.together.user.ws;
+package com.avijit.together.core.ws;
 
 import com.avijit.together.core.data.I_Constant;
 import com.avijit.together.core.data.cache.CentralCache;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import com.avijit.together.core.util.parser.GsonParser;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthenticationException;

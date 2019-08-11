@@ -11,7 +11,7 @@ import com.avijit.together.core.dto.ResponseFactory;
 import com.avijit.together.core.exception.ErrorCode;
 import com.avijit.together.core.exception.IErrorDetails;
 import com.avijit.together.core.exception.TogetherException;
-import com.avijit.together.core.util.PageResource;
+import com.avijit.together.core.util.ws.PageResource;
 import com.avijit.together.database.dao.Conversation;
 import com.avijit.together.database.service.IConversationService;
 import org.springframework.beans.factory.annotation.Autowired;

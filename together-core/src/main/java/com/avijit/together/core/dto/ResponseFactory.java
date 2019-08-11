@@ -29,9 +29,9 @@ public class ResponseFactory {
      * @return
      */
     public static HttpEntity<?> getResponse(HttpStatus status) {
-        ResponseDTO responseDTO = new ResponseDTO(status);
-        responseDTO.setTimestamp(LocalDateTime.now().toString());
-        return new ResponseEntity<>(responseDTO, status);
+        ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(status);
+        errorResponseDTO.setTimestamp(LocalDateTime.now().toString());
+        return new ResponseEntity<>(errorResponseDTO, status);
     }
 
     /**
@@ -44,13 +44,13 @@ public class ResponseFactory {
      */
     public static HttpEntity<?> getResponse(HttpStatus status, ErrorCode errorCode, String errorDetails, String message,
                                             String path) {
-        ResponseDTO responseDTO = new ResponseDTO(status);
-        responseDTO.setTimestamp(LocalDateTime.now().toString());
-        responseDTO.setErrorCode(getErrorString(errorCode.name(), errorCode.getCode()));
-        responseDTO.setErrorDetails(errorDetails);
-        responseDTO.setMessage(message);
-        responseDTO.setPath(path);
-        return new ResponseEntity<>(responseDTO, status);
+        ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(status);
+        errorResponseDTO.setTimestamp(LocalDateTime.now().toString());
+        errorResponseDTO.setErrorCode(getErrorString(errorCode.name(), errorCode.getCode()));
+        errorResponseDTO.setErrorDetails(errorDetails);
+        errorResponseDTO.setMessage(message);
+        errorResponseDTO.setPath(path);
+        return new ResponseEntity<>(errorResponseDTO, status);
     }
 
     /**
@@ -62,14 +62,14 @@ public class ResponseFactory {
      */
     public static HttpEntity<?> getResponse(HttpStatus status, TogetherException togetherException, String message,
                                             String path) {
-        ResponseDTO responseDTO = new ResponseDTO(status);
-        responseDTO.setTimestamp(LocalDateTime.now().toString());
-        responseDTO.setErrorCode(
+        ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(status);
+        errorResponseDTO.setTimestamp(LocalDateTime.now().toString());
+        errorResponseDTO.setErrorCode(
                 getErrorString(togetherException.getErrorCode().name(), togetherException.getErrorCode().getCode()));
-        responseDTO.setErrorDetails(togetherException.getErrorDetails());
-        responseDTO.setMessage(message);
-        responseDTO.setPath(path);
-        return new ResponseEntity<>(responseDTO, status);
+        errorResponseDTO.setErrorDetails(togetherException.getErrorDetails());
+        errorResponseDTO.setMessage(message);
+        errorResponseDTO.setPath(path);
+        return new ResponseEntity<>(errorResponseDTO, status);
     }
 
     /**

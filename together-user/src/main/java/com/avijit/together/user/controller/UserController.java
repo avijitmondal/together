@@ -9,10 +9,10 @@ package com.avijit.together.user.controller;
 
 import com.avijit.together.core.data.I_Constant;
 import com.avijit.together.core.dto.User;
-import com.avijit.together.user.ws.GsonParser;
-import com.avijit.together.user.ws.HttpMethod;
-import com.avijit.together.user.ws.ResponseDTO;
-import com.avijit.together.user.ws.RestService;
+import com.avijit.together.core.util.parser.GsonParser;
+import com.avijit.together.core.ws.HttpMethod;
+import com.avijit.together.core.dto.ResponseDTO;
+import com.avijit.together.core.ws.RestService;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

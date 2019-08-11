@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.avijit.together.user.ws;
+package com.avijit.together.core.util.parser;
 
 import com.avijit.together.core.util.javatime.Converters;
 import com.google.gson.Gson;

@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import com.avijit.together.core.data.I_Constant;
 import com.avijit.together.core.dto.ResponseFactory;
 import com.avijit.together.database.dao.User;
-import com.avijit.together.core.util.PageResource;
+import com.avijit.together.core.util.ws.PageResource;
 import com.avijit.together.database.service.IUserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

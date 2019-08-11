@@ -1,143 +1,80 @@
-/*****************************************************************************
- * FILE NAME   : ResponseDTO.java
- * VERSION     : 1.0
- * AUTHOR      : avijit
- * DATE        : Nov 7, 2017
- * DESCRIPTION : together-server
- ****************************************************************************/
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.avijit.together.core.dto;
 
-import org.springframework.http.HttpStatus;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
 /**
- * @author avijit
  *
+ * @author avijit
+ * @param <T>
  */
-@JsonInclude(Include.NON_NULL)
-public class ResponseDTO {
+public class ResponseDTO<T> {
+    private int size;
+    private T content;
+    private int number;
+    private Sort sort;
+    private int totalPages;
+    private int totalElements;
+    private boolean last;
+    private int numberOfElements;
+    private boolean first;
+    private Link _links;
 
-	/**
-	 * 
-	 */
-	private String timestamp;
-	/**
-	 * 
-	 */
-	private int statusCode;
-	/**
-	 * 
-	 */
-	private String errorCode;
-	/**
-	 * 
-	 */
-	private String errorDetails;
-	/**
-	 * 
-	 */
-	private String message;
-	/**
-	 * 
-	 */
-	private String path;
+    public ResponseDTO() {
+    }
 
-	/**
-	 * @param status
-	 */
-	public ResponseDTO(HttpStatus status) {
-		statusCode = status.value();
-	}
+    public ResponseDTO(int size, T content, int number, Sort sort, int totalPages, int totalElements, boolean last, int numberOfElements, boolean first, Link _links) {
+        this.size = size;
+        this.content = content;
+        this.number = number;
+        this.sort = sort;
+        this.totalPages = totalPages;
+        this.totalElements = totalElements;
+        this.last = last;
+        this.numberOfElements = numberOfElements;
+        this.first = first;
+        this._links = _links;
+    }
 
-	/**
-	 * @return the timestamp
-	 */
-	public String getTimestamp() {
-		return timestamp;
-	}
+    public int getSize() {
+        return size;
+    }
 
-	/**
-	 * @param timestamp
-	 *            the timestamp to set
-	 */
-	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
-	}
+    public T getContent() {
+        return content;
+    }
 
-	/**
-	 * @return the statusCode
-	 */
-	public int getStatusCode() {
-		return statusCode;
-	}
+    public int getNumber() {
+        return number;
+    }
 
-	/**
-	 * @param statusCode
-	 *            the statusCode to set
-	 */
-	public void setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
-	}
+    public Sort getSort() {
+        return sort;
+    }
 
-	/**
-	 * @return the errorCode
-	 */
-	public String getErrorCode() {
-		return errorCode;
-	}
+    public int getTotalPages() {
+        return totalPages;
+    }
 
-	/**
-	 * @param errorCode
-	 *            the errorCode to set
-	 */
-	public void setErrorCode(String errorCode) {
-		this.errorCode = errorCode;
-	}
+    public int getTotalElements() {
+        return totalElements;
+    }
 
-	/**
-	 * @return the errorDetails
-	 */
-	public String getErrorDetails() {
-		return errorDetails;
-	}
+    public boolean isLast() {
+        return last;
+    }
 
-	/**
-	 * @param errorDetails
-	 *            the errorDetails to set
-	 */
-	public void setErrorDetails(String errorDetails) {
-		this.errorDetails = errorDetails;
-	}
+    public int getNumberOfElements() {
+        return numberOfElements;
+    }
 
-	/**
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
+    public boolean isFirst() {
+        return first;
+    }
 
-	/**
-	 * @param message
-	 *            the message to set
-	 */
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	/**
-	 * @return the path
-	 */
-	public String getPath() {
-		return path;
-	}
-
-	/**
-	 * @param path
-	 *            the path to set
-	 */
-	public void setPath(String path) {
-		this.path = path;
-	}
+    public Link getLinks() {
+        return _links;
+    }
 }

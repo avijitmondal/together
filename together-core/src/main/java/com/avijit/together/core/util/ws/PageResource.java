@@ -1,4 +1,4 @@
-package com.avijit.together.core.util;
+package com.avijit.together.core.util.ws;
 
 import java.util.Iterator;
 import java.util.List;
