@@ -81,4 +81,7 @@ public interface I_Constant {
 	String TEMPORARY_FILES_LOCATION = "C://together//db//files//temporary//";
 
 	String FILE_URI = "/%s/files?file_name=%s&s_id=%s";
+
+	String AUTH_TOKEN = "AUTH_TOKEN";
+	String AUTHORIZATION = "Authorization";
 }
