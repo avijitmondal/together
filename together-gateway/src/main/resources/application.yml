@@ -1,21 +1,33 @@
 spring:
   application:
     name: together-gateway
-  profiles:
-    active:
-      - native
-  cloud:
-    config:
-      uri: http://127.0.0.1:8762
-  instance:
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
 
 server:
   port: 8887
 
-ribbon:
-  eureca:
-    enabled: false
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+zuul:
+  prefix: /api/v1
+  routes:
+    test:
+      path: /redirect/**
+      url: http://google.com
+#    customer-by-address:
+#      path: /customer-by-address/**
+#      url: http://localhost:9098
+    together-user-by-service:
+      path: /users/**
+      serviceId: together-user
+    static:
+      path: /static/**
