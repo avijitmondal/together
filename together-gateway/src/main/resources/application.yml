@@ -19,15 +19,17 @@ eureka:
 
 zuul:
   prefix: /api/v1
+  stripPrefix: false
   routes:
-    test:
-      path: /redirect/**
-      url: http://google.com
+#    test:
+#      path: /redirect/**
+#      url: http://google.com
 #    customer-by-address:
 #      path: /customer-by-address/**
 #      url: http://localhost:9098
     together-user-by-service:
       path: /users/**
       serviceId: together-user
-    static:
-      path: /static/**
+      stripPrefix: false
+#    static:
+#      path: /static/**
