@@ -21,8 +21,6 @@ spring:
       client:
         url: http://localhost:8761/admin
 
-#  spring.boot.admin.client.instance.service-base-url.
-
 management:
   security:
     enabled: false

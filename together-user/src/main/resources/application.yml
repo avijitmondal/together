@@ -1,21 +1,30 @@
+server:
+  port: 0
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 2
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
 spring:
   application:
     name: together-user
-  profiles:
-    active:
-      - native
-  cloud:
-    config:
-      uri: http://127.0.0.1:8762
-  instance:
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
+  boot:
+    admin:
+      client:
+        url: http://localhost:8761/admin
 
-server:
-  port: 8883
-
-ribbon:
-  eureca:
+management:
+  security:
     enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"

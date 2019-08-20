@@ -1,3 +1,18 @@
+server:
+  port: 0
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 2
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
 spring:
   application:
     name: together-database
@@ -16,6 +31,16 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: none
+  boot:
+    admin:
+      client:
+        url: http://localhost:8761/admin
 
-server:
-  port: 8885
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
