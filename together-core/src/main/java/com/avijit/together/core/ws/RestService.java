@@ -7,7 +7,7 @@
  *************************************************************************** */
 package com.avijit.together.core.ws;
 
-import com.avijit.together.core.data.I_Constant;
+import com.avijit.together.core.data.Constants;
 import com.avijit.together.core.data.cache.CentralCache;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -105,7 +105,7 @@ public class RestService {
                 request.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 
                 if (isSecured) {
-                    request.addHeader(I_Constant.AUTHORIZATION, centralCache.getAsString(I_Constant.AUTH_TOKEN));
+                    request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));
                 }
 
                 response = client.execute(request);
@@ -119,7 +119,7 @@ public class RestService {
                 request.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 
                 if (isSecured) {
-                    request.addHeader(I_Constant.AUTHORIZATION, centralCache.getAsString(I_Constant.AUTH_TOKEN));
+                    request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));
                 }
 
                 response = client.execute(request);
@@ -133,7 +133,7 @@ public class RestService {
                 request.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 
                 if (isSecured) {
-                    request.addHeader(I_Constant.AUTHORIZATION, centralCache.getAsString(I_Constant.AUTH_TOKEN));
+                    request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));
                 }
 
                 response = client.execute(request);
@@ -146,7 +146,7 @@ public class RestService {
                 request.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 
                 if (isSecured) {
-                    request.addHeader(I_Constant.AUTHORIZATION, centralCache.getAsString(I_Constant.AUTH_TOKEN));
+                    request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));
                 }
 
                 response = client.execute(request);

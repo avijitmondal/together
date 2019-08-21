@@ -7,7 +7,7 @@ package com.avijit.together.core.data;
  * @author avijit
  *
  */
-public abstract class I_Constant {
+public abstract class Constants {
 
 	/* Rest API URI */
 	/**

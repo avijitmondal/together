@@ -7,6 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.user.service;
 
+import com.avijit.together.core.data.Constants;
 import com.avijit.together.core.dto.ResponseDTO;
 import com.avijit.together.core.dto.User;
 import com.avijit.together.core.exception.ErrorCode;
@@ -16,17 +17,12 @@ import com.avijit.together.core.util.parser.GsonParser;
 import com.avijit.together.core.ws.HttpMethod;
 import com.avijit.together.core.ws.RestService;
 import com.google.gson.reflect.TypeToken;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.util.EntityUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * @author avijit
@@ -48,22 +44,20 @@ public class UserService implements IUserService {
 
             restService.setHttpMethod(HttpMethod.GET);
             restService.isSecured(false);
-            restService.setUrl("http://127.0.0.1:8885/api/v1/users");
+            restService.setUrl(Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS);
 
-            HttpResponse httpResponse = restService.execute();
-            HttpEntity httpEntity = httpResponse.getEntity();
-            if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                String responseAsString = EntityUtils.toString(httpEntity);
+            restService.execute();
 
-                ResponseDTO<List<User>> response = (ResponseDTO<List<User>>) GsonParser.fromString(responseAsString, new TypeToken<ResponseDTO<List<User>>>() {
+            if (restService.isSuccessResponse(HttpStatus.SC_OK)) {
+                String responseAsString = restService.getSuccessResponse();
+
+                return  (ResponseDTO<List<User>>) GsonParser.fromString(responseAsString, new TypeToken<ResponseDTO<List<User>>>() {
                 }.getType());
-
-                return response;
             }
         } catch (Exception exception) {
-			return null;
+			return new ResponseDTO<>();
 		}
-		return null;
+		return new ResponseDTO<>();
 	}
 
 	/*
@@ -75,9 +69,23 @@ public class UserService implements IUserService {
 	@Override
 	public Optional<User> findById(String userId) throws TogetherException {
 		try {
-		    return null;
-//			return iUserRepository.findById(UUID.fromString(userId));
-		} catch (IllegalArgumentException illegalArgumentException) {
+			RestService restService = new RestService();
+
+			restService.setHttpMethod(HttpMethod.GET);
+			restService.isSecured(false);
+			restService.setUrl(Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS + "/" + userId);
+
+			restService.execute();
+
+			if (restService.isSuccessResponse(HttpStatus.SC_CREATED)) {
+				String responseAsString = restService.getSuccessResponse();
+				User response = GsonParser.fromString(responseAsString, User.class);
+
+				return Optional.of(response);
+			} else {
+				throw new TogetherException(restService.getErrorResponse());
+			}
+		} catch (Exception exception) {
 			throw new TogetherException(ErrorCode.INVALID_USER_ID, IErrorDetails.INVALID_USER_ID);
 		}
 	}
@@ -90,13 +98,20 @@ public class UserService implements IUserService {
 	@Override
 	public boolean delete(String userId) throws TogetherException {
 		try {
-			if (isExists(userId)) {
-//				iUserRepository.deleteById(UUID.fromString(userId));
-				return false;
+			RestService restService = new RestService();
+
+			restService.setHttpMethod(HttpMethod.DELETE);
+			restService.isSecured(false);
+			restService.setUrl(Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS + "/" + userId);
+
+			restService.execute();
+
+			if (restService.isSuccessResponse(HttpStatus.SC_NO_CONTENT)) {
+				return true;
 			} else {
-				return false;
+				throw new TogetherException(restService.getErrorResponse());
 			}
-		} catch (IllegalArgumentException illegalArgumentException) {
+		} catch (Exception exception) {
 			throw new TogetherException(ErrorCode.INVALID_USER_ID, IErrorDetails.INVALID_USER_ID);
 		}
 	}
@@ -111,11 +126,19 @@ public class UserService implements IUserService {
 	@Override
 	public User save(User user) throws TogetherException {
 		try {
-			user.setId(UUID.randomUUID());
-			user.setCreatedAt(LocalDateTime.now());
-			user.setUpdatedAt(LocalDateTime.now());
-//			return iUserRepository.save(user);
-            return null;
+			RestService restService = new RestService();
+
+			restService.setHttpMethod(HttpMethod.POST);
+			restService.isSecured(false);
+			restService.setUrl(Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS);
+
+			restService.execute();
+			if (restService.isSuccessResponse(HttpStatus.SC_CREATED)) {
+				String responseAsString = restService.getSuccessResponse();
+				return GsonParser.fromString(responseAsString, User.class);
+			} else {
+				throw new TogetherException(restService.getErrorResponse());
+			}
 		} catch (Exception exception) {
 			throw new TogetherException(ErrorCode.USER_NOT_ADDED, IErrorDetails.UNABLE_TO_ADD_USER);
 		}

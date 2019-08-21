@@ -13,7 +13,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import com.avijit.together.core.data.I_Constant;
+import com.avijit.together.core.data.Constants;
 import com.avijit.together.core.dto.ResponseFactory;
 import com.avijit.together.database.dao.User;
 import com.avijit.together.core.util.ws.PageResource;
@@ -40,7 +40,7 @@ import com.avijit.together.core.exception.TogetherException;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(path = I_Constant.API_USERS)
+@RequestMapping(path = Constants.API_USERS)
 public class UserController {
 
     private final Log logger = LogFactory.getLog(this.getClass());

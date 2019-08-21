@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.util.Optional;
 
-import static com.avijit.together.core.data.I_Constant.API_CONVERSATIONS;
+import static com.avijit.together.core.data.Constants.API_CONVERSATIONS;
 
 /**
  * @author avijit
