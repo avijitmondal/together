@@ -7,6 +7,8 @@
  ****************************************************************************/
 package com.avijit.together.core.exception;
 
+import com.avijit.together.core.dto.ErrorResponseDTO;
+
 /**
  * @author avijit
  *
@@ -36,6 +38,11 @@ public class TogetherException extends Throwable {
 		this.errorCode = errorCode;
 		this.errorDetails = errorDetails;
 
+	}
+
+	public TogetherException(ErrorResponseDTO errorResponse) {
+		this.errorCode = ErrorCode.valueOf(errorResponse.getErrorCode());
+		this.errorDetails = errorResponse.getErrorDetails();
 	}
 
 	/**

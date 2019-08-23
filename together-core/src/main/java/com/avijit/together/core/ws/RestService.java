@@ -12,10 +12,11 @@ import com.avijit.together.core.data.cache.CentralCache;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import com.avijit.together.core.dto.ErrorResponseDTO;
 import com.avijit.together.core.util.parser.GsonParser;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthenticationException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpDelete;
@@ -26,6 +27,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,6 +43,7 @@ public class RestService {
     private Object requestBody;
     private boolean isSecured = true;
     private final CentralCache centralCache = CentralCache.getInstance();
+    private HttpResponse httpResponse = null;
 
     /**
      * @param url the url to set
@@ -81,7 +84,7 @@ public class RestService {
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public HttpResponse execute() throws AuthenticationException, ClientProtocolException, IOException {
+    public void execute() throws ClientProtocolException, IOException {
         logger.debug("execute");
         RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(5000).setConnectTimeout(5000)
                 .setSocketTimeout(5000).build();
@@ -96,7 +99,7 @@ public class RestService {
         HttpClientBuilder builder = HttpClientBuilder.create();
 
         CloseableHttpClient client = builder.build();
-        HttpResponse response = null;
+
         switch (httpMethod) {
             case GET: {
                 HttpGet request = new HttpGet(url);
@@ -108,7 +111,7 @@ public class RestService {
                     request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));
                 }
 
-                response = client.execute(request);
+                httpResponse = client.execute(request);
             }
             break;
             case POST: {
@@ -122,7 +125,7 @@ public class RestService {
                     request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));
                 }
 
-                response = client.execute(request);
+                httpResponse = client.execute(request);
             }
             break;
             case PUT: {
@@ -136,7 +139,7 @@ public class RestService {
                     request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));
                 }
 
-                response = client.execute(request);
+                httpResponse = client.execute(request);
             }
             break;
             case DELETE: {
@@ -149,13 +152,27 @@ public class RestService {
                     request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));
                 }
 
-                response = client.execute(request);
+                httpResponse = client.execute(request);
             }
             break;
             default:
                 break;
         }
 
-        return response;
+    }
+
+    public boolean isSuccessResponse(int expectedStatusCode) {
+        return httpResponse.getStatusLine().getStatusCode() == expectedStatusCode;
+    }
+
+    public ErrorResponseDTO getErrorResponse() throws IOException {
+        HttpEntity httpEntity = httpResponse.getEntity();
+        String responseAsString = EntityUtils.toString(httpEntity);
+        return GsonParser.fromString(responseAsString, ErrorResponseDTO.class);
+    }
+
+    public String getSuccessResponse() throws IOException {
+        HttpEntity httpEntity = httpResponse.getEntity();
+        return EntityUtils.toString(httpEntity);
     }
 }
