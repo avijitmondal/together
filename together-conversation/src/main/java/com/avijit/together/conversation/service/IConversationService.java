@@ -5,15 +5,16 @@
  * DATE        : Aug 23, 2017
  * DESCRIPTION : together-server
  ****************************************************************************/
-package com.avijit.together.database.service;
+package com.avijit.together.conversation.service;
 
+import com.avijit.together.core.dto.Conversation;
+import com.avijit.together.core.dto.ResponseDTO;
+import com.avijit.together.core.exception.TogetherException;
 import com.avijit.together.core.service.IService;
-import com.avijit.together.database.dao.Conversation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.avijit.together.core.exception.TogetherException;
-
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -26,7 +27,7 @@ public interface IConversationService extends IService {
 	 * @param pageable
 	 * @return
 	 */
-	Page<Conversation> findAll(Pageable pageable);
+	ResponseDTO<List<Conversation>> findAll(Pageable pageable);
 
 	/**
 	 * @param pageable
@@ -34,7 +35,7 @@ public interface IConversationService extends IService {
 	 * @return
 	 * @throws TogetherException
 	 */
-	Page<Conversation> findByUserId(Pageable pageable, String userId) throws TogetherException;
+	ResponseDTO<List<Conversation>> findByUserId(Pageable pageable, String userId) throws TogetherException;
 
 	/**
 	 * @param conversationId

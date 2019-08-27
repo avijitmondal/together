@@ -5,7 +5,7 @@
  * DATE        : Aug 23, 2017
  * DESCRIPTION : together-server
  ****************************************************************************/
-package com.avijit.together.user.service;
+package com.avijit.together.core.service;
 
 import com.avijit.together.core.exception.TogetherException;
 

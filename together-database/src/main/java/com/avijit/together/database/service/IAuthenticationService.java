@@ -7,6 +7,7 @@
  ****************************************************************************/
 package com.avijit.together.database.service;
 
+import com.avijit.together.core.service.IService;
 import com.avijit.together.database.dao.Credential;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

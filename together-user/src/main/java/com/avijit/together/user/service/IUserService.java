@@ -11,6 +11,7 @@ import com.avijit.together.core.dto.ResponseDTO;
 import com.avijit.together.core.dto.User;
 import com.avijit.together.core.exception.TogetherException;
 
+import com.avijit.together.core.service.IService;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

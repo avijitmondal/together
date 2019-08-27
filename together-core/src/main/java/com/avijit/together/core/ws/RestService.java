@@ -45,6 +45,12 @@ public class RestService {
     private final CentralCache centralCache = CentralCache.getInstance();
     private HttpResponse httpResponse = null;
 
+    public RestService(HttpMethod httpMethod, boolean isSecured, String url) {
+        this.httpMethod = httpMethod;
+        this.isSecured = isSecured;
+        this.url = url;
+    }
+
     /**
      * @param url the url to set
      */

@@ -40,11 +40,7 @@ public class UserService implements IUserService {
 	@Override
 	public ResponseDTO<List<User>> findAll(Pageable pageable) {
 		try {
-            RestService restService = new RestService();
-
-            restService.setHttpMethod(HttpMethod.GET);
-            restService.isSecured(false);
-            restService.setUrl(Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS);
+            RestService restService = new RestService(HttpMethod.GET, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS);
 
             restService.execute();
 
@@ -69,11 +65,7 @@ public class UserService implements IUserService {
 	@Override
 	public Optional<User> findById(String userId) throws TogetherException {
 		try {
-			RestService restService = new RestService();
-
-			restService.setHttpMethod(HttpMethod.GET);
-			restService.isSecured(false);
-			restService.setUrl(Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS + "/" + userId);
+			RestService restService = new RestService(HttpMethod.GET, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS + "/" + userId);
 
 			restService.execute();
 
@@ -98,11 +90,7 @@ public class UserService implements IUserService {
 	@Override
 	public boolean delete(String userId) throws TogetherException {
 		try {
-			RestService restService = new RestService();
-
-			restService.setHttpMethod(HttpMethod.DELETE);
-			restService.isSecured(false);
-			restService.setUrl(Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS + "/" + userId);
+			RestService restService = new RestService(HttpMethod.DELETE, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS + "/" + userId);
 
 			restService.execute();
 
@@ -126,11 +114,7 @@ public class UserService implements IUserService {
 	@Override
 	public User save(User user) throws TogetherException {
 		try {
-			RestService restService = new RestService();
-
-			restService.setHttpMethod(HttpMethod.POST);
-			restService.isSecured(false);
-			restService.setUrl(Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS);
+			RestService restService = new RestService(HttpMethod.POST, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS);
 
 			restService.execute();
 			if (restService.isSuccessResponse(HttpStatus.SC_CREATED)) {
