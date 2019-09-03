@@ -46,4 +46,8 @@ public interface IErrorDetails {
 	String ENTER_VALID_DATA = "Please enter valid data(s)";
 
 	String TRY_SOMETIME_LATER = "Please try after some time";
+
+	String UNABLE_TO_CREATE_DIRECTORY = "Unable to create directory";
+	String FILE_NOT_ADDED = "File with name %s not added";
+	String INVALID_FILE_NAME = "Invalid filename %s";
 }

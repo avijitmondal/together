@@ -98,7 +98,15 @@ public enum ErrorCode {
 	/**
 	 * 
 	 */
-	FILE_NOT_ADDED("1021");
+	FILE_NOT_ADDED("1021"),
+	/**
+	 *
+	 */
+	DIRECTORY_NOT_CREATED("1023"),
+	/**
+	 *
+	 */
+	INVALID_FILE_NAME("1024");
 
 	/**
 	 * 

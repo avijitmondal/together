@@ -25,6 +25,10 @@ public class ResponseDTO<T> {
     public ResponseDTO() {
     }
 
+    public ResponseDTO(T content) {
+        this.content = content;
+    }
+
     public ResponseDTO(int size, T content, int number, Sort sort, int totalPages, int totalElements, boolean last, int numberOfElements, boolean first, Link _links) {
         this.size = size;
         this.content = content;

@@ -40,7 +40,7 @@ public abstract class Constants {
 
 	public static final String API_MESSAGES = API_CONVERSATIONS + "/{conversation_id}/messages";
 
-	public static final String API_CONVERSATION_FILES = API_CONVERSATIONS + "/ftp/{conversation_id}/files";
+	public static final String API_CONVERSATION_FILES = API_PREFIX + "/ftp/{conversation_id}/files";
 
 	/* Chat URI */
 	/**

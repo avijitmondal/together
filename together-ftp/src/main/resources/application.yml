@@ -21,6 +21,17 @@ spring:
       client:
         url: http://localhost:8761/admin
 
+  servlet:
+    multipart:
+      enabled: true # Enable multipart uploads
+      file-size-threshold: 2KB # Threshold after which files are written to disk.
+      max-file-size: 200MB # Max file size.
+      max-request-size: 215MB # Max Request Size
+
+# All files uploaded through the REST API will be stored in this directory
+file:
+  upload-dir: /Users/avijit/work/together/together-server/uploads
+
 management:
   security:
     enabled: false

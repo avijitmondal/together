@@ -1,15 +1,20 @@
 package com.avijit.together.ftp;
 
+import com.avijit.together.ftp.properties.FileStorageProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class TogetherFtpApplication {
+@EnableConfigurationProperties({
+		FileStorageProperties.class
+})
+public class TogetherFTPApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TogetherFtpApplication.class, args);
+		SpringApplication.run(TogetherFTPApplication.class, args);
 	}
 
 }
