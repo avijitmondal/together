@@ -72,8 +72,7 @@ public class FTPController {
                             return null;
                         })
                         .collect(Collectors.toList());
-
-                return new ResponseDTO<List<FileResponse>>(res);
+                return new ResponseDTO<>(res);
             }
             return new ResponseDTO<>();
         } catch (TogetherException togetherException) {

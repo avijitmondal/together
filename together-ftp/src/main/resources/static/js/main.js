@@ -18,7 +18,6 @@ function uploadSingleFile(file) {
     xhr.open("POST", "/api/v1/ftp/046b6c7f-0b8a-43b9-b35d-6489e6daee91/files/");
 
     xhr.onload = function() {
-        console.log(xhr.responseText);
         var response = JSON.parse(xhr.responseText);
         if(xhr.status == 201) {
             singleFileUploadError.style.display = "none";
@@ -43,13 +42,13 @@ function uploadMultipleFiles(files) {
     xhr.open("POST", "/api/v1/ftp/046b6c7f-0b8a-43b9-b35d-6489e6daee91/files/multiple");
 
     xhr.onload = function() {
-        console.log(xhr.responseText);
+
         var response = JSON.parse(xhr.responseText);
         if(xhr.status == 200) {
             multipleFileUploadError.style.display = "none";
             var content = "<p>All Files Uploaded Successfully</p>";
-            for(var i = 0; i < response.length; i++) {
-                content += "<p>DownloadUrl : <a href='" + response[i].fileDownloadUri + "' target='_blank'>" + response[i].fileDownloadUri + "</a></p>";
+            for(var i = 0; i < response.content.length; i++) {
+                content += "<p>DownloadUrl : <a href='" + response.content[i].fileDownloadUri + "' target='_blank'>" + response.content[i].fileDownloadUri + "</a></p>";
             }
             multipleFileUploadSuccess.innerHTML = content;
             multipleFileUploadSuccess.style.display = "block";
