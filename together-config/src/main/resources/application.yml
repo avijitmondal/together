@@ -21,6 +21,18 @@ spring:
       client:
         url: http://localhost:8761/admin
 
+  profiles:
+    include: native,default
+  cloud:
+    config:
+      discovery:
+        enabled: false
+      server:
+        native:
+          searchLocations: E:/work/others/EurekaConfigServer/src/main/resources/config
+        encrypt:
+          enabled: true
+
 management:
   security:
     enabled: false
