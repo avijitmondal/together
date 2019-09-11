@@ -71,9 +71,9 @@ public class UserController {
     @GetMapping(params = "email", produces = {"application/json"}, consumes = {"application/json"})
     public HttpEntity<?> findByEmail(HttpServletRequest request, @RequestParam("email") String email) {
         try {
-            User user = userService.findByEmail(email);
-            if (null != user) {
-                return new ResponseEntity<>(user, HttpStatus.OK);
+            Optional<User> user = userService.findByEmail(email);
+            if (user.isPresent()) {
+                return new ResponseEntity<>(user.get(), HttpStatus.OK);
             }
             return ResponseFactory.getResponse(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND,
                     String.format(IErrorDetails.USER_EMAIL_NOT_FOUND, email), IErrorDetails.ENTER_VALID_USER_EMAIL,

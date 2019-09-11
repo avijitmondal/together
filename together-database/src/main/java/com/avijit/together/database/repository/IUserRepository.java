@@ -11,6 +11,7 @@ import com.avijit.together.database.dao.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -24,6 +25,6 @@ public interface IUserRepository extends PagingAndSortingRepository<User, UUID> 
 	 * @param email
 	 * @return
 	 */
-	User findByEmail(String email);
+	Optional<User> findByEmail(String email);
 
 }

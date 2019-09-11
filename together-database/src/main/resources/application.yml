@@ -17,7 +17,7 @@ spring:
   application:
     name: together-database
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://docker_mysql:3306/together?useSSL=false
     username: root
     password: administrator

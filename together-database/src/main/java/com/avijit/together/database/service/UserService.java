@@ -111,7 +111,7 @@ public class UserService implements IUserService {
 	 * String)
 	 */
 	@Override
-	public User findByEmail(String email) throws TogetherException {
+	public Optional<User> findByEmail(String email) throws TogetherException {
 		try {
 			return iUserRepository.findByEmail(email);
 		} catch (Exception exception) {
