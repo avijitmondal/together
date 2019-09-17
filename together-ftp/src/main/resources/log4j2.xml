@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration monitorInterval="30">
     <properties>
-        <property name="app.name">together-status</property>
+        <property name="app.name">together-ftp</property>
         <property name="pattern">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</property>
     </properties>
     <appenders>
