@@ -14,18 +14,18 @@ services:
     networks:
       - together_network
 
-  together:
-    container_name: docker_together
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-    ports:
-      - "8443:8443"
-    links:
-      - database
-    tty: true
-    networks:
-      - together_network
+#  together:
+#    container_name: docker_together
+#    build:
+#      context: .
+#      dockerfile: docker/Dockerfile
+#    ports:
+#      - "8443:8443"
+#    links:
+#      - database
+#    tty: true
+#    networks:
+#     - together_network
 
   redis:
     image: redis:3.2.8
@@ -44,6 +44,38 @@ services:
     ports:
       - "7474:7474"
       - "7687:7687"
+    tty: true
+    networks:
+      - together_network
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: docker_zipkin
+    ports:
+      - "9411:9411"
+    tty: true
+    networks:
+      - together_network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.2
+    container_name: docker_elasticsearch
+    env_file:
+      - environment/together_elasticsearch.env
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    tty: true
+    networks:
+      - together_network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.3.2
+    container_name: docker_kibana
+    ports:
+      - "5601:5601"
+    links:
+      - elasticsearch
     tty: true
     networks:
       - together_network
