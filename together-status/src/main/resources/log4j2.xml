@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration monitorInterval="30">
+    <properties>
+        <property name="app.name">together-status</property>
+        <property name="pattern">%d{ISO8601} %-5p %c - %m%n</property>
+    </properties>
+    <appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+
+        <RollingRandomAccessFile name="together_app" append="false" fileName="${sys:user.home}\.${app.name}\logs\${app.name}.log"
+                                 filePattern="${sys:user.home}\.${app.name}\logs\$${date:yyyy-MM}/${app.name}-%d{yyyy-MM-dd}-%i.log.zip">
+            <PatternLayout>
+                <pattern>${pattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingRandomAccessFile>
+    </appenders>
+    <loggers>
+        <root level="INFO">
+            <AppenderRef ref="console"/> <!-- To console -->
+            <AppenderRef ref="together_app"/>
+        </root>
+
+        <AsyncLogger name="com.avijit.together" additivity="FALSE" level="DEBUG">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="together_app"/>
+        </AsyncLogger>
+    </loggers>
+</configuration>
