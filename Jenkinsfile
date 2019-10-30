@@ -2,7 +2,7 @@ node {
    def mvnHome
    def scannerHome
    stage('Preparation') {
-      git credentialsId: 'bitbucket', url: 'https://avijitmondal@bitbucket.org/together-team/together-server.git', branch: 'monolithic_to_microservice'
+      git url: 'https://github.com/avijitmondal/together-server.git', branch: 'monolithic_to_microservice'
       // Maven tool.
       // ** NOTE: 'MVN-3' Maven tool must be configured in the global configuration.
       mvnHome = tool 'MVN-3'
