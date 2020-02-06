@@ -2,7 +2,7 @@
 
 Use the following commands to create docker image and run as a container
 ```bash
-docker build . --no-cache --build-arg MODULE=together-status --build-arg PORT=8761 -f docker/Dockerfile.together-status.dev -t together-status
+docker build . --no-cache --build-arg MODULE=together-status --build-arg PORT=8761 -f docker/together-no-dependency.dev.Dockerfile -t together-status
 ```
 
 to run as a docker image
