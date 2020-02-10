@@ -13,6 +13,6 @@ docker run --port 8761:8761 together-status
 after creation of docker image, use the below kubernetes command to deploy it in cluster
 
 ```bash
-kubectl run together-status --image=together-status --image-pull-policy=Never --port=8761
+kubectl apply -f together-status-deployment.yaml
 kubectl expose deployment together-status --type=LoadBalancer --name=together-status-expose
 ```
