@@ -1,0 +1,40 @@
+# application/mysql/mysql-deployment.yaml 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: together-status
+  labels:
+    app: together-status
+spec:
+  ports:
+  - name: http
+    port: 8761
+    targetPort: 8761
+    protocol: TCP
+  selector:
+    app: together-status
+  type: ClusterIP
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: together-status
+spec:
+  selector:
+    matchLabels:
+      app: together-status-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: together-status-app
+    spec:
+      containers:
+      - image: together-status
+        name: together-status
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8761
+          name: together-status
