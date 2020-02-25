@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: together-discovery
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    server:
+      waitTimeInMsWhenSyncEmpty: 0
