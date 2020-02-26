@@ -20,14 +20,14 @@ import java.io.IOException;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableSwagger2
+//@EnableSwagger2
 public class TogetherUserApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TogetherUserApplication.class, args);
 	}
 
-	@Bean
+//	@Bean
 	public Docket api() {
 		MavenXpp3Reader reader = new MavenXpp3Reader();
 		Model model = null;

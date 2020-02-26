@@ -7,10 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-import springfox.documentation.swagger.web.SwaggerResource;
-import springfox.documentation.swagger.web.SwaggerResourcesProvider;
-
-@Component
+/*@Component
 @Primary
 @EnableAutoConfiguration
 public class DocumentationController implements SwaggerResourcesProvider {
@@ -31,4 +28,4 @@ public class DocumentationController implements SwaggerResourcesProvider {
 		return swaggerResource;
 	}
 
-}
+}*/
