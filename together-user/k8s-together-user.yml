@@ -1,0 +1,37 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: together-user
+  labels:
+    app: together-user
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: together-user
+        component: together-user
+    spec:
+      containers:
+        - image: together-user
+          name: together-user
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8901
+          env:
+            - name: EUREKA_SERVICE_URL
+              value: "http://together-discovery:8761"
+            - name: EUREKA_INSTANCE_PREFER_IP_ADDRESS
+              value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: together-user
+spec:
+  ports:
+    - port: 8901
+  selector:
+    app: together-user
+    component: together-user
+  type: LoadBalancer
