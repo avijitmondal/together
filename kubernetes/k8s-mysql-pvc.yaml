@@ -1,4 +1,4 @@
-# application/mysql/mysql-pv.yaml 
+# application/mysql/k8s-mysql-pvc.yaml
 
 apiVersion: v1
 kind: PersistentVolume
