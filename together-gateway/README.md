@@ -22,4 +22,4 @@ after creation of docker image, use the below kubernetes command to deploy it in
 kubectl apply -f together-gateway/k8s-together-gateway.yml
 ```
 
-Open browser and goto http://localhost:8900 to get the eureka dashboard
+Services exposed to http://localhost:8900

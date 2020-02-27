@@ -6,7 +6,7 @@ clone and goto together-server directory
 cd together-server
 ```
 
-Use the following commands to create together-gateway docker image
+Use the following commands to create together-user docker image
 ```bash
 docker build . --no-cache --build-arg MODULE=together-user --build-arg PORT=8901 -f docker/together-dependency.dev.Dockerfile -t together-user
 ```
@@ -22,4 +22,4 @@ after creation of docker image, use the below kubernetes command to deploy it in
 kubectl apply -f together-user/k8s-together-user.yml
 ```
 
-Open browser and goto http://localhost:8901 
+Services exposed to http://localhost:8901 
