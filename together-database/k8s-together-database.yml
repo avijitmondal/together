@@ -1,0 +1,39 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: together-database
+  labels:
+    app: together-database
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: together-database
+        component: together-database
+    spec:
+      containers:
+        - image: together-database
+          name: together-database
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8902
+          env:
+            - name: EUREKA_SERVICE_URL
+              value: "http://together-discovery:8761"
+            - name: EUREKA_INSTANCE_PREFER_IP_ADDRESS
+              value: "true"
+            - name: MYSQL_SERVICE_URL
+              value: "jdbc:mysql://mysql:3306"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: together-database
+spec:
+  ports:
+    - port: 8902
+  selector:
+    app: together-database
+    component: together-database
+  type: LoadBalancer
