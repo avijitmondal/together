@@ -23,7 +23,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${MYSQL_SERVICE_URL:jdbc:mysql://localhost:3306}/together?useSSL=false
     username: root
-    password: administrator
+    password: password
   jpa:
     properties:
       hibernate:

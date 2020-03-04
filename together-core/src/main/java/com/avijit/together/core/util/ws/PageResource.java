@@ -7,8 +7,9 @@ import java.util.function.Function;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  * @param <T>
  *            Return type of pageable
  */
-public class PageResource<T> extends ResourceSupport implements Page<T> {
+public class PageResource<T> extends RepresentationModel implements Page<T> {
 
 	/**
 	 * Contains a page of pageable
@@ -49,7 +50,7 @@ public class PageResource<T> extends ResourceSupport implements Page<T> {
 	private void addPreviousLink(String pageParam, String sizeParam) {
 		if (null != page && page.hasPrevious()) {
 			Link prevLink = buildPageLink(pageParam, page.getNumber() - 1, sizeParam, page.getSize(),
-					Link.REL_PREVIOUS);
+					IanaLinkRelations.PREV.value());
 			add(prevLink);
 		}
 	}
@@ -60,7 +61,7 @@ public class PageResource<T> extends ResourceSupport implements Page<T> {
 	 */
 	private void addSelfLink(String pageParam, String sizeParam) {
 		if (null != page) {
-			Link selfLink = buildPageLink(pageParam, page.getNumber(), sizeParam, page.getSize(), Link.REL_SELF);
+			Link selfLink = buildPageLink(pageParam, page.getNumber(), sizeParam, page.getSize(), IanaLinkRelations.SELF.value());
 			add(selfLink);
 		}
 	}
@@ -71,7 +72,7 @@ public class PageResource<T> extends ResourceSupport implements Page<T> {
 	 */
 	private void addNextLink(String pageParam, String sizeParam) {
 		if (null != page && page.hasNext()) {
-			Link nextLink = buildPageLink(pageParam, page.getNumber() + 1, sizeParam, page.getSize(), Link.REL_NEXT);
+			Link nextLink = buildPageLink(pageParam, page.getNumber() + 1, sizeParam, page.getSize(), IanaLinkRelations.NEXT.value());
 			add(nextLink);
 		}
 	}
@@ -83,7 +84,7 @@ public class PageResource<T> extends ResourceSupport implements Page<T> {
 	private void addLastLink(String pageParam, String sizeParam) {
 		if (null != page && !page.isLast()) {
 			Link prevLink = buildPageLink(pageParam, page.getTotalPages() - 1, sizeParam, page.getSize(),
-					Link.REL_LAST);
+					IanaLinkRelations.LAST.value());
 			add(prevLink);
 		}
 	}
@@ -94,7 +95,7 @@ public class PageResource<T> extends ResourceSupport implements Page<T> {
 	 */
 	private void addFirstLink(String pageParam, String sizeParam) {
 		if (null != page && !page.isFirst()) {
-			Link prevLink = buildPageLink(pageParam, 0, sizeParam, page.getSize(), Link.REL_FIRST);
+			Link prevLink = buildPageLink(pageParam, 0, sizeParam, page.getSize(), IanaLinkRelations.FIRST.value());
 			add(prevLink);
 		}
 	}
