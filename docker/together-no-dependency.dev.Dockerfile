@@ -1,6 +1,6 @@
 #More details check dockerfile-together-no-dependency-README.md
 # Build stage
-FROM maven:3.6.1-jdk-11 AS build
+FROM maven:3.6.3-jdk-11-slim AS build
 MAINTAINER Avijit Mondal <avijitmondal38@gmail.com>
 
 ARG MODULE
