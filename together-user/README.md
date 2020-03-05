@@ -11,7 +11,7 @@ Use the following commands to create together-user docker image
 docker build . --no-cache --build-arg MODULE=together-user --build-arg PORT=8901 -f docker/together-dependency.dev.Dockerfile -t together-user
 ```
 
-to run together-discovery docker image as a docker container
+to run together-user docker image as a docker container
 ```bash
 docker run --port 8901:8901 together-user
 ```
