@@ -8,7 +8,7 @@ cd together-server
 
 Use the following commands to create together-gateway docker image
 ```bash
-docker build . --no-cache --build-arg MODULE=together-gateway --build-arg PORT=8900 -f docker/together-dependency.dev.Dockerfile -t together-gateway
+docker build . --no-cache --build-arg MODULE=together-gateway --build-arg PORT=8900 -f docker/together-no-dependency.dev.Dockerfile -t together-gateway
 ```
 
 to run together-discovery docker image as a docker container

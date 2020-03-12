@@ -25,6 +25,11 @@ spring:
     admin:
       client:
         url: ${ADMIN_SERVICE_URL:http://localhost:9001}/admin/
+  sleuth:
+    sampler:
+      probability: 100
+  zipkin:
+    baseUrl: ${ZIPKIN_SERVICE_URL:http://localhost:9411}
 
 
 management:
@@ -39,11 +44,15 @@ zuul:
   prefix: /api/v1
   stripPrefix: false
   routes:
-    together-user-by-service:
+#    together-user-by-service:
+#      path: /users/**
+#      serviceId: together-user
+#      stripPrefix: false
+#    together-conversation-by-service:
+#      path: /conversations/**
+#      serviceId: together-conversation
+#      stripPrefix: false
+    together-database-by-service:
       path: /users/**
-      serviceId: together-user
-      stripPrefix: false
-    together-conversation-by-service:
-      path: /conversations/**
-      serviceId: together-conversation
+      serviceId: together-database
       stripPrefix: false

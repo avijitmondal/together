@@ -12,6 +12,7 @@ ENV SKIP_TESTS=${SKIP_TEST}
 
 # Copying source code
 WORKDIR /app
+ADD together-server.pom.xml pom.xml
 ADD ${MODULE_NAME}/src/ ${MODULE_NAME}/src/
 ADD ${MODULE_NAME}/pom.xml ${MODULE_NAME}/pom.xml
 
