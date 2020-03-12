@@ -48,7 +48,7 @@ public class ParticipantController {
      * @param participantId
      * @return
      */
-    @GetMapping(value = "/{participant_id}", produces = {"application/json"}, consumes = {"application/json"})
+    @GetMapping(value = "/{participant_id}", produces = {"application/json"})
     public HttpEntity<?> findById(HttpServletRequest request, @PathVariable("conversation_id") String conversationId,
                                   @PathVariable("participant_id") String participantId) {
         try {
@@ -71,7 +71,7 @@ public class ParticipantController {
      * @param conversationId
      * @return
      */
-    @GetMapping(produces = {"application/json"}, consumes = {"application/json"})
+    @GetMapping(produces = {"application/json"})
     public PageResource<?> findByConversationId(HttpServletRequest request, Pageable pageable,
                                                 @PathVariable("conversation_id") String conversationId) {
         try {
@@ -88,7 +88,7 @@ public class ParticipantController {
      * @param participantId
      * @return
      */
-    @DeleteMapping(value = "/{id}", produces = {"application/json"}, consumes = {"application/json"})
+    @DeleteMapping(value = "/{id}", produces = {"application/json"})
     public HttpEntity<?> delete(HttpServletRequest request, @PathVariable("conversation_id") String conversationId,
                                 @PathVariable("participant_id") String participantId) {
         try {

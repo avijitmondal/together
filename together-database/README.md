@@ -8,7 +8,7 @@ cd together-server
 
 Use the following commands to create together-database docker image
 ```bash
-docker build . --no-cache --build-arg MODULE=together-database --build-arg PORT=8902 -f docker/together-dependency.dev.Dockerfile -t together-database
+docker build . --build-arg MODULE=together-database --build-arg PORT=8902 -f docker/together-dependency.dev.Dockerfile -t together-database
 ```
 
 to run together-discovery docker image as a docker container
@@ -23,4 +23,4 @@ kubectl apply -f together-database/k8s-together-database.yml
 ```
 
 Services exposed to http://localhost:8902
- 
+Swagger UI is available at http://localhost:8902/swagger-ui.html

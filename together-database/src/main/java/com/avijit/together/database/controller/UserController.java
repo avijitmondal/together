@@ -55,8 +55,8 @@ public class UserController {
      * @param pageable
      * @return
      */
-    @GetMapping(produces = {"application/json"}, consumes = {"application/json"})
-    public PageResource<User> list(Pageable pageable) {
+    @GetMapping(produces = {"application/json"})
+    public PageResource<User> list(HttpServletRequest request, Pageable pageable) {
 
         Page<User> users = userService.findAll(pageable);
         return new PageResource<>(users, "page", "size");
@@ -68,7 +68,7 @@ public class UserController {
      * @param email
      * @return
      */
-    @GetMapping(params = "email", produces = {"application/json"}, consumes = {"application/json"})
+    @GetMapping(params = "email", produces = {"application/json"})
     public HttpEntity<?> findByEmail(HttpServletRequest request, @RequestParam("email") String email) {
         try {
             Optional<User> user = userService.findByEmail(email);
@@ -89,7 +89,7 @@ public class UserController {
      * @param userId
      * @return
      */
-    @GetMapping(value = "/{user_id}", produces = {"application/json"}, consumes = {"application/json"})
+    @GetMapping(value = "/{user_id}", produces = {"application/json"})
     public HttpEntity<?> findById(HttpServletRequest request, @PathVariable("user_id") String userId) {
         try {
             Optional<User> user = userService.findById(userId);
@@ -140,7 +140,7 @@ public class UserController {
      * @param userId
      * @return
      */
-    @DeleteMapping(value = "/{user_id}", produces = {"application/json"}, consumes = {"application/json"})
+    @DeleteMapping(value = "/{user_id}", produces = {"application/json"})
     public HttpEntity<?> delete(HttpServletRequest request, @PathVariable("user_id") String userId) {
         try {
             boolean result = userService.delete(userId);
