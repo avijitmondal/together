@@ -13,11 +13,15 @@ import com.avijit.together.core.dto.User;
 import com.avijit.together.core.exception.ErrorCode;
 import com.avijit.together.core.exception.IErrorDetails;
 import com.avijit.together.core.exception.TogetherException;
+import com.avijit.together.core.util.EnvironmentValuesReader;
 import com.avijit.together.core.util.parser.GsonParser;
 import com.avijit.together.core.ws.HttpMethod;
 import com.avijit.together.core.ws.RestService;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +34,9 @@ import java.util.Optional;
  */
 @Service("userService")
 public class UserService implements IUserService {
-
+	private final Log logger = LogFactory.getLog(this.getClass());
+	@Autowired
+	private EnvironmentValuesReader environmentValuesReader;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -40,13 +46,13 @@ public class UserService implements IUserService {
 	@Override
 	public ResponseDTO<List<User>> findAll(Pageable pageable) {
 		try {
-            RestService restService = new RestService(HttpMethod.GET, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS);
+            RestService restService = new RestService(HttpMethod.GET, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_USERS);
 
             restService.execute();
 
             if (restService.isSuccessResponse(HttpStatus.SC_OK)) {
                 String responseAsString = restService.getSuccessResponse();
-
+				logger.debug("REST response: " + responseAsString);
                 return  (ResponseDTO<List<User>>) GsonParser.fromString(responseAsString, new TypeToken<ResponseDTO<List<User>>>() {
                 }.getType());
             }
@@ -65,11 +71,12 @@ public class UserService implements IUserService {
 	@Override
 	public Optional<User> findById(String userId) throws TogetherException {
 		try {
-			RestService restService = new RestService(HttpMethod.GET, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS + "/" + userId);
+			logger.debug("finding user with ID: " + userId + " and with URL: " + environmentValuesReader.getTogetherDatabaseUrl());
+			RestService restService = new RestService(HttpMethod.GET, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_USERS + "/" + userId);
 
 			restService.execute();
 
-			if (restService.isSuccessResponse(HttpStatus.SC_CREATED)) {
+			if (restService.isSuccessResponse(HttpStatus.SC_OK)) {
 				String responseAsString = restService.getSuccessResponse();
 				User response = GsonParser.fromString(responseAsString, User.class);
 
@@ -90,7 +97,7 @@ public class UserService implements IUserService {
 	@Override
 	public boolean delete(String userId) throws TogetherException {
 		try {
-			RestService restService = new RestService(HttpMethod.DELETE, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS + "/" + userId);
+			RestService restService = new RestService(HttpMethod.DELETE, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_USERS + "/" + userId);
 
 			restService.execute();
 
@@ -114,7 +121,7 @@ public class UserService implements IUserService {
 	@Override
 	public User save(User user) throws TogetherException {
 		try {
-			RestService restService = new RestService(HttpMethod.POST, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_USERS);
+			RestService restService = new RestService(HttpMethod.POST, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_USERS);
 
 			restService.execute();
 			if (restService.isSuccessResponse(HttpStatus.SC_CREATED)) {

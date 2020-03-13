@@ -15,10 +15,12 @@ import com.avijit.together.core.dto.Message;
 import com.avijit.together.core.exception.ErrorCode;
 import com.avijit.together.core.exception.IErrorDetails;
 import com.avijit.together.core.exception.TogetherException;
+import com.avijit.together.core.util.EnvironmentValuesReader;
 import com.avijit.together.core.util.parser.GsonParser;
 import com.avijit.together.core.ws.HttpMethod;
 import com.avijit.together.core.ws.RestService;
 import org.apache.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,9 @@ import org.springframework.stereotype.Service;
 @Service("messageService")
 public class MessageService implements IMessageService {
 
+	@Autowired
+	private EnvironmentValuesReader environmentValuesReader;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -39,7 +44,7 @@ public class MessageService implements IMessageService {
 	@Override
 	public Optional<Message> findById(String conversationId, String messageId) throws TogetherException {
 		try {
-			var restService = new RestService(HttpMethod.GET, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_CONVERSATIONS + "/" + conversationId + "/messages/" + messageId);
+			var restService = new RestService(HttpMethod.GET, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_CONVERSATIONS + "/" + conversationId + "/messages/" + messageId);
 			restService.execute();
 
 			if (restService.isSuccessResponse(HttpStatus.SC_OK)) {
@@ -65,7 +70,7 @@ public class MessageService implements IMessageService {
 	@Override
 	public Message save(Message message) throws TogetherException {
 		try {
-			var restService = new RestService(HttpMethod.POST, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_CONVERSATIONS);
+			var restService = new RestService(HttpMethod.POST, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_CONVERSATIONS);
 
 			restService.execute();
 			if (restService.isSuccessResponse(HttpStatus.SC_CREATED)) {

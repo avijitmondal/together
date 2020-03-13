@@ -92,7 +92,7 @@ public abstract class Constants {
 	// Service names
 	public static final String SERVICE_TOGETHER_CONFIG = "together-config";
 	public static final String SERVICE_TOGETHER_CONVERSATION = "together-conversation";
-	public static final String SERVICE_TOGETHER_DATABASE = "together-databse";
+	public static final String SERVICE_TOGETHER_DATABASE = "together-database";
 	public static final String SERVICE_TOGETHER_FTP = "together-ftp";
 	public static final String SERVICE_TOGETHER_GATEWAY = "together-gateway";
 	public static final String SERVICE_TOGETHER_LOGIN = "together-login";
@@ -100,4 +100,8 @@ public abstract class Constants {
 	public static final String SERVICE_TOGETHER_STATUS = "together-status";
 	public static final String SERVICE_TOGETHER_USER = "together-user";
 
+	// Environment variables
+	public static final String TOGETHER_DATABASE_URL = "together.database.url";
+	public static final String TOGETHER_CONVERSATION_URL = "together.conversation.url";
+	public static final String TOGETHER_USER_URL = "together.user.url";
 }

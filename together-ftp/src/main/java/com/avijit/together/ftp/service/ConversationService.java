@@ -13,11 +13,13 @@ import com.avijit.together.core.dto.ResponseDTO;
 import com.avijit.together.core.exception.ErrorCode;
 import com.avijit.together.core.exception.IErrorDetails;
 import com.avijit.together.core.exception.TogetherException;
+import com.avijit.together.core.util.EnvironmentValuesReader;
 import com.avijit.together.core.util.parser.GsonParser;
 import com.avijit.together.core.ws.HttpMethod;
 import com.avijit.together.core.ws.RestService;
 import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,9 @@ import java.util.Optional;
 @Service("conversationService")
 public class ConversationService implements IConversationService {
 
+	@Autowired
+	private EnvironmentValuesReader environmentValuesReader;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -40,7 +45,7 @@ public class ConversationService implements IConversationService {
 	 */
 	@Override
 	public ResponseDTO<List<Conversation>> findByUserId(Pageable pageable, String userId) throws TogetherException {
-		RestService restService = new RestService(HttpMethod.GET, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_CONVERSATIONS + "/" + userId);
+		RestService restService = new RestService(HttpMethod.GET, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_CONVERSATIONS + "/" + userId);
 		try{
 			restService.execute();
 			if (restService.isSuccessResponse(HttpStatus.SC_OK)) {
@@ -64,7 +69,7 @@ public class ConversationService implements IConversationService {
 	@Override
 	public Optional<Conversation> findById(String conversationId) throws TogetherException {
 		try {
-			RestService restService = new RestService(HttpMethod.GET, false, Constants.URI_HTTP + Constants.SERVICE_TOGETHER_DATABASE + Constants.API_CONVERSATIONS + "/" + conversationId);
+			RestService restService = new RestService(HttpMethod.GET, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_CONVERSATIONS + "/" + conversationId);
 
 			restService.execute();
 

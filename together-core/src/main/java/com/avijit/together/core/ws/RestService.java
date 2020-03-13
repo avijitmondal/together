@@ -41,7 +41,7 @@ public class RestService {
     private String url;
     private HttpMethod httpMethod;
     private Object requestBody;
-    private boolean isSecured = true;
+    private boolean isSecured;
     private final CentralCache centralCache = CentralCache.getInstance();
     private HttpResponse httpResponse = null;
 

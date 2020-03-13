@@ -23,6 +23,8 @@ spec:
               value: "http://together-discovery:8761"
             - name: EUREKA_INSTANCE_PREFER_IP_ADDRESS
               value: "true"
+            - name: TOGETHER_DATABASE_URL
+              value: "http://together-database:8902"
 ---
 apiVersion: v1
 kind: Service

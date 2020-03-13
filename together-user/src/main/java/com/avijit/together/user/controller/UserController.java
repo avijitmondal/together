@@ -52,14 +52,15 @@ public class UserController {
      * @param pageable
      * @return
      */
-    @GetMapping(produces = {"application/json"}, consumes = {"application/json"})
-    public ResponseDTO<List<User>> findAll(Pageable pageable) {
+    @GetMapping(produces = {"application/json"})
+    public ResponseDTO<List<User>> findAll(HttpServletRequest request, Pageable pageable) {
         return userService.findAll(pageable);
     }
 
-    @GetMapping(value = "/{user_id}", produces = {"application/json"}, consumes = {"application/json"})
+    @GetMapping(value = "/{user_id}", produces = {"application/json"})
     public HttpEntity<?> findById(HttpServletRequest request, @PathVariable("user_id") String userId) {
         try {
+            logger.debug("finding user with ID: " + userId);
             Optional<User> user = userService.findById(userId);
             if (user.isPresent()) {
                 return new ResponseEntity<>(user.get(), HttpStatus.OK);
@@ -102,7 +103,7 @@ public class UserController {
      * @param userId
      * @return
      */
-    @DeleteMapping(value = "/{user_id}", produces = {"application/json"}, consumes = {"application/json"})
+    @DeleteMapping(value = "/{user_id}", produces = {"application/json"})
     public HttpEntity<?> delete(HttpServletRequest request, @PathVariable("user_id") String userId) {
         try {
             boolean result = userService.delete(userId);

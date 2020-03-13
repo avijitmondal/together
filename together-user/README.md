@@ -23,3 +23,4 @@ kubectl apply -f together-user/k8s-together-user.yml
 ```
 
 Services exposed to http://localhost:8901 
+Swagger UI is available at http://localhost:8901/swagger-ui.html
