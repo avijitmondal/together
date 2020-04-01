@@ -28,16 +28,15 @@
     </properties>
 
 	<modules>
-        <module>together-core</module>
-        <module>together-status</module>
-        <module>together-gateway</module>
-        <module>together-database</module>
-        <module>together-conversation</module>
-        <module>together-ftp</module>
-        <module>together-login</module>
-        <module>together-registration</module>
-        <module>together-user</module>
         <module>together-config</module>
+        <module>together-conversation</module>
+        <module>together-core</module>
+        <module>together-database</module>
+        <module>together-discovery</module>
+        <module>together-ftp</module>
+        <module>together-gateway</module>
+        <module>together-status</module>
+        <module>together-user</module>
     </modules>
 
     <dependencies>
