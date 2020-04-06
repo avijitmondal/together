@@ -29,7 +29,7 @@
 
 	<modules>
 <!--        <module>together-config</module>-->
-        <module>together-conversation</module>
+<!--        <module>together-conversation</module>-->
         <module>together-core</module>
         <module>together-database</module>
         <module>together-discovery</module>
