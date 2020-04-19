@@ -1,5 +1,7 @@
 # *together* #
 
+![together CI with Maven](https://github.com/avijitmondal/together-server/workflows/together%20CI%20with%20Maven/badge.svg?branch=monolithic_to_microservice)
+
 together server is the backend for together application.
 
 ### What is this repository for? ###

@@ -1,4 +1,4 @@
-package com.avijit.together.user;
+package com.avijit.together.user.config;
 
 import com.avijit.together.core.util.EnvironmentValuesReader;
 import org.springframework.context.annotation.Bean;
