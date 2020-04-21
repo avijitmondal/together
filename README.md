@@ -1,7 +1,7 @@
 # *together* #
 
 ![together CI with Maven](https://github.com/avijitmondal/together-server/workflows/together%20CI%20with%20Maven/badge.svg?branch=monolithic_to_microservice)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 together server is the backend for together application.
 
 ### What is this repository for? ###
@@ -20,7 +20,7 @@ together server is the backend for together application.
 * [Deployment instructions](#Deployment instructions)
 
 ### Summary of set up
-Docker is used to deploy this application
+Docker used to deploy this application
 
 ### Configuration
 ######Configure Tomcat to support SSL or https
@@ -68,7 +68,7 @@ OpenSSL version: OpenSSL 1.1.0h  27 Mar 2018
 mysql-server:5.7 is being used
 
 ### How to run
-Run docker compose commands in source direcory
+Run docker compose commands in source directory
 ```docker
 docker-compose build
 docker-compose up
@@ -77,7 +77,7 @@ docker-compose up
 ### Deployment instructions
 Open
 ```https://<container-ip>:8443```
-for swagger UI
+for swagger UI.
 
 ### Contribution guidelines ###
 
