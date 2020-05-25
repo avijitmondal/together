@@ -36,6 +36,9 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: none
+  data:
+    mongodb:
+      uri: ${MONGODB_SERVICE_URL:mongodb://localhost:27017}/together
   boot:
     admin:
       client:
@@ -49,3 +52,6 @@ management:
       exposure:
         include: "*"
 
+info:
+  tags:
+    environment: test

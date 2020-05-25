@@ -18,11 +18,7 @@ import javax.persistence.Table;
  * @author avijit
  *
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data
 @Entity
 @Table(name = "FILE_NAME")
 public class FileName {

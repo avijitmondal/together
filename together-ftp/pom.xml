@@ -8,7 +8,6 @@
 		<version>2.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.avijit.together</groupId>
 	<artifactId>together-ftp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>together-ftp</name>

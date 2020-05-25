@@ -1,11 +1,15 @@
+server:
+  port: 9001
+
 spring:
   application:
     name: together-status
   boot:
     admin:
-      context-path: /admin
+      context-path: /
       ui:
-        title: "together status"
+        title: "together ADMIN"
+        brand: "together ADMIN"
       client:
         url: ${ADMIN_SERVICE_URL:http://localhost:9001}/admin/
 
@@ -37,5 +41,6 @@ management:
   security:
     enabled: false
 
-server:
-  port: 9001
+info:
+  tags:
+    environment: test

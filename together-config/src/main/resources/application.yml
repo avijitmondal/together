@@ -29,7 +29,7 @@ spring:
         enabled: false
       server:
         native:
-          searchLocations: E:/work/others/EurekaConfigServer/src/main/resources/config
+          searchLocations: ${sys:user.home}/.together/together-config/config
         encrypt:
           enabled: true
 
@@ -41,3 +41,6 @@ management:
       exposure:
         include: "*"
 
+info:
+  tags:
+    environment: test

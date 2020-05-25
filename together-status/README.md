@@ -22,5 +22,5 @@ after creation of docker image, use the below kubernetes command to deploy it in
 kubectl apply -f together-status/k8s-together-status.yml
 ```
 Open browser and goto 
-http://localhost:9001/admin
+http://localhost:9001
 to get the status

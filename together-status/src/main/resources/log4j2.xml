@@ -20,7 +20,7 @@
     </appenders>
 
     <Loggers>
-        <Logger name="com.avijit" level="debug" additivity="false">
+        <Logger name="com.avijit.together" level="debug" additivity="false">
             <AppenderRef ref="LogToFile"/>
             <AppenderRef ref="LogToConsole"/>
         </Logger>

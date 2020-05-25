@@ -37,3 +37,7 @@ management:
 together:
   database:
     url: ${TOGETHER_DATABASE_URL:http://localhost:8902}
+
+info:
+  tags:
+    environment: test

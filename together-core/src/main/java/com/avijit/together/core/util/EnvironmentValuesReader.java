@@ -1,20 +1,16 @@
 package com.avijit.together.core.util;
 
 import com.avijit.together.core.data.Constants;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.EnvironmentAware;
-import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 
-@Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class EnvironmentValuesReader implements EnvironmentAware {
     private String togetherDatabaseUrl;
     private String togetherConversationUrl;
     private String togetherUserUrl;
 
-    private EnvironmentValuesReader() { }
+    private EnvironmentValuesReader() {
+    }
 
     public static EnvironmentValuesReader getInstance() {
         return EnvironmentValuesReaderHelper.INSTANCE;
@@ -39,7 +35,7 @@ public class EnvironmentValuesReader implements EnvironmentAware {
         return togetherUserUrl;
     }
 
-    private static class EnvironmentValuesReaderHelper{
+    private static class EnvironmentValuesReaderHelper {
         private static final EnvironmentValuesReader INSTANCE = new EnvironmentValuesReader();
     }
 }

@@ -40,6 +40,10 @@ management:
       exposure:
         include: "*"
 
+info:
+  tags:
+    environment: test
+
 zuul:
   prefix: /api/v1
   stripPrefix: false

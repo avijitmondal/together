@@ -30,7 +30,7 @@ spring:
 
 # All files uploaded through the REST API will be stored in this directory
 file:
-  upload-dir: /Users/avijit/work/together/together-server/uploads
+  upload-dir: ${sys:user.home}/.together/${app.name}/upload
 
 management:
   security:
@@ -39,3 +39,7 @@ management:
     web:
       exposure:
         include: "*"
+
+info:
+  tags:
+    environment: test
