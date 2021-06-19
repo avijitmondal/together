@@ -42,7 +42,7 @@ management:
 
 info:
   tags:
-    environment: test
+    environment: local
 
 zuul:
   prefix: /api/v1
@@ -60,3 +60,16 @@ zuul:
       path: /users/**
       serviceId: together-database
       stripPrefix: false
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+server:
+  port: 8080
+
+info:
+  tags:
+    environment: prod
