@@ -20,15 +20,14 @@
     </appenders>
 
     <Loggers>
-        <Logger name="io.github.avijitmondal.together" level="debug" additivity="false">
+        <Logger name="com.avijitmondal.together" level="debug" additivity="false">
             <AppenderRef ref="LogToFile"/>
             <AppenderRef ref="LogToConsole"/>
         </Logger>
-<!--
         <Logger name="org.springframework.boot" level="error" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
--->
+
         <Root level="info">
             <AppenderRef ref="LogToFile"/>
             <AppenderRef ref="LogToConsole"/>

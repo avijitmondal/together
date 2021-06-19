@@ -1,4 +1,4 @@
-package io.github.avijitmondal.together.discovery;
+package com.avijitmondal.together.discovery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

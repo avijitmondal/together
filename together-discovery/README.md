@@ -3,17 +3,17 @@
 clone and goto together-server directory
 
 ```bash
-cd together-server
+cd together-server/together-discovery
 ```
 
 Use the following commands to create together-discovery docker image
 ```bash
-docker build . --no-cache --build-arg MODULE=together-discovery --build-arg PORT=8761 -f docker/together-no-dependency.dev.Dockerfile -t together-discovery
+docker build .  -t together-discovery:latest
 ```
 
 to run together-discovery docker image as a docker container
 ```bash
-docker run --port 8761:87611 together-discovery
+docker run --port 8761:87611 together-discovery:latest
 ```
 
 after creation of docker image, use the below kubernetes command to deploy it in K8s cluster
