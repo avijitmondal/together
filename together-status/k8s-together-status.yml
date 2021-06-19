@@ -11,7 +11,7 @@ spec:
       imagePullPolicy: Never
       name: together-status
       ports:
-        - containerPort: 9001
+        - containerPort: 8080
       env:
         - name: EUREKA_SERVICE_URL
           value: "http://together-discovery:8761" #"eureka" host is resolved by K8s DNS matching the service name
@@ -24,7 +24,7 @@ metadata:
   name: together-status
 spec:
   ports:
-    - port: 9001
+    - port: 8080
   selector:
     app: together-status
     component: together-status

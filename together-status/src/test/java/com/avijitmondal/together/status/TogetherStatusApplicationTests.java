@@ -1,4 +1,4 @@
-package com.avijit.together.status;
+package com.avijitmondal.together.status;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

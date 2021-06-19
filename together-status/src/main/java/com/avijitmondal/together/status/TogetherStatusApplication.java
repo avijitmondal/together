@@ -1,4 +1,4 @@
-package com.avijit.together.status;
+package com.avijitmondal.together.status;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;

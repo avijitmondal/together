@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 8080
 
 spring:
   application:
@@ -8,10 +8,10 @@ spring:
     admin:
       context-path: /
       ui:
-        title: "together ADMIN"
-        brand: "together ADMIN"
+        title: "together"
+        brand: "together"
       client:
-        url: ${ADMIN_SERVICE_URL:http://localhost:9001}/admin/
+        url: ${ADMIN_SERVICE_URL:http://localhost:8080}/admin/
 
 eureka:
   instance:

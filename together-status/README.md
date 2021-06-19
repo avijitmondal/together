@@ -3,17 +3,17 @@
 clone and goto together-server directory
 
 ```bash
-cd together-server
+cd together-server/together-status
 ```
 
 Use the following commands to create together-status docker image
 ```bash
-docker build . --no-cache --build-arg MODULE=together-status --build-arg PORT=9001 -f docker/together-no-dependency.dev.Dockerfile -t together-status
+docker build . -t together-status:latest
 ```
 
 to run together-status docker image as a docker container
 ```bash
-docker run --port 9001:9001 together-status
+docker run --port 8080:8080 together-status:latest
 ```
 
 after creation of docker image, use the below kubernetes command to deploy it in K8s cluster
@@ -22,5 +22,5 @@ after creation of docker image, use the below kubernetes command to deploy it in
 kubectl apply -f together-status/k8s-together-status.yml
 ```
 Open browser and goto 
-http://localhost:9001
+http://localhost:8080
 to get the status
