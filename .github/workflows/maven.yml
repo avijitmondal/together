@@ -5,9 +5,9 @@ name: together CI with Maven
 
 on:
   push:
-    branches: monolithic_to_microservice
+    branches: master
   pull_request:
-    branches: monolithic_to_microservice
+    branches: master
 
 jobs:
   build:
