@@ -44,3 +44,13 @@ management:
 info:
   tags:
     environment: test
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+info:
+  tags:
+    environment: prod

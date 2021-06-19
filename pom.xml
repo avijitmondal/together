@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <name>Together</name>
-    <description>Chat application</description>
+    <description>together chat application</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
