@@ -1,0 +1,22 @@
+<div class="login-page">
+    <div class="row">
+        <div class="col-md-4 push-md-4">
+            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+            <h1>Together</h1>
+            <form #loginForm="ngForm">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="email" class="form-control input-underline input-lg" placeholder="Email" id="email" required [(ngModel)]="model.email" name="email" #email="ngModel" >
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control input-underline input-lg" placeholder="Password" id="password" required [(ngModel)]="model.password" name="password" #password="ngModel" >
+                    </div>
+                </div>
+                <input type="submit" class="btn rounded-btn" value="Log in" (click)="authenticateUser()"/>
+                &nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="login-page">
+    <div class="row">
+        <div class="col-md-4 push-md-4">
+            <img class="user-avatar" src="assets/images/logo.png" width="150px" />
+            <h1>Together</h1>
+            <form role="form" #registerForm="ngForm">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-underline input-lg" placeholder="Full Name" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel" >
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" class="form-control input-underline input-lg" placeholder="Email" id="email" required [(ngModel)]="model.email" name="email" #email="ngModel" >
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" class="form-control input-underline input-lg" placeholder="Phone" id="phone" required [(ngModel)]="model.phone" name="phone" #phone="ngModel" maxlength="10" min="7000000000" >
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control input-underline input-lg" placeholder="Password" id="password" required [(ngModel)]="model.password" name="password" #password="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control input-underline input-lg" placeholder="Repeat Password" id="reenter" required [(ngModel)]="model.reenter" name="reenter" #reenter="ngModel" >
+                    </div>
+                </div>
+                <input type="submit" class="btn rounded-btn" value="Register" (click)="registerUser()"/>&nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
+            </form>
+        </div>
+    </div>
+</div>

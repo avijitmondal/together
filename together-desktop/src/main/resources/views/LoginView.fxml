@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="loginPane" maxWidth="350.0" minWidth="350.0" prefHeight="420.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.avijitmondal.together.controller.LoginController">
+    <right>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="325.0" minWidth="10.0" prefWidth="103.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="210.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="325.0" minWidth="10.0" prefWidth="103.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="149.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="226.0" minHeight="10.0" prefHeight="133.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="149.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="126.0" minHeight="12.0" prefHeight="35.0" />
+                <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="127.0" minHeight="0.0" prefHeight="36.0" valignment="CENTER" />
+                <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="47.0" />
+                <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="28.0" />
+                <RowConstraints maxHeight="110.0" minHeight="9.0" prefHeight="11.0" />
+            </rowConstraints>
+            <children>
+                <TextField id="usernameTextfield" fx:id="usernameField" alignment="CENTER" promptText="Username" GridPane.columnIndex="1" GridPane.rowIndex="4" stylesheets="@../styles/login.css"/>
+                <PasswordField id="passwordPasswordfield" fx:id="passwordField" alignment="CENTER" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="5"  stylesheets="@../styles/login.css"/>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <ImageView fx:id="Defaultview" fitHeight="146.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/logo/ms-icon-310x310.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </StackPane>
+                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                    <children>
+                        <Button id="MinimizedBtn" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="24.0" maxWidth="68.0" minWidth="45.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="24.0" prefWidth="45.0" stylesheets="@../styles/login.css">
+                        </Button>
+                        <Button id="CloseBtn" fx:id="closeButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" maxHeight="24.0" maxWidth="68.0" minWidth="45.0" mnemonicParsing="false" onAction="#closeSystem" prefHeight="24.0" prefWidth="45.0" stylesheets="@../styles/login.css">
+                        </Button>
+                    </children>
+                    <GridPane.margin>
+                        <Insets right="10.0" top="10.0" />
+                    </GridPane.margin>
+                </HBox>
+                <Label text="together" textFill="#f89406" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="33.0" />
+                    </font>
+                </Label>
+                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                    <children>
+                        <Button id="connectBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="27.0" prefWidth="100.0" stylesheets="@../styles/login.css" text="Register" />
+                        <Button id="connectBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="27.0" prefWidth="100.0" stylesheets="@../styles/login.css" text="Login" />
+                    </children>
+                </HBox>
+            </children>
+        </GridPane>
+    </right>
+</BorderPane>

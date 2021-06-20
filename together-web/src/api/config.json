@@ -1,0 +1,16 @@
+{
+    "host": "192.168.2.187",
+    "port": 8080,
+    "https": false,
+
+    "user": "guest",
+    "pass": "guest",
+
+    "subscribe": ["/topic/groupchats.chat1"],
+    "publish": ["/groupchats/chat1"],
+
+    "heartbeat_in": 0,
+    "heartbeat_out": 20000,
+
+    "debug": true
+}
