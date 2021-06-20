@@ -1,4 +1,4 @@
-name: together CI microservice
+name: together CI
 
 on:
   push:
@@ -13,6 +13,24 @@ on:
       - published
 
 jobs:
+
+  root:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Clonning codebase
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Build together
+        run: mvn -B package
 
   together-status:
     runs-on: ubuntu-20.04
@@ -54,7 +72,7 @@ jobs:
         with:
           context: ./together-status
           file: ./together-status/Dockerfile
-          tags: docker.pkg.github.com/avijitmondal/together/together-status:latest
+          tags: docker.pkg.github.com/avijitmondal/together-server/together-status:latest
           github-token: ${{ github.token }}
           push: true
 

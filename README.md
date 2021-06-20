@@ -1,7 +1,6 @@
 # *together* #
 
-[![together CI root](https://github.com/avijitmondal/together-server/workflows/together%20CI%20root/badge.svg)]([![Actions Status](https://github.com/avijitmondal/together-server/workflows/together%20CI%20root/badge.svg)](https://github.com/avijitmondal/together-server/actions))
-[![together CI Microservice](https://github.com/avijitmondal/together-server/workflows/together%20CI%20microservice/badge.svg)]([![Actions Status](https://github.com/avijitmondal/together-server/workflows/together%20CI%20microservice/badge.svg)](https://github.com/avijitmondal/together-server/actions))
+[![together CI](https://github.com/avijitmondal/together-server/workflows/together%20CI/badge.svg)](https://github.com/avijitmondal/together-server/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 together server is the backend for together application.
