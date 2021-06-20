@@ -3,7 +3,7 @@
  * VERSION     : 1.0
  * AUTHOR      : avijit
  * DATE        : Aug 23, 2017
- * DESCRIPTION : together-server
+ * DESCRIPTION : together
  ****************************************************************************/
 package com.avijitmondal.together.conversation.service;
 

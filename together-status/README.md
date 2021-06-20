@@ -1,9 +1,9 @@
 # together-status module
 
-clone and goto together-server directory
+clone and goto together directory
 
 ```bash
-cd together-server/together-status
+cd together/together-status
 ```
 
 Use the following commands to create together-status docker image

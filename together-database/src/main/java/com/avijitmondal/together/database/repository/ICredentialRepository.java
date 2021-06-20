@@ -3,7 +3,7 @@
  * VERSION     : 1.0
  * AUTHOR      : avijit
  * DATE        : Aug 24, 2017
- * DESCRIPTION : together-server
+ * DESCRIPTION : together
  ****************************************************************************/
 package com.avijitmondal.together.database.repository;
 

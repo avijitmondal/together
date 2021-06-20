@@ -1,9 +1,9 @@
 # together-discovery module
 
-clone and goto together-server directory
+clone and goto together directory
 
 ```bash
-cd together-server/together-discovery
+cd together/together-discovery
 ```
 
 Use the following commands to create together-discovery docker image

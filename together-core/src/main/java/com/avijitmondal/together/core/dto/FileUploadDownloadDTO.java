@@ -3,7 +3,7 @@
  * VERSION     : 1.0
  * AUTHOR      : avijit
  * DATE        : Oct 17, 2017
- * DESCRIPTION : together-server
+ * DESCRIPTION : together
  ****************************************************************************/
 package com.avijitmondal.together.core.dto;
 

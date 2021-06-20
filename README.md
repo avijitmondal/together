@@ -1,6 +1,6 @@
 # *together* #
 
-[![together CI](https://github.com/avijitmondal/together-server/workflows/together%20CI/badge.svg)](https://github.com/avijitmondal/together-server/actions)
+[![together CI](https://github.com/avijitmondal/together/workflows/together%20CI/badge.svg)](https://github.com/avijitmondal/together/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 together server is the backend for together application.

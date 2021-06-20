@@ -1,9 +1,9 @@
 # together-gateway module
 
-clone and goto together-server directory
+clone and goto together directory
 
 ```bash
-cd together-server
+cd together
 ```
 
 Use the following commands to create together-gateway docker image

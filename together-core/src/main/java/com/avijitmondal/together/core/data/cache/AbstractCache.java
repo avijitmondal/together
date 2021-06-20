@@ -3,7 +3,7 @@
  * VERSION     : 1.0
  * AUTHOR      : avijit
  * DATE        : Mar 27, 2018
- * DESCRIPTION : together-server
+ * DESCRIPTION : together
  ****************************************************************************/
 package com.avijitmondal.together.core.data.cache;
 

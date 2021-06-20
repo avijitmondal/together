@@ -3,7 +3,7 @@ FROM maven:3.8.1-jdk-11-slim AS build
 LABEL maintainer="avijitmondal38@gmail.com"
 
 WORKDIR /app
-ADD together-server.pom.xml pom.xml
+ADD together.pom.xml pom.xml
 ADD together-core/src/ together-core/src/
 ADD together-core/pom.xml together-core/pom.xml
 ADD together-auth-center/src/ together-auth-center/src/

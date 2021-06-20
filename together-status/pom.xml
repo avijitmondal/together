@@ -96,7 +96,7 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/avijitmondal/together-server</url>
+			<url>https://maven.pkg.github.com/avijitmondal/together</url>
 		</repository>
 	</distributionManagement>
 </project>

@@ -42,7 +42,7 @@ public class SwaggerConfig {
     //Api information
     private ApiInfo generateAPIInfo() {
         return new ApiInfo("together-ftp Swagger", "Swagger for together-ftp", "1.0",
-                "https://github.com/avijitmondal/together-server/", getContacts(), "MIT", "https://github.com/avijitmondal/together-server/blob/master/LICENSE", new ArrayList());
+                "https://github.com/avijitmondal/together/", getContacts(), "MIT", "https://github.com/avijitmondal/together/blob/master/LICENSE", new ArrayList());
     }
 
     // Developer Contacts

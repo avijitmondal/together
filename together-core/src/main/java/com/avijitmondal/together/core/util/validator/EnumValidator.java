@@ -3,7 +3,7 @@
  * VERSION     : 1.0
  * AUTHOR      : avijit
  * DATE        : Dec 11, 2017
- * DESCRIPTION : together-server
+ * DESCRIPTION : together
  ****************************************************************************/
 package com.avijitmondal.together.core.util.validator;
 
