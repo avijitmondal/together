@@ -69,10 +69,14 @@ jobs:
       - name: Build and push Docker images
         id: docker_build
         uses: docker/build-push-action@v2.5.0
+        run: |
+          IFS='-'
+          read -ra ADDR <<< `ls target/*.jar | head -n 1`
+          MVN_ARTIFACT_VERSION="${ADDR[2]%.*}"
         with:
           context: ./together-discovery
           file: ./together-discovery/Dockerfile
-          tags: docker.pkg.github.com/avijitmondal/together/together-discovery:latest
+          tags: docker.pkg.github.com/avijitmondal/together/together-discovery:$MVN_ARTIFACT_VERSION
           github-token: ${{ github.token }}
           push: true
 
@@ -116,10 +120,14 @@ jobs:
       - name: Build and push Docker images
         id: docker_build
         uses: docker/build-push-action@v2.5.0
+        run: |
+          IFS='-'
+          read -ra ADDR <<< `ls target/*.jar | head -n 1`
+          MVN_ARTIFACT_VERSION="${ADDR[2]%.*}"
         with:
           context: ./together-status
           file: ./together-status/Dockerfile
-          tags: docker.pkg.github.com/avijitmondal/together/together-status:latest
+          tags: docker.pkg.github.com/avijitmondal/together/together-status:$MVN_ARTIFACT_VERSION
           github-token: ${{ github.token }}
           push: true
 

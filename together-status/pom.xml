@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.avijitmondal.together</groupId>
 	<artifactId>together-status</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 	<name>together-status</name>
 	<description>together status service</description>
@@ -83,7 +83,6 @@
 	</dependencyManagement>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
