@@ -55,7 +55,11 @@ jobs:
 
       - name: Publish maven package to GitHub
         working-directory: ./together-discovery
-        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        run: |
+          mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+          IFS='-'
+          read -ra ADDR <<< `ls target/*.jar | head -n 1`
+          MVN_ARTIFACT_VERSION="${ADDR[2]%.*}"
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
@@ -69,10 +73,6 @@ jobs:
       - name: Build and push Docker images
         id: docker_build
         uses: docker/build-push-action@v2.5.0
-        run: |
-          IFS='-'
-          read -ra ADDR <<< `ls target/*.jar | head -n 1`
-          MVN_ARTIFACT_VERSION="${ADDR[2]%.*}"
         with:
           context: ./together-discovery
           file: ./together-discovery/Dockerfile
@@ -106,7 +106,11 @@ jobs:
 
       - name: Publish maven package to GitHub
         working-directory: ./together-status
-        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        run: |
+          mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+          IFS='-'
+          read -ra ADDR <<< `ls target/*.jar | head -n 1`
+          MVN_ARTIFACT_VERSION="${ADDR[2]%.*}"
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
@@ -120,10 +124,6 @@ jobs:
       - name: Build and push Docker images
         id: docker_build
         uses: docker/build-push-action@v2.5.0
-        run: |
-          IFS='-'
-          read -ra ADDR <<< `ls target/*.jar | head -n 1`
-          MVN_ARTIFACT_VERSION="${ADDR[2]%.*}"
         with:
           context: ./together-status
           file: ./together-status/Dockerfile
