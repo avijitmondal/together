@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: '00 20 * * *'
+    - cron: '00 20 * * 5'
 
 jobs:
   analyze:
@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
+        language: [ 'java', 'javascript' ]
 
     steps:
     - name: Checkout repository
