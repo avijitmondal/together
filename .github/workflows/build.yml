@@ -77,7 +77,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-alive
+          context: .
           file: ./together-alive/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-alive:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
@@ -131,7 +131,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-auth-center
+          context: .
           file: ./together-auth-center/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-auth-center:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
@@ -185,7 +185,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-config
+          context: .
           file: ./together-config/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-config:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
@@ -239,7 +239,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-conversation
+          context: .
           file: ./together-conversation/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-conversation:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
@@ -293,7 +293,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-database
+          context: .
           file: ./together-database/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-database:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
@@ -401,7 +401,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-ftp
+          context: .
           file: ./together-ftp/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-ftp:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
@@ -455,7 +455,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-gateway
+          context: .
           file: ./together-gateway/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-gateway:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
@@ -509,7 +509,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-message
+          context: .
           file: ./together-message/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-message:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
@@ -617,7 +617,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-user
+          context: .
           file: ./together-user/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-user:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
