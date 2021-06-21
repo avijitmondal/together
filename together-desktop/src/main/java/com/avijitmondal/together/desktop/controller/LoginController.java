@@ -1,6 +1,6 @@
-package io.github.avijitmondal.together.controller;
+package com.avijitmondal.together.desktop.controller;
 
-import io.github.avijitmondal.together.data.Constants;
+import com.avijitmondal.together.desktop.data.Constants;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;

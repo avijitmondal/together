@@ -1,25 +1,21 @@
-# together-user module
+# together-conversation module
 
 clone and goto together directory
 
 ```bash
-cd together
+cd together/together-conversation
 ```
 
 Use the following commands to create together-conversation docker image
 ```bash
-docker build . --no-cache --build-arg MODULE=together-conversation --build-arg PORT=8903 -f docker/together-dependency.dev.Dockerfile -t together-conversation
+docker build . -t together-conversation:latest
 ```
 
 to run together-conversation docker image as a docker container
 ```bash
-docker run --port 8903:8903 together-conversation
+docker run --port 8080:8080 together-conversation:latest
 ```
 
-after creation of docker image, use the below kubernetes command to deploy it in K8s cluster
-
-```bash
-kubectl apply -f together-conversation/k8s-together-conversation.yml
-```
-
-Services exposed to http://localhost:8903 
+Open browser and goto 
+http://localhost:8080
+to get the conversation

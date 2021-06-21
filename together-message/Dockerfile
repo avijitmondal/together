@@ -12,12 +12,13 @@ ADD together-message/pom.xml together-message/pom.xml
 RUN mvn --file together-core/pom.xml clean install
 
 RUN mvn --file together-message/pom.xml clean package
+RUN mv together-message/target/together-message-*.jar app.jar
 
 # Deployment stage
 FROM openjdk:11-jre-slim
 LABEL maintainer="avijitmondal38@gmail.com"
 
-COPY --from=build /app/together-message/target/together-message.jar /usr/local/lib/app.jar
+COPY --from=build /app/app.jar /usr/local/lib/app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/usr/local/lib/app.jar"]

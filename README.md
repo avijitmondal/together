@@ -1,6 +1,9 @@
 # *together* #
 
-[![together: CI](https://github.com/avijitmondal/together/workflows/togetherCI/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/deploy.yml)
+[![together: CI](https://github.com/avijitmondal/together/workflows/togetherCI/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/build.yml)
+[![together: Desktop](https://github.com/avijitmondal/together/workflows/togetherDesktop/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/desktop.yml)
+[![together: Mobile](https://github.com/avijitmondal/together/workflows/togetherMobile/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/mobile.yml)
+[![together: Web](https://github.com/avijitmondal/together/workflows/togetherWeb/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/web.yml)
 [![together: CodeQL](https://github.com/avijitmondal/together/workflows/CodeQL/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/codeql-analysis.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 

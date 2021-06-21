@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.avijitmondal.together.data.cache;
+package com.avijitmondal.together.desktop.data.cache;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

@@ -12,12 +12,13 @@ ADD together-alive/pom.xml together-alive/pom.xml
 RUN mvn --file together-core/pom.xml clean install
 
 RUN mvn --file together-alive/pom.xml clean package
+RUN mv together-alive/target/together-alive-*.jar app.jar
 
 # Deployment stage
 FROM openjdk:11-jre-slim
 LABEL maintainer="avijitmondal38@gmail.com"
 
-COPY --from=build /app/together-alive/target/together-alive.jar /usr/local/lib/app.jar
+COPY --from=build /app/app.jar /usr/local/lib/app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/usr/local/lib/app.jar"]

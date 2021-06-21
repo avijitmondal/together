@@ -34,6 +34,7 @@
         <module>together-conversation</module>
         <module>together-core</module>
         <module>together-database</module>
+        <module>together-desktop</module>
         <module>together-discovery</module>
         <module>together-ftp</module>
         <module>together-gateway</module>

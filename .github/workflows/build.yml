@@ -32,6 +32,276 @@ jobs:
       - name: Build together
         run: mvn -B package
 
+  together-alive:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        working-directory: ./together-alive
+        id: vars
+        run: |
+          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build together-alive
+        working-directory: ./together-alive
+        run: mvn -B package --file pom.xml
+
+      - name: Publish maven package to GitHub
+        working-directory: ./together-alive
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          context: ./together-alive
+          file: ./together-alive/Dockerfile
+          tags: docker.pkg.github.com/avijitmondal/together/together-alive:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
+          github-token: ${{ github.token }}
+          push: true
+
+      - name: Published image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  together-auth-center:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        working-directory: ./together-auth-center
+        id: vars
+        run: |
+          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build together-auth-center
+        working-directory: ./together-auth-center
+        run: mvn -B package --file pom.xml
+
+      - name: Publish maven package to GitHub
+        working-directory: ./together-auth-center
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          context: ./together-auth-center
+          file: ./together-auth-center/Dockerfile
+          tags: docker.pkg.github.com/avijitmondal/together/together-auth-center:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
+          github-token: ${{ github.token }}
+          push: true
+
+      - name: Published image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  together-config:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        working-directory: ./together-config
+        id: vars
+        run: |
+          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build together-config
+        working-directory: ./together-config
+        run: mvn -B package --file pom.xml
+
+      - name: Publish maven package to GitHub
+        working-directory: ./together-config
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          context: ./together-config
+          file: ./together-config/Dockerfile
+          tags: docker.pkg.github.com/avijitmondal/together/together-config:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
+          github-token: ${{ github.token }}
+          push: true
+
+      - name: Published image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  together-conversation:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        working-directory: ./together-conversation
+        id: vars
+        run: |
+          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build together-conversation
+        working-directory: ./together-conversation
+        run: mvn -B package --file pom.xml
+
+      - name: Publish maven package to GitHub
+        working-directory: ./together-conversation
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          context: ./together-conversation
+          file: ./together-conversation/Dockerfile
+          tags: docker.pkg.github.com/avijitmondal/together/together-conversation:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
+          github-token: ${{ github.token }}
+          push: true
+
+      - name: Published image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  together-database:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        working-directory: ./together-database
+        id: vars
+        run: |
+          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build together-database
+        working-directory: ./together-database
+        run: mvn -B package --file pom.xml
+
+      - name: Publish maven package to GitHub
+        working-directory: ./together-database
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          context: ./together-database
+          file: ./together-database/Dockerfile
+          tags: docker.pkg.github.com/avijitmondal/together/together-database:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
+          github-token: ${{ github.token }}
+          push: true
+
+      - name: Published image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
   together-discovery:
     runs-on: ubuntu-20.04
     permissions:
@@ -86,6 +356,168 @@ jobs:
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
+  together-ftp:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        working-directory: ./together-ftp
+        id: vars
+        run: |
+          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build together-ftp
+        working-directory: ./together-ftp
+        run: mvn -B package --file pom.xml
+
+      - name: Publish maven package to GitHub
+        working-directory: ./together-ftp
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          context: ./together-ftp
+          file: ./together-ftp/Dockerfile
+          tags: docker.pkg.github.com/avijitmondal/together/together-ftp:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
+          github-token: ${{ github.token }}
+          push: true
+
+      - name: Published image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  together-gateway:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        working-directory: ./together-gateway
+        id: vars
+        run: |
+          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build together-gateway
+        working-directory: ./together-gateway
+        run: mvn -B package --file pom.xml
+
+      - name: Publish maven package to GitHub
+        working-directory: ./together-gateway
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          context: ./together-gateway
+          file: ./together-gateway/Dockerfile
+          tags: docker.pkg.github.com/avijitmondal/together/together-gateway:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
+          github-token: ${{ github.token }}
+          push: true
+
+      - name: Published image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  together-message:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        working-directory: ./together-message
+        id: vars
+        run: |
+          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build together-message
+        working-directory: ./together-message
+        run: mvn -B package --file pom.xml
+
+      - name: Publish maven package to GitHub
+        working-directory: ./together-message
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          context: ./together-message
+          file: ./together-message/Dockerfile
+          tags: docker.pkg.github.com/avijitmondal/together/together-message:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
+          github-token: ${{ github.token }}
+          push: true
+
+      - name: Published image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
   together-status:
     runs-on: ubuntu-20.04
     permissions:
@@ -134,6 +566,60 @@ jobs:
           context: ./together-status
           file: ./together-status/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-status:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
+          github-token: ${{ github.token }}
+          push: true
+
+      - name: Published image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  together-user:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        working-directory: ./together-user
+        id: vars
+        run: |
+          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build together-user
+        working-directory: ./together-user
+        run: mvn -B package --file pom.xml
+
+      - name: Publish maven package to GitHub
+        working-directory: ./together-user
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push Docker images
+        id: docker_build
+        uses: docker/build-push-action@v2.5.0
+        with:
+          context: ./together-user
+          file: ./together-user/Dockerfile
+          tags: docker.pkg.github.com/avijitmondal/together/together-user:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
 

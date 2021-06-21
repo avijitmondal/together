@@ -1,4 +1,4 @@
-package io.github.avijitmondal.together;
+package com.avijitmondal.together.desktop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

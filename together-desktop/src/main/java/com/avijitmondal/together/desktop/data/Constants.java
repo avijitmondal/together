@@ -1,4 +1,4 @@
-package io.github.avijitmondal.together.data;
+package com.avijitmondal.together.desktop.data;
 
 import javafx.scene.paint.Color;
 

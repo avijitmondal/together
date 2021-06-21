@@ -1,6 +1,6 @@
-package io.github.avijitmondal.together;
+package com.avijitmondal.together.desktop;
 
-import io.github.avijitmondal.together.data.Constants;
+import com.avijitmondal.together.desktop.data.Constants;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

@@ -3,24 +3,19 @@
 clone and goto together directory
 
 ```bash
-cd together
+cd together/together-database
 ```
 
 Use the following commands to create together-database docker image
 ```bash
-docker build . --build-arg MODULE=together-database --build-arg PORT=8902 -f docker/together-dependency.dev.Dockerfile -t together-database
+docker build . -t together-database:latest
 ```
 
-to run together-discovery docker image as a docker container
+to run together-database docker image as a docker container
 ```bash
-docker run --port 8902:8902 together-database
+docker run --port 8080:8080 together-database:latest
 ```
 
-after creation of docker image, use the below kubernetes command to deploy it in K8s cluster
-
-```bash
-kubectl apply -f together-database/k8s-together-database.yml
-```
-
-Services exposed to http://localhost:8902
-Swagger UI is available at http://localhost:8902/swagger-ui.html
+Open browser and goto 
+http://localhost:8080
+to get the database
