@@ -60,6 +60,7 @@ jobs:
           IFS='-'
           read -ra ADDR <<< `ls target/*.jar | head -n 1`
           MVN_ARTIFACT_VERSION="${ADDR[2]%.*}"
+          export MVN_ARTIFACT_VERSION
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
@@ -111,6 +112,7 @@ jobs:
           IFS='-'
           read -ra ADDR <<< `ls target/*.jar | head -n 1`
           MVN_ARTIFACT_VERSION="${ADDR[2]%.*}"
+          export MVN_ARTIFACT_VERSION
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
