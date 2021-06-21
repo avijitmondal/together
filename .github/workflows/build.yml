@@ -1,4 +1,4 @@
-name: together CI
+name: togetherCI
 
 on:
   push:
@@ -79,7 +79,7 @@ jobs:
         with:
           context: ./together-discovery
           file: ./together-discovery/Dockerfile
-          tags: docker.pkg.github.com/avijitmondal/together/together-discovery:${{steps.vars.outputs.version}}+${{steps.vars.outputs.tag}}
+          tags: docker.pkg.github.com/avijitmondal/together/together-discovery:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
 
@@ -133,7 +133,7 @@ jobs:
         with:
           context: ./together-status
           file: ./together-status/Dockerfile
-          tags: docker.pkg.github.com/avijitmondal/together/together-status:${{steps.vars.outputs.version}}+${{steps.vars.outputs.tag}}
+          tags: docker.pkg.github.com/avijitmondal/together/together-status:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
 

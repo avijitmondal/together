@@ -1,6 +1,6 @@
 # *together* #
 
-[![together: CI](https://github.com/avijitmondal/together/workflows/together%20CI/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/deploy.yml)
+[![together: CI](https://github.com/avijitmondal/together/workflows/togetherCI/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/deploy.yml)
 [![together: CodeQL](https://github.com/avijitmondal/together/workflows/CodeQL/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/codeql-analysis.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
