@@ -9,12 +9,12 @@ updates:
     directory: "/" 
     schedule:
       interval: "weekly"
-	  day: "friday"
-	  time: "09:00"
+      day: "friday"
+      time: "09:00"
       timezone: "Asia/Kolkata"
-	labels:
+    labels:
       - "maven dependencies"
-	commit-message:
+    commit-message:
       prefix: "maven"
-	pull-request-branch-name:
+    pull-request-branch-name:
       separator: "-
