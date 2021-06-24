@@ -4,11 +4,12 @@ LABEL maintainer="avijitmondal38@gmail.com"
 
 WORKDIR /app
 
-ADD src/ src/
-ADD pom.xml pom.xml
+ADD together-status/src/ together-status/src/
+ADD together-status/pom.xml together-status/pom.xml
+ADD settings.xml ~/.m2/settings.xml
 
 RUN mvn clean package
-RUN mv target/together-status-*.jar target/app.jar
+RUN mv together-status/target/together-status-*.jar target/app.jar
 
 # Deployment stage
 FROM openjdk:11-jre-slim

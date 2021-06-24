@@ -4,11 +4,12 @@ LABEL maintainer="avijitmondal38@gmail.com"
 
 WORKDIR /app
 
-ADD src/ src/
-ADD pom.xml pom.xml
+ADD together-discovery/src/ together-discovery/src/
+ADD together-discovery/pom.xml together-discovery/pom.xml
+ADD settings.xml ~/.m2/settings.xml
 
 RUN mvn clean package
-RUN mv target/together-discovery-*.jar target/app.jar
+RUN mv together-discovery/target/together-discovery-*.jar target/app.jar
 
 # Deployment stage
 FROM openjdk:11-jre-slim

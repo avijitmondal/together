@@ -30,7 +30,14 @@ jobs:
           java-version: 11
 
       - name: Build together
-        run: mvn -B package
+        run: mvn -B package --file modules.xml
+
+      - name: Publish maven package to GitHub
+        working-directory: .
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
   together-alive:
     runs-on: ubuntu-20.04
@@ -64,6 +71,7 @@ jobs:
         working-directory: ./together-alive
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -82,6 +90,9 @@ jobs:
           tags: docker.pkg.github.com/avijitmondal/together/together-alive:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}          
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -118,6 +129,7 @@ jobs:
         working-directory: ./together-auth-center
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -136,6 +148,9 @@ jobs:
           tags: docker.pkg.github.com/avijitmondal/together/together-auth-center:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}        
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -172,6 +187,7 @@ jobs:
         working-directory: ./together-config
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -190,6 +206,9 @@ jobs:
           tags: docker.pkg.github.com/avijitmondal/together/together-config:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -226,6 +245,7 @@ jobs:
         working-directory: ./together-conversation
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -244,6 +264,9 @@ jobs:
           tags: docker.pkg.github.com/avijitmondal/together/together-conversation:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -273,6 +296,7 @@ jobs:
         working-directory: ./together-core
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
   together-database:
@@ -307,6 +331,7 @@ jobs:
         working-directory: ./together-database
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -325,6 +350,9 @@ jobs:
           tags: docker.pkg.github.com/avijitmondal/together/together-database:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -361,6 +389,7 @@ jobs:
         working-directory: ./together-discovery
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -374,11 +403,14 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-discovery
+          context: .
           file: ./together-discovery/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-discovery:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -415,6 +447,7 @@ jobs:
         working-directory: ./together-ftp
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -433,6 +466,9 @@ jobs:
           tags: docker.pkg.github.com/avijitmondal/together/together-ftp:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -469,6 +505,7 @@ jobs:
         working-directory: ./together-gateway
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -487,6 +524,9 @@ jobs:
           tags: docker.pkg.github.com/avijitmondal/together/together-gateway:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -523,6 +563,7 @@ jobs:
         working-directory: ./together-message
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -541,6 +582,9 @@ jobs:
           tags: docker.pkg.github.com/avijitmondal/together/together-message:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -577,6 +621,7 @@ jobs:
         working-directory: ./together-status
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -590,11 +635,14 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2.5.0
         with:
-          context: ./together-status
+          context: .
           file: ./together-status/Dockerfile
           tags: docker.pkg.github.com/avijitmondal/together/together-status:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -631,6 +679,7 @@ jobs:
         working-directory: ./together-user
         run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
@@ -649,6 +698,9 @@ jobs:
           tags: docker.pkg.github.com/avijitmondal/together/together-user:${{steps.vars.outputs.version}}-${{steps.vars.outputs.tag}}
           github-token: ${{ github.token }}
           push: true
+          secrets: |
+            GITHUB_ACTOR=${{ github.actor }}
+            GITHUB_TOKEN=${{ github.token }}
 
       - name: Published image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

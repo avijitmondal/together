@@ -3,10 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.avijitmondal.together</groupId>
-		<artifactId>together</artifactId>
-		<version>2.0.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+        <groupId>com.avijitmondal.together</groupId>
+        <artifactId>together-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>together-ftp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -37,12 +36,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<distributionManagement>
-		<repository>
-			<id>github</id>
-			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/avijitmondal/together</url>
-		</repository>
-	</distributionManagement>
+	
 </project>

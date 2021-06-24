@@ -3,13 +3,10 @@ FROM maven:3.8.1-jdk-11-slim AS build
 LABEL maintainer="avijitmondal38@gmail.com"
 
 WORKDIR /app
-ADD together.pom.xml pom.xml
-ADD together-core/src/ together-core/src/
-ADD together-core/pom.xml together-core/pom.xml
+
 ADD together-config/src/ together-config/src/
 ADD together-config/pom.xml together-config/pom.xml
-
-RUN mvn --file together-core/pom.xml clean install
+ADD settings.xml ~/.m2/settings.xml
 
 RUN mvn --file together-config/pom.xml clean package
 RUN mv together-config/target/together-config-*.jar app.jar
