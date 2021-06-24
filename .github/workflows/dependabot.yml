@@ -17,4 +17,4 @@ updates:
     commit-message:
       prefix: "maven"
     pull-request-branch-name:
-      separator: "-
+      separator: "-"
