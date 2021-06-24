@@ -6,9 +6,9 @@ WORKDIR /app
 
 ADD together-discovery/src/ together-discovery/src/
 ADD together-discovery/pom.xml together-discovery/pom.xml
-ADD settings.xml ~/.m2/settings.xml
+ADD settings.xml settings.xml
 
-RUN mvn clean package
+RUN mvn --file together-discovery/pom.xml -s settings.xml clean package
 RUN mv together-discovery/target/together-discovery-*.jar target/app.jar
 
 # Deployment stage

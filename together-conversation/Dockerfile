@@ -6,9 +6,9 @@ WORKDIR /app
 
 ADD together-conversation/src/ together-conversation/src/
 ADD together-conversation/pom.xml together-conversation/pom.xml
-ADD settings.xml ~/.m2/settings.xml
+ADD settings.xml settings.xml
 
-RUN mvn --file together-conversation/pom.xml clean package
+RUN mvn --file together-conversation/pom.xml -s settings.xml clean package
 RUN mv together-conversation/target/together-alive-*.jar app.jar
 
 # Deployment stage

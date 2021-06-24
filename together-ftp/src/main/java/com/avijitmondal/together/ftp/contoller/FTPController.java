@@ -61,8 +61,7 @@ public class FTPController {
                                                                @PathVariable("conversation_id") String conversationId, @RequestParam("files") MultipartFile[] files) {
         try {
             if (conversationService.isExists(conversationId)) {
-                List<FileResponse> res =  Arrays.asList(files)
-                        .stream()
+                List<FileResponse> res =  Arrays.stream(files)
                         .map(file -> {
                             try {
                                 return save(file, request);

@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 
 @Service("ftpService")
 public class FTPService {
@@ -35,7 +36,7 @@ public class FTPService {
 
     public FileResponse save(MultipartFile file) throws TogetherException {
 
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         FileResponse response = new FileResponse(fileName, null, file.getContentType(), file.getSize());
         try {
             // Check file name contains invalid characters
@@ -55,6 +56,7 @@ public class FTPService {
 
     public Resource loadFileAsResource(String fileName) throws TogetherException {
         try {
+            fileName = fileName.replaceAll("\\.", "").replaceAll("/", "");
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
             if(resource.exists()) {

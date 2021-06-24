@@ -6,9 +6,9 @@ WORKDIR /app
 
 ADD together-user/src/ together-user/src/
 ADD together-user/pom.xml together-user/pom.xml
-ADD settings.xml ~/.m2/settings.xml
+ADD settings.xml settings.xml
 
-RUN mvn --file together-user/pom.xml clean package
+RUN mvn --file together-user/pom.xml -s settings.xml clean package
 RUN mv together-user/target/together-user-*.jar app.jar
 
 # Deployment stage

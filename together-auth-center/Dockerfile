@@ -6,9 +6,9 @@ WORKDIR /app
 
 ADD together-auth-center/src/ together-auth-center/src/
 ADD together-auth-center/pom.xml together-auth-center/pom.xml
-ADD settings.xml ~/.m2/settings.xml
+ADD settings.xml settings.xml
 
-RUN mvn --file together-auth-center/pom.xml clean package
+RUN mvn --file together-auth-center/pom.xml -s settings.xml clean package
 RUN mv together-auth-center/target/together-auth-center-*.jar app.jar
 
 # Deployment stage

@@ -6,9 +6,9 @@ WORKDIR /app
 
 ADD together-ftp/src/ together-ftp/src/
 ADD together-ftp/pom.xml together-ftp/pom.xml
-ADD settings.xml ~/.m2/settings.xml
+ADD settings.xml settings.xml
 
-RUN mvn --file together-ftp/pom.xml clean package
+RUN mvn --file together-ftp/pom.xml -s settings.xml clean package
 RUN mv together-ftp/target/together-ftp-*.jar app.jar
 
 # Deployment stage

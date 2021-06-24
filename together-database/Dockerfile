@@ -6,9 +6,9 @@ WORKDIR /app
 
 ADD together-database/src/ together-database/src/
 ADD together-database/pom.xml together-database/pom.xml
-ADD settings.xml ~/.m2/settings.xml
+ADD settings.xml settings.xml
 
-RUN mvn --file together-database/pom.xml clean package
+RUN mvn --file together-database/pom.xml -s settings.xml clean package
 RUN mv together-database/target/together-database-*.jar app.jar
 
 # Deployment stage

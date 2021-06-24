@@ -6,9 +6,9 @@ WORKDIR /app
 
 ADD together-gateway/src/ together-gateway/src/
 ADD together-gateway/pom.xml together-gateway/pom.xml
-ADD settings.xml ~/.m2/settings.xml
+ADD settings.xml settings.xml
 
-RUN mvn --file together-gateway/pom.xml clean package
+RUN mvn --file together-gateway/pom.xml -s settings.xml clean package
 RUN mv together-gateway/target/together-gateway-*.jar app.jar
 
 # Deployment stage

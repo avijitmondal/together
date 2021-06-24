@@ -6,9 +6,9 @@ WORKDIR /app
 
 ADD together-alive/src/ together-alive/src/
 ADD together-alive/pom.xml together-alive/pom.xml
-ADD settings.xml ~/.m2/settings.xml
+ADD settings.xml settings.xml
 
-RUN mvn --file together-alive/pom.xml clean package
+RUN mvn --file together-alive/pom.xml -s settings.xml clean package
 RUN mv together-alive/target/together-alive-*.jar app.jar
 
 # Deployment stage
