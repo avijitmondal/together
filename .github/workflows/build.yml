@@ -18,9 +18,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clonning codebase
@@ -35,19 +32,22 @@ jobs:
 
       - name: Build together
         run: mvn -B package --file modules.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: .
         run: mvn deploy
-
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
+        
   together-alive:
     runs-on: ubuntu-20.04
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -70,10 +70,16 @@ jobs:
       - name: Build together-alive
         working-directory: ./together-alive
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-alive
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -103,9 +109,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -128,10 +131,16 @@ jobs:
       - name: Build together-auth-center
         working-directory: ./together-auth-center
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-auth-center
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -161,9 +170,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -186,10 +192,16 @@ jobs:
       - name: Build together-config
         working-directory: ./together-config
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-config
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -219,9 +231,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -244,10 +253,16 @@ jobs:
       - name: Build together-conversation
         working-directory: ./together-conversation
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-conversation
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -277,9 +292,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -295,19 +307,22 @@ jobs:
       - name: Build together-core
         working-directory: ./together-core
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-core
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
   together-database:
     runs-on: ubuntu-20.04
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -330,10 +345,16 @@ jobs:
       - name: Build together-database
         working-directory: ./together-database
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-database
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -363,9 +384,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -388,10 +406,16 @@ jobs:
       - name: Build together-discovery
         working-directory: ./together-discovery
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-discovery
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -421,9 +445,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -446,10 +467,16 @@ jobs:
       - name: Build together-ftp
         working-directory: ./together-ftp
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-ftp
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -504,10 +531,16 @@ jobs:
       - name: Build together-gateway
         working-directory: ./together-gateway
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-gateway
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -537,9 +570,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -562,10 +592,16 @@ jobs:
       - name: Build together-message
         working-directory: ./together-message
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-message
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -595,9 +631,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -620,10 +653,16 @@ jobs:
       - name: Build together-status
         working-directory: ./together-status
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-status
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -653,9 +692,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      GITHUB_ACTOR: ${{ github.actor }}
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
       - name: Clone codebase
@@ -678,10 +714,16 @@ jobs:
       - name: Build together-user
         working-directory: ./together-user
         run: mvn -B package --file pom.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Publish maven package to GitHub
         working-directory: ./together-user
         run: mvn deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
