@@ -37,6 +37,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: npm install and npm run build
-        working-directory: ./together-alive
+        working-directory: ./together-web
         run: |
           npm i
