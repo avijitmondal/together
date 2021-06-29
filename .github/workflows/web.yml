@@ -38,5 +38,4 @@ jobs:
 
       - name: npm install and npm run build
         working-directory: ./together-web
-        run: |
-          npm i
+        run: npm i
