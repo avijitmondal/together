@@ -56,7 +56,7 @@ jobs:
         working-directory: ./together-alive
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
@@ -110,7 +110,7 @@ jobs:
         working-directory: ./together-auth-center
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
@@ -164,7 +164,7 @@ jobs:
         working-directory: ./together-config
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
@@ -218,7 +218,7 @@ jobs:
         working-directory: ./together-conversation
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
@@ -299,7 +299,7 @@ jobs:
         working-directory: ./together-database
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
@@ -353,7 +353,7 @@ jobs:
         working-directory: ./together-discovery
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
@@ -407,7 +407,7 @@ jobs:
         working-directory: ./together-ftp
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
@@ -461,7 +461,7 @@ jobs:
         working-directory: ./together-gateway
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
@@ -515,7 +515,7 @@ jobs:
         working-directory: ./together-message
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
@@ -569,7 +569,7 @@ jobs:
         working-directory: ./together-status
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
@@ -623,7 +623,7 @@ jobs:
         working-directory: ./together-user
         id: vars
         run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo ::set-output name=version::$(mvn -q -s $GITHUB_WORKSPACE/settings.xml -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo ::set-output name=tag::$(echo $(git log --oneline|head -n 1|awk '{print $1}'))
 
       - name: Set up JDK 11
