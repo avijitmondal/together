@@ -46,9 +46,7 @@ info:
 
 ---
 spring:
-  config:
-    activate:
-      on-profile: prod
+  profiles: prod
 
 server:
   port: 8080
