@@ -5,6 +5,7 @@
 [![together: Mobile](https://github.com/avijitmondal/together/workflows/togetherMobile/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/mobile.yml)
 [![together: Web](https://github.com/avijitmondal/together/workflows/togetherWeb/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/web.yml)
 [![together: CodeQL](https://github.com/avijitmondal/together/workflows/CodeQL/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/codeql-analysis.yml)
+[![together: PullRequest](https://github.com/avijitmondal/together/workflows/togetherPullRequest/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/pull-request.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 together is a chat application.
