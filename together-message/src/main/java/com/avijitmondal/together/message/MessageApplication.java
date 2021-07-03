@@ -1,4 +1,4 @@
-package com.avijitmondal.together.user;
+package com.avijitmondal.together.message;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class TogetherUserApplication {
+public class MessageApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TogetherUserApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(MessageApplication.class, args);
+    }
 }

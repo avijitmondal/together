@@ -11,10 +11,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableConfigurationProperties({
 		FileStorageProperties.class
 })
-public class TogetherFTPApplication {
+public class FTPApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TogetherFTPApplication.class, args);
+		SpringApplication.run(FTPApplication.class, args);
 	}
 
 }

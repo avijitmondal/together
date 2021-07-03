@@ -9,10 +9,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class TogetherAliveApplication implements CommandLineRunner {
+public class AliveApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
-        SpringApplication.run(TogetherAliveApplication.class, args);
+        SpringApplication.run(AliveApplication.class, args);
     }
 
     @Override

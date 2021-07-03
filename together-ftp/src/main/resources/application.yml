@@ -12,7 +12,7 @@ eureka:
       enabled: true
     lease:
       duration: 5
-
+    enabled: false
 spring:
   application:
     name: together-ftp

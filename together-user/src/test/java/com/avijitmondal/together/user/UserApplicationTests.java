@@ -1,4 +1,4 @@
-package com.avijitmondal.together.database;
+package com.avijitmondal.together.user;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TogetherDatabaseApplicationTests {
+public class UserApplicationTests {
 
 	@Test
 	public void contextLoads() {

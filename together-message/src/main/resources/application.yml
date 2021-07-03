@@ -14,6 +14,7 @@ eureka:
       enabled: true
       lease:
         duration: 5
+    enabled: false
 endpoints:
   shutdown:
     enabled: true

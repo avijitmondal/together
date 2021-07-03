@@ -10,9 +10,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableDiscoveryClient
 @EnableAdminServer
 @EnableScheduling
-public class TogetherStatusApplication {
+public class StatusApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TogetherStatusApplication.class, args);
+		SpringApplication.run(StatusApplication.class, args);
 	}
 }

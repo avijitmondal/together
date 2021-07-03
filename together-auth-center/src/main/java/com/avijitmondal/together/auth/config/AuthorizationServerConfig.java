@@ -1,11 +1,16 @@
 package com.avijitmondal.together.auth.config;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -18,21 +23,32 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
-public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+
+    private final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
     @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    @Qualifier("userDetailsService")
+    private UserDetailsService userDetailsService;
+
+    // TODO: move to config file
+    private final int expiration = 3600;
+    // TODO: Use asymmetric key instead of symmetric key
+    private final String signingKey = "123";
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
                 .tokenStore(tokenStore())
                 .accessTokenConverter(accessTokenConverter())
-                .authenticationManager(authenticationManager);
+                .authenticationManager(authenticationManager)
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
+                .tokenServices(tokenServices())
+                .userDetailsService(userDetailsService);
     }
 
     @Override
@@ -40,10 +56,15 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
         clients
                 .inMemory()
                 .withClient("myclient")
-                .secret(passwordEncoder.encode("secret"))
+                .secret(passwordEncoder().encode("secret"))
                 .authorizedGrantTypes("authorization_code", "implicit", "password", "client_credentials", "refresh_token")
                 .scopes("read","write")
-                .accessTokenValiditySeconds(86400); // 24 hours
+                .accessTokenValiditySeconds(expiration);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -53,9 +74,9 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
-        var converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("123"); // symmetric key
-        return converter;
+        var jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        jwtAccessTokenConverter.setSigningKey(signingKey);
+        return jwtAccessTokenConverter;
     }
 
     @Bean
@@ -63,6 +84,8 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     public DefaultTokenServices tokenServices() {
         var defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setSupportRefreshToken(true);
+        defaultTokenServices.setTokenEnhancer(accessTokenConverter());
         return defaultTokenServices;
     }
 }
