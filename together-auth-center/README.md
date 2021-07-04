@@ -20,11 +20,16 @@ Open browser and goto
 http://localhost:8080
 to get the auth-center
 
+swagger-ui is available at 
+http://localhost:8906/swagger-ui.html
+
+h2 console is available at
+http://localhost:8906/h2-ui
 
 Generating access token for ROLE_USER
 ```shell
 curl http://localhost:8906/oauth/token \
-	-d"grant_type=password&username=user&password=password" \
+	-d"grant_type=password&username=user1@example.com&password=password" \
 	-H"Content-type:application/x-www-form-urlencoded; charset=utf-8" \
 	-u myclient:secret
 ```
@@ -42,7 +47,7 @@ curl http://localhost:8906/oauth/token \
 Generating access token for ROLE_ADMIN
 ```shell
 curl http://localhost:8906/oauth/token \
-	-d"grant_type=password&username=admin&password=P@ssw0rd" \
+	-d"grant_type=password&username=admin@example.com&password=password" \
 	-H"Content-type:application/x-www-form-urlencoded; charset=utf-8" \
 	-u myclient:secret
 ```
