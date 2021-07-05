@@ -18,7 +18,7 @@ public class UnsecuredControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void unsecuredResourceTest() throws Exception {
+    void unsecuredResourceTest() throws Exception {
         mockMvc.perform(get("/unsecured"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("This resource is not secured"));
