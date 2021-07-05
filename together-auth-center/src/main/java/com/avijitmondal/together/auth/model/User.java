@@ -1,6 +1,7 @@
 package com.avijitmondal.together.auth.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
-@ToString
+@Data
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -41,11 +42,11 @@ public class User implements UserDetails {
     @ApiModelProperty(notes = "Indicates whether the user is enabled or disabled. A disabled user cannot be authenticated.")
     private boolean enabled;
 
-    @Column(name = "created_time", insertable=true, updatable=false)
+    @Column(name = "created_time", insertable = true, updatable = false)
     @ApiModelProperty(notes = "The database generated user, token and session mapping created time.")
     private LocalDateTime createdTime;
 
-    @Column(name = "updated_time", insertable=false, updatable=true)
+    @Column(name = "updated_time", insertable = false, updatable = true)
     @ApiModelProperty(notes = "The database generated user, token and session mapping updated time.")
     private LocalDateTime updatedTime;
 
@@ -57,11 +58,14 @@ public class User implements UserDetails {
     @Column(name = "reset_password_key")
     private String resetPasswordKey;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_authority",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "authority_users",
+            joinColumns = { @JoinColumn(name = "users_id") },
+            inverseJoinColumns = { @JoinColumn(name = "authority_id") })
     private Set<Authority> authorities;
 
     public User() {
@@ -81,8 +85,6 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-
         return authorities;
     }
 

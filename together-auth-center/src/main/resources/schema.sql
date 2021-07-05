@@ -10,15 +10,15 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS authority (
     id BIGINT PRIMARY KEY auto_increment,
-    name VARCHAR(50) UNIQUE
+    role enum('ROLE_USER','ROLE_ADMIN') DEFAULT 'ROLE_USER'
 );
 
-CREATE TABLE IF NOT EXISTS user_authority (
-    user_id BIGINT,
-    authority_id BIGINT,
-    FOREIGN KEY (user_id) REFERENCES users (id),
+CREATE TABLE IF NOT EXISTS authority_users (
+    users_id BIGINT not null,
+    authority_id BIGINT not null,
+    FOREIGN KEY (users_id) REFERENCES users (id),
     FOREIGN KEY (authority_id) REFERENCES authority (id),
-    UNIQUE INDEX user_authority_idx_1 (user_id, authority_id)
+    UNIQUE INDEX user_authority_idx_1 (users_id, authority_id)
 );
 
 CREATE TABLE IF NOT EXISTS oauth_access_token (
