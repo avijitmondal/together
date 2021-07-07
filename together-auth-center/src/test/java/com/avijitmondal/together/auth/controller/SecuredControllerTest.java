@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -46,10 +47,11 @@ class SecuredControllerTest {
     @Test
     void securedResourceAsAdmin() throws Exception {
         var accessToken = obtainOAuthAccessToken("admin", "password");
-        mockMvc.perform(get("/secured/admin").header(HttpHeaders.AUTHORIZATION,
+        var resultActions = mockMvc.perform(get("/secured/admin").header(HttpHeaders.AUTHORIZATION,
                 "Bearer " + accessToken))
-                .andExpect(status().isOk())
-                .andExpect(content().string("This resource is secured. Authentication: admin; Authorities: [ROLE_USER, ROLE_ADMIN]"));
+                .andExpect(status().isOk());
+        assert resultActions.andReturn().getResponse().getContentAsString()
+                .contains("This resource is secured. Authentication: admin; Authorities:");
     }
 
     @Test
@@ -65,6 +67,6 @@ class SecuredControllerTest {
     public void UnauthorizedTest() throws Exception {
         mockMvc.perform(get("/secured/user"))
                 .andExpect(status().isUnauthorized())
-                .andExpect(content().string("{\"error\":\"unauthorized\",\"error_description\":\"Full authentication is required to access this resource\"}"));
+                .andExpect(content().json("{\"error\":\"unauthorized\",\"error_description\":\"Full authentication is required to access this resource\"}"));
     }
 }
