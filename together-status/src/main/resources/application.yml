@@ -26,6 +26,7 @@ eureka:
       enabled: true
       lease:
         duration: 5
+    enabled: false
 endpoints:
   shutdown:
     enabled: true
@@ -51,6 +52,10 @@ spring:
 
 server:
   port: 8080
+
+eureka:
+  client:
+    enabled: true
 
 info:
   tags:

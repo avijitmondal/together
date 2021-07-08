@@ -17,6 +17,54 @@ eureka:
 
 ---
 spring:
+  profiles: peer-1
+  application:
+    name: together-discovery
+server:
+  port: 9001
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9002/eureka/,http://localhost:9003/eureka/
+
+---
+spring:
+  profiles: peer-2
+  application:
+    name: together-discovery
+server:
+  port: 9002
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/,http://localhost:9003/eureka/
+
+---
+spring:
+  profiles: peer-3
+  application:
+    name: together-discovery
+server:
+  port: 9003
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/,http://localhost:9002/eureka/
+
+---
+spring:
   profiles: prod
 
 server:

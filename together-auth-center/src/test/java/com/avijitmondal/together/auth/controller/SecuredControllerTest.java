@@ -50,8 +50,13 @@ class SecuredControllerTest {
         var resultActions = mockMvc.perform(get("/secured/admin").header(HttpHeaders.AUTHORIZATION,
                 "Bearer " + accessToken))
                 .andExpect(status().isOk());
-        assert resultActions.andReturn().getResponse().getContentAsString()
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        assert responseBody
                 .contains("This resource is secured. Authentication: admin; Authorities:");
+        assert responseBody
+                .contains("ROLE_USER");
+        assert responseBody
+                .contains("ROLE_ADMIN");
     }
 
     @Test

@@ -49,14 +49,10 @@ zuul:
   prefix: /api/v1
   stripPrefix: false
   routes:
-#    together-user-by-service:
-#      path: /users/**
-#      serviceId: together-user
-#      stripPrefix: false
-#    together-conversation-by-service:
-#      path: /conversations/**
-#      serviceId: together-conversation
-#      stripPrefix: false
+    together-auth-center-by-service:
+      path: /auth/**
+      serviceId: together-auth-center
+      stripPrefix: true
     together-database-by-service:
       path: /users/**
       serviceId: together-database
@@ -68,6 +64,10 @@ spring:
 
 server:
   port: 8080
+
+eureka:
+  client:
+    enabled: true
 
 info:
   tags:

@@ -52,6 +52,10 @@ spring:
 server:
   port: 8080
 
+eureka:
+  client:
+    enabled: true
+
 info:
   tags:
     environment: prod
