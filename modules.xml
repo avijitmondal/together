@@ -21,6 +21,7 @@
         <module>together-ftp</module>
         <module>together-gateway</module>
         <module>together-status</module>
+        <module>together-sync</module>
         <module>together-user</module>
     </modules>
 
