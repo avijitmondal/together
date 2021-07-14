@@ -35,6 +35,7 @@ together is a chat application.
 * [together-gateway](https://github.com/avijitmondal/together/blob/main/together-gateway/README.md)
 * [together-mobile](https://github.com/avijitmondal/together/blob/main/together-mobile/README.md)
 * [together-status](https://github.com/avijitmondal/together/blob/main/together-status/README.md)
+* [together-sync](https://github.com/avijitmondal/together/blob/main/together-sync/README.md)
 * [together-user](https://github.com/avijitmondal/together/blob/main/together-user/README.md)
 * [together-web](https://github.com/avijitmondal/together/blob/main/together-web/README.md)
 
