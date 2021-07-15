@@ -26,7 +26,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(generateAPIInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.avijit.together.config.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.avijitmondal.together.config.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -42,7 +42,7 @@ public class SwaggerConfig {
     //Api information
     private ApiInfo generateAPIInfo() {
         return new ApiInfo("together-config Swagger", "Swagger for together-config", "1.0",
-                "https://github.com/avijitmondal/together/", getContacts(), "MIT", "https://github.com/avijitmondal/together/blob/master/LICENSE", new ArrayList());
+                "https://github.com/avijitmondal/together/", getContacts(), "MIT", "https://github.com/avijitmondal/together/blob/master/LICENSE", new ArrayList<>());
     }
 
     // Developer Contacts
