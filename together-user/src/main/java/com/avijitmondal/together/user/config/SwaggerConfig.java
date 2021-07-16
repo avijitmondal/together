@@ -26,7 +26,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(generateAPIInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.avijit.together.user.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.avijitmondal.together.user.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
