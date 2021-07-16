@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AuthCenterApplicationTest {
+class AuthCenterApplicationTest {
 
     @Autowired
     private AuthenticationController authenticationController;
