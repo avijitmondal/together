@@ -7,9 +7,7 @@
  ****************************************************************************/
 package com.avijitmondal.together.core.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;

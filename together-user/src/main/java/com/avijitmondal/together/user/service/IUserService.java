@@ -8,10 +8,10 @@
 package com.avijitmondal.together.user.service;
 
 import com.avijitmondal.together.core.dto.ResponseDTO;
-import com.avijitmondal.together.core.dto.User;
 import com.avijitmondal.together.core.exception.TogetherException;
 
 import com.avijitmondal.together.core.service.IService;
+import com.avijitmondal.together.user.dao.User;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

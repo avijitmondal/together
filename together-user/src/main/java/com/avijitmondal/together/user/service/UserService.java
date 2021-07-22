@@ -9,7 +9,6 @@ package com.avijitmondal.together.user.service;
 
 import com.avijitmondal.together.core.data.Constants;
 import com.avijitmondal.together.core.dto.ResponseDTO;
-import com.avijitmondal.together.core.dto.User;
 import com.avijitmondal.together.core.exception.ErrorCode;
 import com.avijitmondal.together.core.exception.IErrorDetails;
 import com.avijitmondal.together.core.exception.TogetherException;
@@ -17,6 +16,7 @@ import com.avijitmondal.together.core.util.EnvironmentValuesReader;
 import com.avijitmondal.together.core.util.parser.GsonParser;
 import com.avijitmondal.together.core.ws.HttpMethod;
 import com.avijitmondal.together.core.ws.RestService;
+import com.avijitmondal.together.user.dao.User;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
