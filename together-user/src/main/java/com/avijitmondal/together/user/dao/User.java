@@ -28,11 +28,7 @@ import java.util.UUID;
  * @author avijit
  *
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode
+@Data
 @ToString
 @Entity
 @Table(name = "USERS")
@@ -47,8 +43,8 @@ public class User implements Serializable {
      * Unique ID for User
      */
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+//    @GeneratedValue(generator = "uuid2")
+//    @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)", name = "ID")
     private UUID id;
 

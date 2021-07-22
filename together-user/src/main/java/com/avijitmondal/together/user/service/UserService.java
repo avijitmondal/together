@@ -7,26 +7,23 @@
  ****************************************************************************/
 package com.avijitmondal.together.user.service;
 
-import com.avijitmondal.together.core.data.Constants;
 import com.avijitmondal.together.core.dto.ResponseDTO;
 import com.avijitmondal.together.core.exception.ErrorCode;
 import com.avijitmondal.together.core.exception.IErrorDetails;
 import com.avijitmondal.together.core.exception.TogetherException;
 import com.avijitmondal.together.core.util.EnvironmentValuesReader;
-import com.avijitmondal.together.core.util.parser.GsonParser;
-import com.avijitmondal.together.core.ws.HttpMethod;
-import com.avijitmondal.together.core.ws.RestService;
 import com.avijitmondal.together.user.dao.User;
-import com.google.gson.reflect.TypeToken;
+import com.avijitmondal.together.user.repository.UserRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author avijit
@@ -35,8 +32,9 @@ import java.util.Optional;
 @Service("userService")
 public class UserService implements IUserService {
 	private final Log logger = LogFactory.getLog(this.getClass());
+
 	@Autowired
-	private EnvironmentValuesReader environmentValuesReader;
+	private UserRepository userRepository;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -46,20 +44,11 @@ public class UserService implements IUserService {
 	@Override
 	public ResponseDTO<List<User>> findAll(Pageable pageable) {
 		try {
-            RestService restService = new RestService(HttpMethod.GET, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_USERS);
-
-            restService.execute();
-
-            if (restService.isSuccessResponse(HttpStatus.SC_OK)) {
-                String responseAsString = restService.getSuccessResponse();
-				logger.debug("REST response: " + responseAsString);
-                return  (ResponseDTO<List<User>>) GsonParser.fromString(responseAsString, new TypeToken<ResponseDTO<List<User>>>() {
-                }.getType());
-            }
+			List<User> users = userRepository.findAll();
+			return new ResponseDTO<>(users);
         } catch (Exception exception) {
 			return new ResponseDTO<>();
 		}
-		return new ResponseDTO<>();
 	}
 
 	/*
@@ -71,19 +60,8 @@ public class UserService implements IUserService {
 	@Override
 	public Optional<User> findById(String userId) throws TogetherException {
 		try {
-			logger.debug("finding user with ID: " + userId + " and with URL: " + environmentValuesReader.getTogetherDatabaseUrl());
-			RestService restService = new RestService(HttpMethod.GET, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_USERS + "/" + userId);
-
-			restService.execute();
-
-			if (restService.isSuccessResponse(HttpStatus.SC_OK)) {
-				String responseAsString = restService.getSuccessResponse();
-				User response = GsonParser.fromString(responseAsString, User.class);
-
-				return Optional.of(response);
-			} else {
-				throw new TogetherException(restService.getErrorResponse());
-			}
+			logger.debug("finding user with ID: " + userId);
+			return userRepository.findById(UUID.fromString(userId));
 		} catch (Exception exception) {
 			throw new TogetherException(ErrorCode.INVALID_USER_ID, IErrorDetails.INVALID_USER_ID);
 		}
@@ -97,15 +75,12 @@ public class UserService implements IUserService {
 	@Override
 	public boolean delete(String userId) throws TogetherException {
 		try {
-			RestService restService = new RestService(HttpMethod.DELETE, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_USERS + "/" + userId);
-
-			restService.execute();
-
-			if (restService.isSuccessResponse(HttpStatus.SC_NO_CONTENT)) {
+			Optional<User> optionalUser = userRepository.findById(UUID.fromString(userId));
+			if (optionalUser.isPresent()) {
+				userRepository.delete(optionalUser.get());
 				return true;
-			} else {
-				throw new TogetherException(restService.getErrorResponse());
 			}
+			return false;
 		} catch (Exception exception) {
 			throw new TogetherException(ErrorCode.INVALID_USER_ID, IErrorDetails.INVALID_USER_ID);
 		}
@@ -121,16 +96,19 @@ public class UserService implements IUserService {
 	@Override
 	public User save(User user) throws TogetherException {
 		try {
-			RestService restService = new RestService(HttpMethod.POST, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_USERS);
-
-			restService.execute();
-			if (restService.isSuccessResponse(HttpStatus.SC_CREATED)) {
-				String responseAsString = restService.getSuccessResponse();
-				return GsonParser.fromString(responseAsString, User.class);
-			} else {
-				throw new TogetherException(restService.getErrorResponse());
-			}
+			var tmpUser = new User();
+			tmpUser.setId(UUID.randomUUID());
+			tmpUser.setEmail(user.getEmail());
+			tmpUser.setPhone(user.getPhone());
+			tmpUser.setFirstName(user.getFirstName());
+			tmpUser.setMiddleName(user.getMiddleName());
+			tmpUser.setLastName(user.getLastName());
+			tmpUser.setGender(user.getGender());
+			tmpUser.setBirthday(user.getBirthday());
+			tmpUser.setCreatedAt(LocalDateTime.now());
+			return userRepository.save(tmpUser);
 		} catch (Exception exception) {
+			exception.printStackTrace();
 			throw new TogetherException(ErrorCode.USER_NOT_ADDED, IErrorDetails.UNABLE_TO_ADD_USER);
 		}
 	}
@@ -161,8 +139,7 @@ public class UserService implements IUserService {
 	@Override
 	public boolean isExists(String userId) throws TogetherException {
 		try {
-//			return iUserRepository.existsById(UUID.fromString(userId));
-            return false;
+			return userRepository.existsById(UUID.fromString(userId));
 		} catch (IllegalArgumentException illegalArgumentException) {
 			throw new TogetherException(ErrorCode.INVALID_USER_ID,
 					String.format(IErrorDetails.INVALID_USER_ID, userId));
