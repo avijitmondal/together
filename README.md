@@ -14,14 +14,14 @@
 
 ### How do I get set up? ###
 
-* [Summary of set up](#Summary of set up)
+* [List of modules](#List of modules)
 * [Configuration](#Configuration)
 * [Dependencies](#Dependencies)
 * [Database configuration](#Database configuration)
 * [How to run](#How to run)
 * [Deployment instructions](#Deployment instructions)
 
-### Summary of set up
+### List of modules
 * [together-alive](https://github.com/avijitmondal/together/blob/main/together-alive/README.md)
 * [together-auth-center](https://github.com/avijitmondal/together/blob/main/together-auth-center/README.md)
 * [together-config](https://github.com/avijitmondal/together/blob/main/together-config/README.md)
