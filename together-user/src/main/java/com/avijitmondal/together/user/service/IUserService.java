@@ -47,6 +47,6 @@ public interface IUserService extends IService {
 	 * @return
 	 * @throws TogetherException
 	 */
-	User findByEmail(String email) throws TogetherException;
+	Optional<User> findByEmail(String email) throws TogetherException;
 
 }

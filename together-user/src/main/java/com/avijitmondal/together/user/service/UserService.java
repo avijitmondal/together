@@ -120,10 +120,9 @@ public class UserService implements IUserService {
 	 * String)
 	 */
 	@Override
-	public User findByEmail(String email) throws TogetherException {
+	public Optional<User> findByEmail(String email) throws TogetherException {
 		try {
-//			return iUserRepository.findByEmail(email);
-            return null;
+			return userRepository.findByEmail(email);
 		} catch (Exception exception) {
 			throw new TogetherException(ErrorCode.USER_NOT_FOUND,
 					String.format(IErrorDetails.USER_EMAIL_NOT_FOUND, email));
