@@ -10,4 +10,8 @@ class DiscoveryApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void main() {
+		DiscoveryApplication.main(new String[]{});
+	}
 }
