@@ -11,4 +11,8 @@ class StatusApplicationTests {
 		assert true;
 	}
 
+    @Test
+    void main() {
+		StatusApplication.main(new String[]{});
+    }
 }
