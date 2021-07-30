@@ -7,10 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 class DiscoveryApplicationTests {
 
 	@Test
-	void contextLoads() {
-	}
-
-	@Test
 	void main() {
 		DiscoveryApplication.main(new String[]{});
 	}
