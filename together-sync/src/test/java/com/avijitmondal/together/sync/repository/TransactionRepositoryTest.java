@@ -2,7 +2,6 @@ package com.avijitmondal.together.sync.repository;
 
 
 import com.avijitmondal.together.sync.model.Transaction;
-import com.avijitmondal.together.sync.repository.TransactionRepository;
 import com.mongodb.MongoClientURI;
 import com.mongodb.WriteConcern;
 import de.flapdoodle.embed.mongo.MongodExecutable;
@@ -34,7 +33,7 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@DataMongoTest(excludeAutoConfiguration= {EmbeddedMongoAutoConfiguration.class})
+@DataMongoTest(excludeAutoConfiguration = {EmbeddedMongoAutoConfiguration.class})
 class TransactionRepositoryTest {
 
     @Autowired
@@ -68,19 +67,20 @@ class TransactionRepositoryTest {
     void findSuccessfulOperationsForUserWithCreatedDateLessThanNowTest() {
         long now = System.currentTimeMillis();
         String userId = USER_ID_LIST.get(RANDOM.nextInt(2));
-        List<Transaction> resultsPage =  transactionRepository.findBySuccessIsTrueAndCreatedLessThanEqualAndUserIdOrderByCreatedDesc(now, userId, PageRequest.of(0, 5)).getContent();
+        List<Transaction> resultsPage = transactionRepository.findBySuccessIsTrueAndCreatedLessThanEqualAndUserIdOrderByCreatedDesc(now, userId, PageRequest.of(0, 5)).getContent();
 
         assertThat(resultsPage).isNotEmpty();
+        assertThat(resultsPage).extracting("id").isNotEmpty();
         assertThat(resultsPage).extracting("userId").allMatch(id -> Objects.equals(id, userId));
         assertThat(resultsPage).extracting("created").isSortedAccordingTo(Collections.reverseOrder());
-        assertThat(resultsPage).extracting("created").first().matches(createdTimeStamp -> (Long)createdTimeStamp <= now);
+        assertThat(resultsPage).extracting("created").first().matches(createdTimeStamp -> (Long) createdTimeStamp <= now);
         assertThat(resultsPage).extracting("success").allMatch(sucessfull -> (Boolean) sucessfull);
     }
 
     @Configuration
     static class MongoConfiguration implements InitializingBean, DisposableBean {
 
-         MongodExecutable executable;
+        MongodExecutable executable;
 
         @Override
         public void afterPropertiesSet() throws Exception {

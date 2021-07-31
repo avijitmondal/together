@@ -44,7 +44,7 @@ public class ConversationService implements IConversationService {
 	 * springframework.data.domain.Pageable, java.lang.String)
 	 */
 	@Override
-	public ResponseDTO<List<Conversation>> findByUserId(Pageable pageable, String userId) throws TogetherException {
+	public ResponseDTO<List<Conversation>> findByUserId(Pageable pageable, String userId) {
 		RestService restService = new RestService(HttpMethod.GET, false, environmentValuesReader.getTogetherDatabaseUrl() + Constants.API_CONVERSATIONS + "/" + userId);
 		try{
 			restService.execute();
