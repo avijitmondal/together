@@ -49,14 +49,26 @@ zuul:
   prefix: /api/v1
   stripPrefix: false
   routes:
-    together-auth-center-by-service:
+    together-alive-service:
+      path: /alive/**
+      serviceId: together-alive
+      stripPrefix: true
+    together-auth-center-service:
       path: /auth/**
       serviceId: together-auth-center
       stripPrefix: true
-    together-database-by-service:
+    together-conversation-service:
+      path: /conversations/**
+      serviceId: together-conversations
+      stripPrefix: true
+    together-ftp-service:
+      path: /ftp/**
+      serviceId: together-ftp
+      stripPrefix: true
+    together-user-service:
       path: /users/**
-      serviceId: together-database
-      stripPrefix: false
+      serviceId: together-user
+      stripPrefix: true
 
 ---
 spring:
