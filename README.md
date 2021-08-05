@@ -48,9 +48,9 @@
 ### Deployment instructions
 
 ### Contribution guidelines ###
-* Writing tests
-* Code review
-* Other guidelines
+- [ ] Writing tests
+- [ ] Code review
+- [ ] Other guidelines
 
 ### Who do I talk to? ###
 [Avijit](mailto:avijitmondal38@gmail.com)
