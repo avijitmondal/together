@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 ### What is this repository for? ###
-* together chat application
+* together open source chat application
 * 0.0.1-SNAPSHOT
 
 ### How do I get set up? ###
