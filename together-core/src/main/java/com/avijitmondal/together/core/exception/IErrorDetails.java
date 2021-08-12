@@ -12,6 +12,10 @@ package com.avijitmondal.together.core.exception;
  *
  */
 public abstract class IErrorDetails {
+
+	private IErrorDetails() {
+		throw new IllegalStateException("Utility class");
+	}
 	public static final String USER_ID_NOT_FOUND = "User with ID %s not found";
 	public static final String MESSAGE_ID_NOT_FOUND = "Message with ID %s not found";
 	public static final String AUTHENTICATION_ID_NOT_FOUND = "Authentication with ID %s not found";

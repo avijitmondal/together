@@ -117,9 +117,9 @@ public class Heartbeat implements Runnable, Observable<HeartbeatState, Heartbeat
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
         datagramSocket.receive(receivePacket);
         receiveData = receivePacket.getData();
-        byte[] data = new byte[receivePacket.getLength()];
-        System.arraycopy(receiveData, receivePacket.getOffset(), data, 0, receivePacket.getLength());
-        return data;
+        byte[] receivedData = new byte[receivePacket.getLength()];
+        System.arraycopy(receiveData, receivePacket.getOffset(), receivedData, 0, receivePacket.getLength());
+        return receivedData;
     }
 }
 

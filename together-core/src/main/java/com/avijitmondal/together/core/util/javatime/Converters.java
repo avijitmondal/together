@@ -24,6 +24,10 @@ import java.time.ZonedDateTime;
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class Converters {
 
+    private Converters() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * The specific genericized type for {@code LocalDate}.
      */

@@ -7,7 +7,11 @@ package com.avijitmondal.together.core.data;
  * @author avijit
  *
  */
-public abstract class Constants {
+public class Constants {
+
+	private Constants() {
+		throw new IllegalStateException("Constant class");
+	}
 
 	/* Rest API URI */
 	/**

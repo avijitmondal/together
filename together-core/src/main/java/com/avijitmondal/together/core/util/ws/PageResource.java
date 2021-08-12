@@ -109,8 +109,7 @@ public class PageResource<T> extends RepresentationModel implements Page<T> {
 
 	private Link buildPageLink(String pageParam, int page, String sizeParam, int size, String rel) {
 		String path = createBuilder().queryParam(pageParam, page).queryParam(sizeParam, size).build().toUriString();
-		Link link = new Link(path, rel);
-		return link;
+		return new Link(path, rel);
 	}
 
 	/*

@@ -94,7 +94,7 @@ public class ConversationController {
         try {
             Conversation temp = conversationService.save(conversation);
             if (null != temp) {
-                return new ResponseEntity<Conversation>(temp, HttpStatus.CREATED);
+                return new ResponseEntity<>(temp, HttpStatus.CREATED);
             }
             return ResponseFactory.getResponse(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCode.CONVERSATION_NOT_ADDED,
                     IErrorDetails.UNABLE_TO_ADD_CONVERSATION, IErrorDetails.TRY_SOMETIME_LATER,

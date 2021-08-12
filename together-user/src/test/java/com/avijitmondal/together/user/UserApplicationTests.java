@@ -1,13 +1,15 @@
 package com.avijitmondal.together.user;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserApplicationTests {
+class UserApplicationTests {
 
     @Test
-    public void main() {
+    void main() {
 		UserApplication.main(new String[]{});
+        Assertions.assertTrue(true);
     }
 }

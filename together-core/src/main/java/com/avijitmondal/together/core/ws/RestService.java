@@ -1,4 +1,4 @@
-/** ***************************************************************************
+/* ***************************************************************************
  * FILE NAME   : RestService.java
  * VERSION     : 1.0
  * AUTHOR      : avijit
@@ -17,7 +17,6 @@ import com.avijitmondal.together.core.util.parser.GsonParser;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -30,6 +29,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.MediaType;
 
 /**
  * @author avijit
@@ -86,11 +86,9 @@ public class RestService {
 
     /**
      *
-     * @return @throws AuthenticationException
-     * @throws ClientProtocolException
      * @throws IOException
      */
-    public void execute() throws ClientProtocolException, IOException {
+    public void execute() throws IOException {
         logger.debug("execute");
         RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(5000).setConnectTimeout(5000)
                 .setSocketTimeout(5000).build();
@@ -110,8 +108,8 @@ public class RestService {
             case GET: {
                 HttpGet request = new HttpGet(url);
                 request.setConfig(requestConfig);
-                request.addHeader(HttpHeaders.ACCEPT, "application/json");
-                request.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+                request.addHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
+                request.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
                 if (isSecured) {
                     request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));
@@ -124,8 +122,8 @@ public class RestService {
                 HttpPost request = new HttpPost(url);
                 request.setEntity(stringEntity);
                 request.setConfig(requestConfig);
-                request.addHeader(HttpHeaders.ACCEPT, "application/json");
-                request.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+                request.addHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
+                request.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
                 if (isSecured) {
                     request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));
@@ -138,8 +136,8 @@ public class RestService {
                 HttpPut request = new HttpPut(url);
                 request.setEntity(stringEntity);
                 request.setConfig(requestConfig);
-                request.addHeader(HttpHeaders.ACCEPT, "application/json");
-                request.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+                request.addHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
+                request.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
                 if (isSecured) {
                     request.addHeader(Constants.AUTHORIZATION, centralCache.getAsString(Constants.AUTH_TOKEN));

@@ -24,6 +24,10 @@ public class GsonParser {
         GSON = BUILDER.create();
     }
 
+    private GsonParser() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static <T> T fromString(String body, Class<T> targetClass) {
         if (body == null) {
             return null;

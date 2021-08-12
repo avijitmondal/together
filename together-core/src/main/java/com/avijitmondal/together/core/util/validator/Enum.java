@@ -20,13 +20,13 @@ import java.lang.annotation.*;
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Enum {
-	public abstract String message() default "Invalid Emum value.";
+	String message() default "Invalid Enum value.";
 
-	public abstract Class<?>[] groups() default {};
+	Class<?>[] groups() default {};
 
-	public abstract Class<? extends Payload>[] payload() default {};
+	Class<? extends Payload>[] payload() default {};
 
-	public abstract Class<? extends java.lang.Enum<?>> enumClass();
+	Class<? extends java.lang.Enum<?>> enumClass();
 
-	public abstract boolean ignoreCase() default false;
+	boolean ignoreCase() default false;
 }
