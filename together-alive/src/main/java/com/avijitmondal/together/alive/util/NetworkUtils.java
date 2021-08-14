@@ -8,6 +8,10 @@ import java.net.DatagramSocket;
 
 class NetworkUtils {
 
+    private NetworkUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     static synchronized byte[] receiveData(DatagramSocket datagramSocket) throws IOException {
         byte[] receiveData = new byte[Constants.UDP_VALID_PACKET_SIZE];
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
