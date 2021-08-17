@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserTokenSessionService implements IUserTokenSessionService {
@@ -25,9 +25,9 @@ public class UserTokenSessionService implements IUserTokenSessionService {
     public ValidMappingResponse isValidUserTokenSessionMapping(UserTokenSession userTokenSession) throws UsernameNotFoundException {
 
         String username = userTokenSession.getUsername();
-        UserTokenSession userTokenSessionFromDB = userTokenSessionRepository.findOneByUsername(username);
+        Optional<UserTokenSession> userTokenSessionFromDB = userTokenSessionRepository.findOneByUsername(username);
 
-        if (Objects.isNull(userTokenSessionFromDB)) {
+        if (userTokenSessionFromDB.isEmpty()) {
 
             logger.error("User " + username + " mapping with token is not found in the database.");
             throw new UsernameNotFoundException("User " + username + "  mapping with token is not found in the database.");
@@ -37,20 +37,20 @@ public class UserTokenSessionService implements IUserTokenSessionService {
         ZonedDateTime currentZonedDateTime = currentSystemTime.atZone(ZoneId.systemDefault());
         long currentTimeInMillis = currentZonedDateTime.toInstant().toEpochMilli();
 
-        ZonedDateTime dataBaseZonedDateTime = userTokenSessionFromDB.getCreatedTime().atZone(ZoneId.systemDefault());
+        ZonedDateTime dataBaseZonedDateTime = userTokenSessionFromDB.get().getCreatedTime().atZone(ZoneId.systemDefault());
 
         // tokenTimeInMillis = created_time in millis + expiry time (seconds) * 1000.
-        long  tokenTimeInMillis = dataBaseZonedDateTime.toInstant().toEpochMilli() + (userTokenSessionFromDB.getExpiryTime() * 1000);
+        long  tokenTimeInMillis = dataBaseZonedDateTime.toInstant().toEpochMilli() + (userTokenSessionFromDB.get().getExpiryTime() * 1000);
 
         if ( currentTimeInMillis >= tokenTimeInMillis) {
 
             logger.info("User " + username + " token has expired. Please generate new token. Deleting the expired token mapping.");
-            userTokenSessionRepository.delete(userTokenSessionFromDB);
+            userTokenSessionRepository.delete(userTokenSessionFromDB.get());
             throw new UsernameNotFoundException("User " + username + " token has expired. Please generate new token.");
 
-        }else if(!userTokenSession.equals(userTokenSessionFromDB)) {
+        }else if(!userTokenSession.equals(userTokenSessionFromDB.get())) {
 
-            if (!userTokenSessionFromDB.getToken().equals(userTokenSession.getToken())){
+            if (!userTokenSessionFromDB.get().getToken().equals(userTokenSession.getToken())){
                 logger.info("User "+userTokenSession.getUsername()+ " has invalid user and token mapping. Please generate new token.");
 
             } else {
@@ -58,13 +58,13 @@ public class UserTokenSessionService implements IUserTokenSessionService {
             }
 
             logger.info("So, Deleting the invalid mapping.");
-            userTokenSessionRepository.delete(userTokenSessionFromDB);
+            userTokenSessionRepository.delete(userTokenSessionFromDB.get());
             throw new UsernameNotFoundException("User " + username + " has invalid user, session-id and token mapping. Please generate new token.");
 
         }else {
 
             logger.info("User " + username + " has valid token.");
-            return new ValidMappingResponse(true, userTokenSessionFromDB);
+            return new ValidMappingResponse(true, userTokenSessionFromDB.get());
         }
 
     }
@@ -72,14 +72,14 @@ public class UserTokenSessionService implements IUserTokenSessionService {
     @Override
     public UserTokenSession saveUserTokenSessionMapping(UserTokenSession userTokenSession) {
 
-        UserTokenSession userTokenSessionFromDB = userTokenSessionRepository.findOneByUsername(userTokenSession.getUsername());
+        Optional<UserTokenSession> userTokenSessionFromDB = userTokenSessionRepository.findOneByUsername(userTokenSession.getUsername());
 
-        if (Objects.nonNull(userTokenSessionFromDB)) {
+        if (userTokenSessionFromDB.isPresent()) {
 
-            if (userTokenSessionFromDB.equals(userTokenSession)) {
+            if (userTokenSessionFromDB.get().equals(userTokenSession)) {
                 logger.info("User "+userTokenSession.getUsername()+ " making login call again with same token and session-id.");
 
-            } else if (!userTokenSessionFromDB.getToken().equals(userTokenSession.getToken())){
+            } else if (!userTokenSessionFromDB.get().getToken().equals(userTokenSession.getToken())){
                 logger.info("User "+userTokenSession.getUsername()+ " making login call with new token");
 
             } else {
@@ -87,7 +87,7 @@ public class UserTokenSessionService implements IUserTokenSessionService {
 
             }
             logger.info("So, Deleting older mapping from tbl_user_token_session."+userTokenSessionFromDB);
-            userTokenSessionRepository.delete(userTokenSessionFromDB);
+            userTokenSessionRepository.delete(userTokenSessionFromDB.get());
 
         }
 

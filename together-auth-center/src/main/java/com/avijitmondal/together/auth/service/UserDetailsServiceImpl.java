@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -26,12 +27,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<User> users = userRepository.findAll();
         logger.debug("Available users are " + users);
 
-        User userFromDataBase = userRepository.findOneByUsername(username);
-        if (userFromDataBase == null) {
+        Optional<User> userFromDataBase = userRepository.findOneByUsername(username);
+        if (userFromDataBase.isEmpty()) {
             logger.info("User " + username + " was not found in the database");
             throw new UsernameNotFoundException("User " + username + " was not found in the database");
         }
-        return userFromDataBase;
+        return userFromDataBase.get();
 
     }
 }

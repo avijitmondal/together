@@ -2,11 +2,14 @@ package com.avijitmondal.together.auth.model;
 
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 
 @ToString
@@ -17,10 +20,11 @@ public class UserTokenSession {
     static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false, updatable = false)
-    @ApiModelProperty(notes = "The database generated user, token and session mapping ID.")
-    private Long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "id", nullable = false, updatable = false, columnDefinition = "BINARY(16)")
+    @ApiModelProperty(notes = "auto generated token id")
+    private UUID id;
 
     @Column(name = "username", nullable = false, unique = true)
     @ApiModelProperty(notes = "user name.")
@@ -60,14 +64,15 @@ public class UserTokenSession {
     public UserTokenSession() {
     }
 
-    public UserTokenSession(String username, String token, String sessionId, Long expiryTime) {
+    public UserTokenSession(UUID id, String username, String token, String sessionId, Long expiryTime) {
+        this.id = id;
         this.username = username;
         this.token = token;
         this.sessionId = sessionId;
         this.expiryTime = expiryTime;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 

@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiResponses;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @Api(value = "Authentication API", description = "Authenticate user using authorization token.")
@@ -32,7 +32,6 @@ public class AuthenticationController {
     private final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
-    @Qualifier("userDetailsService")
     private UserDetailsService userDetailsService;
 
     private final long tokenExpiryTime = 3600;
@@ -50,6 +49,8 @@ public class AuthenticationController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     public ResponseEntity<UserTokenSession> login(@RequestHeader HttpHeaders httpHeaders, Principal principal, HttpServletRequest httpServletRequest) {
+        if (Objects.isNull(principal))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
         String username = principal.getName();
         UserTokenSession userTokenSession = buildUserTokenSession(principal, httpHeaders);
@@ -115,6 +116,6 @@ public class AuthenticationController {
             sessionId[0] = "JSEESION-ID";
         }
 
-        return new UserTokenSession(username, tokenValue, sessionId[0], tokenExpiryTime);
+        return new UserTokenSession(UUID.randomUUID(), username, tokenValue, sessionId[0], tokenExpiryTime);
     }
 }

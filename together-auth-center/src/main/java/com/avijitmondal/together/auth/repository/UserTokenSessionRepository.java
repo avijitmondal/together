@@ -4,8 +4,11 @@ import com.avijitmondal.together.auth.model.UserTokenSession;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserTokenSessionRepository extends CrudRepository<UserTokenSession, Long> {
+import java.util.Optional;
+import java.util.UUID;
 
-    UserTokenSession findOneByUsername(String username);
+@Repository("userTokenSessionRepository")
+public interface UserTokenSessionRepository extends CrudRepository<UserTokenSession, UUID> {
+
+    Optional<UserTokenSession> findOneByUsername(String username);
 }

@@ -6,14 +6,20 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AuthenticationControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void loginTest() {
-        System.out.println("Login test");
+    void loginUnauthorized() throws Exception {
+        mockMvc.perform(post("/login"))
+                .andExpect(status().isUnauthorized());
     }
+
 }
