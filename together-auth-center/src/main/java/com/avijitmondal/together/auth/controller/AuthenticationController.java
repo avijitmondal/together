@@ -106,7 +106,7 @@ public class AuthenticationController {
         String username = principal.getName();
         String[] sessionId = new String[1];
 
-        if (Objects.nonNull(httpHeaders.get("cookie"))) {
+        if (!Objects.requireNonNull(httpHeaders.get("cookie")).isEmpty()) {
             sessionId = httpHeaders.get("cookie").get(0).split(";");
         } else {
             logger.info("User " + username + " cookie not found. JSessionId not set.");

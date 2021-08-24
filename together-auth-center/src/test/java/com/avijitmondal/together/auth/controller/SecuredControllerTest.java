@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -69,7 +68,7 @@ class SecuredControllerTest {
     }
 
     @Test
-    public void UnauthorizedTest() throws Exception {
+    void UnauthorizedTest() throws Exception {
         mockMvc.perform(get("/secured/user"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(content().json("{\"error\":\"unauthorized\",\"error_description\":\"Full authentication is required to access this resource\"}"));
