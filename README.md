@@ -7,6 +7,8 @@
 [![together: CodeQL](https://github.com/avijitmondal/together/workflows/CodeQL/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/codeql-analysis.yml)
 [![together: PullRequest](https://github.com/avijitmondal/together/workflows/togetherPullRequest/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/pull-request.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+<img src="https://img.shields.io/github/last-commit/avijitmondal/together.svg" alt="Last Commit">
+
 
 ### What is this repository for? ###
 * together open source chat application
