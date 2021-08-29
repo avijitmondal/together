@@ -5,12 +5,15 @@ import com.avijitmondal.together.auth.model.User;
 import com.avijitmondal.together.auth.model.bean.AuthorityRole;
 import com.avijitmondal.together.auth.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
@@ -36,11 +39,11 @@ class SecuredControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    private UserRepository localMockRepository = Mockito.mock(UserRepository.class);
-
+    @Autowired
+    private UserRepository localMockRepository;
 
     private String obtainOAuthAccessToken(String username, String password) throws Exception {
-        final var CONTENT_TYPE = "application/json;charset=UTF-8";
+        final var CONTENT_TYPE = "application/x-www-form-urlencoded; charset=utf-8";
 
         final MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "password");
@@ -61,6 +64,23 @@ class SecuredControllerTest {
 
     @Test
     void securedResourceAsAdmin() throws Exception {
+        Authority authorityAdmin = new Authority();
+        authorityAdmin.setId(1L);
+        authorityAdmin.setRole(AuthorityRole.ROLE_ADMIN);
+
+        Authority authorityUser = new Authority();
+        authorityUser.setId(2L);
+        authorityUser.setRole(AuthorityRole.ROLE_USER);
+
+        User user = new User();
+        user.setId(UUID.randomUUID());
+        user.setUsername("admin");
+        user.setEmail("admin@example.com");
+        user.setPassword("$2a$10$D4OLKI6yy68crm.3imC9X.P2xqKHs5TloWUcr6z5XdOqnTrAK84ri");
+        user.setEnabled(true);
+        user.setAuthorities(Set.of(authorityAdmin, authorityUser));
+        localMockRepository.save(user);
+
         var accessToken = obtainOAuthAccessToken("admin", "password");
 
         Assertions.assertNotNull(accessToken);
@@ -80,7 +100,7 @@ class SecuredControllerTest {
     @Test
     void securedResourceAsUser() throws Exception {
         Authority authority = new Authority();
-        authority.setId(1L);
+        authority.setId(2L);
         authority.setRole(AuthorityRole.ROLE_USER);
 
         User user = new User();
@@ -90,10 +110,7 @@ class SecuredControllerTest {
         user.setPassword("$2a$10$D4OLKI6yy68crm.3imC9X.P2xqKHs5TloWUcr6z5XdOqnTrAK84ri");
         user.setEnabled(true);
         user.setAuthorities(Set.of(authority));
-
-        when(localMockRepository.findOneByUsername(any(String.class))).thenReturn(java.util.Optional.of(user));
-        when(localMockRepository.findAll()).thenReturn(List.of(user));
-        System.out.println("%%1 " + localMockRepository.findAll());
+        localMockRepository.save(user);
 
         var accessToken = obtainOAuthAccessToken("user1", "password");
 

@@ -50,7 +50,7 @@ public class Heartbeat implements Runnable, Observable<HeartbeatState, Heartbeat
 
     @Override
     public void run() {
-        Future asynchronousHeartbeat = executor.submit(this::receiveHeartbeat);
+        Future<byte[]> asynchronousHeartbeat = executor.submit(this::receiveHeartbeat);
         boolean lossCommsAlreadyNotified = false;
         int timeElapsed = 0;
         HeartbeatEvent event;
@@ -92,7 +92,7 @@ public class Heartbeat implements Runnable, Observable<HeartbeatState, Heartbeat
         return true;
     }
 
-    private boolean notifyDeath(int timeElapsed, Future asynchronousHeartbeat) {
+    private boolean notifyDeath(int timeElapsed, Future<byte[]> asynchronousHeartbeat) {
         HeartbeatEvent event = new HeartbeatEvent(expectedPayload, timeElapsed, new Date().getTime());
         asynchronousHeartbeat.cancel(true);
         notify(HeartbeatState.HOST_OFFLINE, event);
