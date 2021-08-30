@@ -22,9 +22,11 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 public class DocumentationController implements SwaggerResourcesProvider {
 
     @Override
-    public List get() {
-        List resources = new ArrayList();
-        resources.add(swaggerResource("together-database", "/v2/api-docs", "1.0"));
+    public List<SwaggerResource> get() {
+        List<SwaggerResource> resources = new ArrayList<>();
+        resources.add(swaggerResource("together-alive", "/v2/api-docs", "1.0"));
+        resources.add(swaggerResource("together-auth-center", "/v2/api-docs", "1.0"));
+        resources.add(swaggerResource("together-user", "/v2/api-docs", "1.0"));
         return resources;
     }
 

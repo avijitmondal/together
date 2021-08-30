@@ -1,8 +1,11 @@
 package com.avijitmondal.together.gateway.filter;
 
 import com.netflix.zuul.ZuulFilter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class PostFilter extends ZuulFilter {
+    private final Log logger = LogFactory.getLog(this.getClass());
 
     @Override
     public String filterType() {
@@ -21,7 +24,7 @@ public class PostFilter extends ZuulFilter {
 
     @Override
     public Object run() {
-        System.out.println("Inside Response Filter");
+        logger.info("Inside Response Filter");
 
         return null;
     }
