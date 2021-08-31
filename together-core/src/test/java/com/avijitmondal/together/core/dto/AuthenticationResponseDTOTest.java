@@ -1,21 +1,15 @@
 package com.avijitmondal.together.core.dto;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.Test;
 
-public class AuthenticationResponseDTOTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+class AuthenticationResponseDTOTest {
 
     private AuthenticationResponseDTO authenticationResponseDTO;
-    public AuthenticationResponseDTOTest(String testName) {
-        super(testName);
-    }
 
-    public static Test suite() {
-        return new TestSuite(AuthenticationResponseDTOTest.class);
-    }
-
-    public void testArgConstructor() {
+    @Test
+    void testArgConstructor() {
         assertNull(authenticationResponseDTO);
     }
 }

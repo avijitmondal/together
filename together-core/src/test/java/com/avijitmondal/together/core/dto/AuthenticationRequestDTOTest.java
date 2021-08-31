@@ -1,20 +1,16 @@
 package com.avijitmondal.together.core.dto;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
-public class AuthenticationRequestDTOTest extends TestCase {
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+class AuthenticationRequestDTOTest {
 
     private AuthenticationRequestDTO authenticationRequestDTO;
-    public AuthenticationRequestDTOTest(String testName) {
-        super(testName);
-    }
 
-    public static Test suite() {
-        return new TestSuite(AuthenticationRequestDTOTest.class);
-    }
-
+    @Test
     public void testArgConstructor() {
         assertNull(authenticationRequestDTO);
         authenticationRequestDTO = new AuthenticationRequestDTO("user", "password");
@@ -23,6 +19,7 @@ public class AuthenticationRequestDTOTest extends TestCase {
         authenticationRequestDTO = null;
     }
 
+    @Test
     public void testUsername() {
         assertNull(authenticationRequestDTO);
         authenticationRequestDTO = new AuthenticationRequestDTO();
@@ -32,6 +29,7 @@ public class AuthenticationRequestDTOTest extends TestCase {
         authenticationRequestDTO = null;
     }
 
+    @Test
     public void testPassword() {
         assertNull(authenticationRequestDTO);
         authenticationRequestDTO = new AuthenticationRequestDTO();

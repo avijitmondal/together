@@ -1,10 +1,13 @@
 package com.avijitmondal.together.core.bean;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class GenderTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-    public void testValues() {
+class GenderTest {
+
+    @Test
+    void testValues() {
         assertNotNull(Gender.MALE);
         assertNotNull(Gender.FEMALE);
         assertNotNull(Gender.OTHERS);

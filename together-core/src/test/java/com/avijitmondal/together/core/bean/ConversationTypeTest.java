@@ -1,10 +1,14 @@
 package com.avijitmondal.together.core.bean;
 
-import junit.framework.TestCase;
 
-public class ConversationTypeTest extends TestCase {
+import org.junit.jupiter.api.Test;
 
-    public void testValues() {
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+class ConversationTypeTest{
+
+    @Test
+    void testValues() {
         assertNotNull(ConversationType.SINGLE);
         assertNotNull(ConversationType.GROUP);
     }

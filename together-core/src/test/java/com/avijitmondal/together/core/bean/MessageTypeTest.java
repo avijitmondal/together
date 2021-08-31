@@ -1,10 +1,14 @@
 package com.avijitmondal.together.core.bean;
 
-import junit.framework.TestCase;
 
-public class MessageTypeTest extends TestCase {
+import org.junit.jupiter.api.Test;
 
-    public void testValues() {
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+class MessageTypeTest {
+
+    @Test
+    void testValues() {
         assertNotNull(MessageType.AUDIO);
         assertNotNull(MessageType.VIDEO);
         assertNotNull(MessageType.TEXT);
