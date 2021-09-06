@@ -13,7 +13,7 @@ import com.avijitmondal.together.core.dto.ErrorResponseDTO;
  * @author avijit
  *
  */
-public class TogetherException extends Throwable {
+public class TogetherException extends Exception {
 
 	/**
 	 * 
