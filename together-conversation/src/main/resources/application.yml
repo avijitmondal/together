@@ -14,6 +14,7 @@ eureka:
       enabled: true
       lease:
         duration: 5
+    enabled: false
 endpoints:
   shutdown:
     enabled: true
@@ -33,3 +34,22 @@ management:
     web:
       exposure:
         include: "*"
+
+info:
+  tags:
+    environment: local
+
+---
+spring:
+  profiles: prod
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    enabled: true
+
+info:
+  tags:
+    environment: prod

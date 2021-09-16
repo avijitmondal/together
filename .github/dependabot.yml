@@ -1,0 +1,34 @@
+version: 2
+registries:
+  maven-github:
+    type: maven-repository
+    url: https://maven.pkg.github.com/avijitmondal
+    token: ${{ github.token }}
+updates:
+  - package-ecosystem: "maven"
+    directory: "/" 
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "09:00"
+      timezone: "Asia/Kolkata"
+    labels:
+      - "maven dependencies"
+    commit-message:
+      prefix: "maven"
+    pull-request-branch-name:
+      separator: "-"
+  
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "09:00"
+      timezone: "Asia/Kolkata"
+    labels:
+      - "github-actions dependencies"
+    commit-message:
+      prefix: "github-actions"
+    pull-request-branch-name:
+      separator: "-"

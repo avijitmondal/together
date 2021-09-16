@@ -1,0 +1,37 @@
+name: togetherWeb
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  together-web:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+
+    steps:
+      - name: Clonning codebase
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install and npm run build
+        working-directory: ./together-web
+        run: npm i

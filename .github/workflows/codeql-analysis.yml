@@ -1,0 +1,46 @@
+name: "CodeQL"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '00 20 * * 5'
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-20.04
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    env:
+      GITHUB_ACTOR: ${{ github.actor }}
+      GITHUB_TOKEN: ${{ github.token }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'java', 'javascript' ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: ${{ matrix.language }}
+
+    - if: matrix.language != 'java'
+      name: Autobuild
+      uses: github/codeql-action/autobuild@v1
+
+    - if: matrix.language == 'java'
+      name: Build Java
+      run: mvn install --file modules.xml -s $GITHUB_WORKSPACE/settings.xml
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1

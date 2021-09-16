@@ -1,13 +1,17 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: together-status
   boot:
     admin:
-      context-path: /admin
+      context-path: /
       ui:
-        title: "together status"
+        title: "together"
+        brand: "together"
       client:
-        url: ${ADMIN_SERVICE_URL:http://localhost:9001}/admin/
+        url: ${ADMIN_SERVICE_URL:http://localhost:8080}/admin/
 
 eureka:
   instance:
@@ -22,6 +26,7 @@ eureka:
       enabled: true
       lease:
         duration: 5
+    enabled: false
 endpoints:
   shutdown:
     enabled: true
@@ -37,5 +42,21 @@ management:
   security:
     enabled: false
 
+info:
+  tags:
+    environment: local
+
+---
+spring:
+  profiles: prod
+
 server:
-  port: 9001
+  port: 8080
+
+eureka:
+  client:
+    enabled: true
+
+info:
+  tags:
+    environment: prod

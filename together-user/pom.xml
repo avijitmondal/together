@@ -3,27 +3,41 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.avijit.together</groupId>
-		<artifactId>together-server</artifactId>
-		<version>2.0.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+        <groupId>com.avijitmondal.together</groupId>
+        <artifactId>together-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.avijit.together</groupId>
 	<artifactId>together-user</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>together-user</name>
-	<description>User service together application</description>
+	<description>together user service</description>
+
+	<properties>
+		<java.version>11</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.avijit.together</groupId>
+			<groupId>com.avijitmondal.together</groupId>
 			<artifactId>together-core</artifactId>
-			<version>2.0.0-SNAPSHOT</version>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -31,5 +45,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

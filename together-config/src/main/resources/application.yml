@@ -12,7 +12,7 @@ eureka:
       enabled: true
     lease:
       duration: 5
-
+    enabled: false
 spring:
   application:
     name: together-config
@@ -29,7 +29,7 @@ spring:
         enabled: false
       server:
         native:
-          searchLocations: E:/work/others/EurekaConfigServer/src/main/resources/config
+          searchLocations: ${sys:user.home}/.together/together-config/config
         encrypt:
           enabled: true
 
@@ -40,4 +40,23 @@ management:
     web:
       exposure:
         include: "*"
+
+info:
+  tags:
+    environment: local
+
+---
+spring:
+  profiles: prod
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    enabled: true
+
+info:
+  tags:
+    environment: prod
 

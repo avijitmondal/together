@@ -1,88 +1,58 @@
 # *together* #
 
-together server is the backend for together application.
+[![together: CI](https://github.com/avijitmondal/together/workflows/togetherCI/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/build.yml)
+[![together: Desktop](https://github.com/avijitmondal/together/workflows/togetherDesktop/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/desktop.yml)
+[![together: Mobile](https://github.com/avijitmondal/together/workflows/togetherMobile/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/mobile.yml)
+[![together: Web](https://github.com/avijitmondal/together/workflows/togetherWeb/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/web.yml)
+[![together: CodeQL](https://github.com/avijitmondal/together/workflows/CodeQL/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/codeql-analysis.yml)
+[![together: PullRequest](https://github.com/avijitmondal/together/workflows/togetherPullRequest/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/pull-request.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+<img src="https://img.shields.io/github/last-commit/avijitmondal/together.svg" alt="Last Commit">
+
 
 ### What is this repository for? ###
-
-* Rest server together chat application
-* 1.0.5-SNAPSHOT
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* together open source chat application
+* 0.0.1-SNAPSHOT
 
 ### How do I get set up? ###
 
-* [Summary of set up](#Summary of set up)
+* [List of modules](#List of modules)
 * [Configuration](#Configuration)
 * [Dependencies](#Dependencies)
 * [Database configuration](#Database configuration)
 * [How to run](#How to run)
 * [Deployment instructions](#Deployment instructions)
 
-### Summary of set up
-Docker is used to deploy this application
+### List of modules
+* [together-alive](https://github.com/avijitmondal/together/blob/main/together-alive/README.md)
+* [together-auth-center](https://github.com/avijitmondal/together/blob/main/together-auth-center/README.md)
+* [together-config](https://github.com/avijitmondal/together/blob/main/together-config/README.md)
+* [together-conversation](https://github.com/avijitmondal/together/blob/main/together-conversion/README.md)
+* [together-core](https://github.com/avijitmondal/together/blob/main/together-core/README.md)
+* [together-desktop](https://github.com/avijitmondal/together/blob/main/together-desktop/README.md)
+* [together-discovery](https://github.com/avijitmondal/together/blob/main/together-discovery/README.md)
+* [together-ftp](https://github.com/avijitmondal/together/blob/main/together-ftp/README.md)
+* [together-gateway](https://github.com/avijitmondal/together/blob/main/together-gateway/README.md)
+* [together-mobile](https://github.com/avijitmondal/together/blob/main/together-mobile/README.md)
+* [together-status](https://github.com/avijitmondal/together/blob/main/together-status/README.md)
+* [together-sync](https://github.com/avijitmondal/together/blob/main/together-sync/README.md)
+* [together-user](https://github.com/avijitmondal/together/blob/main/together-user/README.md)
+* [together-web](https://github.com/avijitmondal/together/blob/main/together-web/README.md)
 
 ### Configuration
-######Configure Tomcat to support SSL or https
-generate keystore 
-```docker
-$keytool -genkey -alias together -keyalg RSA -keystore together-keystore
-$keytool -importkeystore -srckeystore together-keystore -destkeystore together-keystore -deststoretype pkcs12
-``` 
-keystore password : together
 
 ### Dependencies
-Docker version
-```sbtshell
-avijit$ docker version
-
-Client: Docker Engine - Community
- Version:           18.09.2
- API version:       1.39
- Go version:        go1.10.8
- Git commit:        6247962
- Built:             Sun Feb 10 04:12:39 2019
- OS/Arch:           darwin/amd64
- Experimental:      false
-
-Server: Docker Engine - Community
- Engine:
-  Version:          18.09.2
-  API version:      1.39 (minimum version 1.12)
-  Go version:       go1.10.6
-  Git commit:       6247962
-  Built:            Sun Feb 10 04:13:06 2019
-  OS/Arch:          linux/amd64
-  Experimental:     false
-```
-Docker-compose version
-```docker
-avijit$ docker-compose version
-docker-compose version 1.23.2, build 1110ad01
-docker-py version: 3.6.0
-CPython version: 3.6.6
-OpenSSL version: OpenSSL 1.1.0h  27 Mar 2018
-```
 
 ### Database configuration
-mysql-server:5.7 is being used
 
 ### How to run
-Run docker compose commands in source direcory
-```docker
-docker-compose build
-docker-compose up
-```
 
 ### Deployment instructions
-Open
-```https://<container-ip>:8443```
-for swagger UI
 
 ### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
+- [ ] Writing tests
+- [ ] Code review
+- [ ] Other guidelines
 
 ### Who do I talk to? ###
-
-* [Avijit Mondal](mailto:avijitmondal38@gmail.com)
+[Avijit](mailto:avijitmondal38@gmail.com)

@@ -1,0 +1,72 @@
+server:
+  port: 8911
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    registryFetchIntervalSeconds: 5
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
+    healthcheck:
+      enabled: true
+      lease:
+        duration: 5
+    enabled: false
+endpoints:
+  shutdown:
+    enabled: true
+
+spring:
+  application:
+    name: together-sync
+  boot:
+    admin:
+      client:
+        url: ${ADMIN_SERVICE_URL:http://localhost:9001}/admin/
+  datasource:
+    url: jdbc:h2:mem:auth-center
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format-sql: true
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      path: /h2-ui
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+info:
+  tags:
+    environment: local
+
+---
+spring:
+  profiles: prod
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    enabled: true
+
+info:
+  tags:
+    environment: prod
