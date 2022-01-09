@@ -1,4 +1,4 @@
-# *together* #
+# *together* # 
 
 [![together: CI](https://github.com/avijitmondal/together/workflows/togetherCI/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/build.yml)
 [![together: Desktop](https://github.com/avijitmondal/together/workflows/togetherDesktop/badge.svg)](https://github.com/avijitmondal/together/actions/workflows/desktop.yml)
