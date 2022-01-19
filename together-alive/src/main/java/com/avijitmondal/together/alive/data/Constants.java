@@ -1,9 +1,9 @@
 package com.avijitmondal.together.alive.data;
 
-public class Constants {
+public final class Constants {
 
     private Constants() {
-        throw new IllegalStateException("Utility class");
+        throw new IllegalStateException("Constant class");
     }
     public static final int TIME_INTERVAL = 1000;
     public static final int TIME_LIFE_FRAMES = 5;
