@@ -16,12 +16,12 @@
 
 ### How do I get set up? ###
 
-* [List of modules](#List of modules)
+* [List of modules](#list-of-modules)
 * [Configuration](#Configuration)
 * [Dependencies](#Dependencies)
-* [Database configuration](#Database configuration)
-* [How to run](#How to run)
-* [Deployment instructions](#Deployment instructions)
+* [Database configuration](#database-configuration)
+* [How to run](#how-to-run)
+* [Deployment instructions](#contribution-guidelines)
 
 ### List of modules
 * [together-alive](https://github.com/avijitmondal/together/blob/main/together-alive/README.md)
